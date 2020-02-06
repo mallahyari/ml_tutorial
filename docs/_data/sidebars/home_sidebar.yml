@@ -13,6 +13,6 @@ entries:
       title: Linear Regression
       url: /core
     output: web
-    title: linear_regression
+    title: ml_tutorial
   output: web
   title: Sidebar
