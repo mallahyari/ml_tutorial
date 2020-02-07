@@ -1,7 +1,7 @@
 {
   "ml_tutorial": {
     "Overview": "/",
-    "Welcome to Machine Learning Tutorial": "/core",
+    "Naive Bayes Classifier": "/core",
     "Linear Regression": "/linear_regression"
   }
 }

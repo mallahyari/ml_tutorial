@@ -10,7 +10,7 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Welcome to Machine Learning Tutorial
+      title: Naive Bayes Classifier
       url: /core
     - output: web,pdf
       title: Linear Regression
