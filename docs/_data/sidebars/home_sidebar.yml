@@ -10,8 +10,11 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
-      title: Linear Regression
+      title: Welcome to Machine Learning Tutorial
       url: /core
+    - output: web,pdf
+      title: Linear Regression
+      url: /linear_regression
     output: web
     title: ml_tutorial
   output: web

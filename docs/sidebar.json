@@ -1,6 +1,7 @@
 {
   "ml_tutorial": {
     "Overview": "/",
-    "Linear Regression": "/core"
+    "Welcome to Machine Learning Tutorial": "/core",
+    "Linear Regression": "/linear_regression"
   }
 }
