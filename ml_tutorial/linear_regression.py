@@ -15,6 +15,9 @@ def generate_data():
 
 # Cell
 def gradient_descent(data,w_0_t,w_1_t,learning_rate,num_iterations):
+    """Gradient descent implementation, which gets `data`, starting `w_0` and `w_1`, `learning_rate`
+    and the number of iterations `num_iterations`"""
+
     w_0 = 0
     w_1 = 0
     (X,y) = data
