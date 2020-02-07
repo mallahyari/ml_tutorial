@@ -22,6 +22,117 @@ summary: "This tutorial describes how to fit a curve using linear regression."
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Regression">Regression<a class="anchor-link" href="#Regression">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We wish to learn $f:X\to Y$, where $Y$ is a real number, given $\{&lt;x^1,y^1&gt;,\cdots, &lt;x^m,y^m&gt;\}$.</p>
+<p><strong>Approach</strong></p>
+<p>1- Choose some parametraized form for $P(Y|X;\theta)$</p>
+<p>2- Derive learning algorithms as Maximum Likelihood Estimates (MLE), or Maximum a Posteriori (MAP) estimate for $\theta$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Simple-Linear-Regression-Model">Simple Linear Regression Model<a class="anchor-link" href="#Simple-Linear-Regression-Model">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's assume that we are going to predict the price of a house, $y$, based on its square feet, $x$. Therefore, training set = $\{&lt;x^1,y^1&gt;,\cdots,&lt;x^m,y^m&gt;\}$, where:</p>
+<ul>
+<li><p>$m$: number of trainig examples</p>
+</li>
+<li><p>$x$: input variable</p>
+</li>
+<li><p>$y$: output variable or target label</p>
+</li>
+<li><p>$(x^i,y^i)$: is the $i$th training example</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>{% include image.html height="500" max-width="500" file="/ml_tutorial/images/linear_regression_ex.png" %}</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We would like to find a <strong>line</strong> that <strong>fits</strong> our training examples the <strong>best</strong>.</p>
+<p>{% include image.html height="500" max-width="500" file="/ml_tutorial/images/linear_regression_ex_model.png" %}</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Since we are looling for a line to fit our training set, we need to find a function $\hat y = f(x)$ that estimates $y^i$ for all $1\leq i \leq m$. Thus, we have:</p>
+<p>$\hat y = f(x) = w_0 + w_1x$</p>
+<p>$w_0$ and $w_1$ are the paramaters that we need to find.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Cost-Function/Error-Function">Cost Function/Error Function<a class="anchor-link" href="#Cost-Function/Error-Function">&#182;</a></h2><p>We wish to estimate the actual $y$, i.e. we want to minimize the error as much as possible. The error is the difference between the actual $y^i$ and our estimated/predicted $\hat{y}^i$ for all $1\leq i \leq m$.</p>
+<p>The error/cost function is:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+$$J(w_0,w_1) = \frac{1}{m}\sum_{i=1}^{m}\left( \hat{y}^i - (w_0 + w_1 x^i)\right)^2$$<p>We get the average of the function squared to make the arithmatic easier.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Precisely, we need to minimize the <strong>mean residual squared error</strong>:</p>
+$$\text{minimize } J(w_0,w_1) = \underset{\mathbf{w0,w_1}}{\arg\min} \frac{1}{m}\sum_{i=1}^{m}\left( \hat{y}^i - (w_0 + w_1 x^i)\right)^2$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Fitting-the-Linear-Regression-Model-using-Gradient-Descent-Algorithm">Fitting the Linear Regression Model using Gradient Descent Algorithm<a class="anchor-link" href="#Fitting-the-Linear-Regression-Model-using-Gradient-Descent-Algorithm">&#182;</a></h2><p>In order to mininze the cost function, we need to take the gradient (i.e. derivative) of the function with resptect to our parameters $w_0$ and $w_1$, set it zero and solve for $w_0$ and $w_1$.</p>
+$$\frac{\partial{J}}{\partial{w_0}} = \frac{-2}{m} \sum_{i=1}^{m}\left(\hat{y}^i - (w_0 + w_1 x^i)\right)$$$$\frac{\partial{J}}{\partial{w_1}} = \frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (w_0 + w_1 x^i)\right)$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-gradient-descent-algorithm:">The gradient descent algorithm:<a class="anchor-link" href="#The-gradient-descent-algorithm:">&#182;</a></h3><p>initialize $w_0^{(0)} = w_1^{(0)} = 0$, for $t=0$</p>
+<p>for $t=1$ to <em>num_iterations</em></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$w_0^{(t+1)} = w_0^{(t)} - \eta \frac{-2}{m} \sum_{i=1}^{m}\left(\hat{y}^i - (w_0 + w_1 x^i)\right) $</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+$w_1^{(t+1)} = w_1^{(t)} - \eta\frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (w_0 + w_1 x^i)\right)$</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$t = t+1$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
@@ -77,17 +188,14 @@ summary: "This tutorial describes how to fit a curve using linear regression."
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">initial_w_0</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">initial_w_1</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">5000</span>
-<span class="n">l_rates</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">]</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
 <span class="n">all_params</span> <span class="o">=</span> <span class="p">[]</span>
 
 <span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">()</span>
 <span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">l_rates</span><span class="p">)):</span>
-    <span class="n">learning_rate</span> <span class="o">=</span> <span class="n">l_rates</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-    <span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">initial_w_0</span><span class="p">,</span><span class="n">initial_w_1</span><span class="p">,</span><span class="n">learning_rate</span><span class="p">,</span><span class="n">num_iterations</span><span class="p">)</span>
-    <span class="n">all_params</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;w_0 = </span><span class="si">{}</span><span class="s2">, w_1 = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span><span class="p">))</span>
+<span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">initial_w_0</span><span class="p">,</span><span class="n">initial_w_1</span><span class="p">,</span><span class="n">learning_rate</span><span class="p">,</span><span class="n">num_iterations</span><span class="p">)</span>
+<span class="n">all_params</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;w_0 = </span><span class="si">{}</span><span class="s2">, w_1 = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -100,7 +208,49 @@ summary: "This tutorial describes how to fit a curve using linear regression."
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>w_0 = [4.54501842], w_1 = [3.31182753]
+<pre>w_0 = [4.4687417], w_1 = [3.41976037]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">initial_w_0</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">initial_w_1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">num_iterations</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">l_rates</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span><span class="mf">0.2</span><span class="p">]</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">all_params</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">generate_data</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">l_rates</span><span class="p">)):</span>
+    <span class="n">learning_rate</span> <span class="o">=</span> <span class="n">l_rates</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span> <span class="o">=</span> <span class="n">gradient_descent</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">initial_w_0</span><span class="p">,</span><span class="n">initial_w_1</span><span class="p">,</span><span class="n">learning_rate</span><span class="p">,</span><span class="n">num_iterations</span><span class="p">)</span>
+    <span class="n">all_params</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;learning_rate: </span><span class="si">{:.4f}</span><span class="s2"> =&gt; w_0 = </span><span class="si">{}</span><span class="s2">, w_1 = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span><span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>learning_rate: 0.0010 =&gt; w_0 = [4.76179263], w_1 = [3.24719375]
+learning_rate: 0.1000 =&gt; w_0 = [5.09497231], w_1 = [2.95754206]
+learning_rate: 0.2000 =&gt; w_0 = [5.09497231], w_1 = [2.95754206]
 </pre>
 </div>
 </div>
