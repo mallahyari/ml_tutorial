@@ -74,9 +74,9 @@ Examples of linear regression include, predicting the weight from gender, age, a
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We may think of a line as the regression model to predict the prices of houses from their area.</p>
-<p>{% include image.html height="500" max-width="500" file="/ml_tutorial/lr_house_line_ex.png" %}</p>
+<p>{% include image.html height="500" max-width="500" file="/ml_tutorial/images/lr_house_line_ex.png" %}</p>
 <p>Someone might consider a quadratic function or even high order polynomial functions to do the prediction.</p>
-<p>{% include image.html height="500" max-width="500" file="/ml_tutorial/lr_house_ex.png" %}</p>
+<p>{% include image.html height="500" max-width="500" file="/ml_tutorial/images/lr_house_ex.png" %}</p>
 
 </div>
 </div>
@@ -112,7 +112,8 @@ $$y_i=w_0+w_1h_1(x_1)+w_2h_2(x_2)+\cdots+w_kh_k(x_k)+\epsilon_i= w_0 +\sum_{j=1}
 <li><p>In order to find coefficients, we need to minimize the <strong>mean residual square error</strong>:</p>
 </li>
 </ul>
-$$J(\mathbf{w}) = \frac{1}{m}\sum_{i=1}^{m}\left( f(\mathbf{x}_i) - \left(w_0 +\sum_{j=1}^{k}w_jh_j(\mathbf{x})\right)\right)^2$$$$\mathbf{w}^* = \underset{\mathbf{w}}{\arg\min}\ J(\mathbf{w})$$
+$$J(\mathbf{w}) = \frac{1}{m}\sum_{i=1}^{m}\left( f(\mathbf{x}_i) - \left(w_0 +\sum_{j=1}^{k}w_jh_j(\mathbf{x})\right)\right)^2$$$$\mathbf{w}^* = \underset{\mathbf{w}}{\arg\min}\ J(\mathbf{w})$$<p>{% include note.html content='The reason it&#8217;s called <em>linear</em> regression is that the model is a linear combinations of the input features.' %}</p>
+
 </div>
 </div>
 </div>
@@ -285,7 +286,7 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Run-an-Example">Run an Example<a class="anchor-link" href="#Run-an-Example">&#182;</a></h2><p>In this example, we generate some linear-looking data and then find the line that fits the data. The function that we use to generate the data is $y=5+3x+\text{Gaussian noise}$. Our goal is to find $\theta=[w_0,w_1]$ where $w_0=5$ and $w_1=3$ or close enough, as we have noise and it makes it impossible to recover the exact paratmeters of the function. We use the <code>generate_data</code> function to generate the training data.</p>
+<h2 id="Run-an-Example">Run an Example<a class="anchor-link" href="#Run-an-Example">&#182;</a></h2><p>In this example, we generate some linear-looking data and then find the line that fits the data. The function that we use to generate the data is $y=5+3x+\text{Gaussian noise}$. Our goal is to find $\theta=[w_0,w_1]$ where $w_0=5$ and $w_1=3$ or close enough, as we have noise and it makes it impossible to recover the exact paratmeters of the function. We use the <a href="/ml_tutorial/linear_regression#generate_data"><code>generate_data</code></a> function to generate the training data.</p>
 
 </div>
 </div>
@@ -389,7 +390,7 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We set the initial parameters to 0:  $w_0^{(0)} = w_1^{(0)} = 0$, define the number of iterations of the graditent descent algorithm as well as the learning rate. Then, we run the <code>gradient_descent</code> function. The outputs of this function are the estimated parameters $w_0$ and $w_1$.</p>
+<p>We set the initial parameters to 0:  $w_0^{(0)} = w_1^{(0)} = 0$, define the number of iterations of the graditent descent algorithm as well as the learning rate. Then, we run the <a href="/ml_tutorial/linear_regression#gradient_descent"><code>gradient_descent</code></a> function. The outputs of this function are the estimated parameters $w_0$ and $w_1$.</p>
 
 </div>
 </div>

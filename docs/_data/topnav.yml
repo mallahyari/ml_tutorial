@@ -1,10 +1,10 @@
 topnav:
-- title: Topnav
-  items:
-    - title: GitHub
-      external_url: https://github.com/sci2lab/linear_regression
+  - title: Topnav
+    items:
+      - title: GitHub
+        external_url: https://github.com/sci2lab/ml_tutorial
 
 #Topnav dropdowns
 topnav_dropdowns:
-- title: Topnav dropdowns
-  folders:
+  - title: Topnav dropdowns
+    folders:

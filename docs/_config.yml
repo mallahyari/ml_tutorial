@@ -1,7 +1,7 @@
-repository: sci2lab/linear_regression
+repository: sci2lab/ml_tutorial
 output: web
-topnav_title: linear_regression
-site_title: linear_regression
+topnav_title: Machine Learning Tutorial
+site_title: Machine Learning Tutorial
 company_name: Mehdi Allahyari
 description: A description of your project
 # Set to false to disable KaTeX math
@@ -20,7 +20,7 @@ exclude:
   - .idea/
   - .gitignore
   - vendor
- 
+
 exclude: [vendor]
 
 highlighter: rouge
