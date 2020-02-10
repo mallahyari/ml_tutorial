@@ -2,12 +2,9 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"generate_data": "01_linear_regression.ipynb",
-         "make_point_plot": "01_linear_regression.ipynb",
-         "make_line_plot": "01_linear_regression.ipynb",
-         "gradient_descent": "01_linear_regression.ipynb"}
+index = {}
 
-modules = ["linear_regression.py"]
+modules = []
 
 doc_url = "https://sci2lab.github.io/ml_tutorial/"
 

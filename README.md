@@ -1,9 +1,7 @@
 # Machine Learning Concepts
-> This project explains some of machine learning concepts.
+> This project aims to create intuitive tutorials for some of machine learning concepts.
 
 
-This file will become your README and also the index of your documentation.
+[1- Naive Bayes Classifier](core)
 
-## Install
-
-`pip install ml_tutorial`
+[2- Linear Regression](linear_regression)
