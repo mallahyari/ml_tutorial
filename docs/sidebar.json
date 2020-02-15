@@ -2,6 +2,7 @@
   "ml_tutorial": {
     "Overview": "/",
     "Naive Bayes Classifier": "/core",
-    "Linear Regression": "/linear_regression"
+    "Linear Regression": "/linear_regression",
+    "Logistic Regression": "/logistic_regression"
   }
 }
