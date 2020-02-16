@@ -80,6 +80,13 @@ $$\ln\frac{P(Y=1|X)}{P(Y=0|X)} = w_0+\sum_{i=1}^{n}w_iX_i$$
 
 where $w_0+\sum_{i=1}^{n}w_iX_i$ is the linear classification rule.
 
+## Decision Boundary
+
+Since logistic regression prediction function returns a probability between 0 and 1, in order to predict which class this data belongs we need to set a threshold. For each data point, if the estimated probability is above this threshold, we classify the point into class 1, and if it's below the threshold, we classify the point into class 2.
+
+If $P(Y=1|X)\geq0.5$, class $=1$, and if $P(Y=1|X)<0.5$, class $=0$.
+
+> Note: Decision boundary can be linear (a line) or non-linear (a curve or higher order polynomial). Polynomial order can be increased to get complex decision boundary.
 
 ## Training Logistic Regression: MLCE
 
@@ -136,6 +143,57 @@ where $\lambda \sum_{i=1}^{n}w_i^2$ is called a **regularization** term. Regular
 And the modified gradient descent rule is:
 
 $$w_i=w_i-\eta \left [\frac{\partial J_D(\mathbf{w})}{\partial w_i} + \lambda w_i \right ]$$
+
+## Logistic Regression Model Fitting using Cost Function
+
+In the first part above, we learned how to fit parameters for logistic regression model using two primary principles: (a) maximum likelihood (conditional) estimates (MLE), and (b) map a posteriori estimation. In this section, we show how to train a logistic regression model (i.e. find the parameters $w$) by defining and minimizing a **cost** function.
+
+In general, while training a classification model, our goal is to find a model that minimizes error. For logistic regression, we would like to find the parameters $w$ that minimize the number of misclassifications. Therefore, we define a cost function based on the parameters and find the set of parameters that give the minimum cost/error.
+
+## Cost Function for Logistic Regression
+
+*A cost function primarily measures how wrong a machine learning model is in terms of estimating the relationship between $X$ and $y$.* Therefore, a cost function aims to penalize bad choices for the parameters to be optimized.
+
+We can not use the linear regression cost function for logistic regression. If we make use of mean squared error for logistic regression, we will end up with a non-convex function of parameters $w$ (due to non-linear sigmoid function). Thus, gradient descent *cannot* guarantee that it finds the global minimum.
+
+
+![convex](../images/con_nonconvex.png)
+*Convex and non-convex functions. ([image source]("https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc"))*
+
+
+Instead of Mean Squared Error, we use a cost function called **Cross-entropy** (or Log Loss). The cross-entropy cost functions can be divided into two functions: one for $y=0$ and one for $y=1$.
+
+Training data:  $D = \{<x^1,y^1>,\cdots,<x^m,y^m>\}$.
+
+Every instance has $n+1$ features. $x=<x_0,\cdots,x_n>$, where $x_0=1$
+
+$w$ is the vector of parameters: $w=<w_0,\cdots,w_n>$
+
+And, $h_{w}(x) = P(y=1|x,w)=\dfrac{1}{1+e^{-wx}}$
+
+The cost functions for each data point $i$ are:
+- $J_{y=1}^i(w)=-\log(h_{w}(x^i))$ if $y=1$
+- $J_{y=0}^i(w)=-\log(1-h_{w}(x^i))$ if $y=0$
+
+Therefore,
+$$J(w)=\frac{1}{m}\sum_{i=1}^{m}\left[y^i\log(h_{w}(x^i))+(1-y^i)\log(1-h_{w}(x^i))\right]$$
+> Note: $y=0$ or $1$ always
+
+We can interpret cost functions as follows:
+
+1. if $y=1$:
+    - if $h_w(x)=0$ and $y=1$, cost is very large (infinite)
+    - if $h_w(x)=1$ and $y=1$, cost $=0$
+
+2. if $y=0$:
+   - if $h_w(x)=1$ and $y=0$, cost is very large (infinite)
+    - if $h_w(x)=0$ and $y=0$, cost $=0$
+
+
+
+
+
+
 
 
 

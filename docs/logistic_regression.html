@@ -133,7 +133,7 @@ $$P(Y=0|X=&lt;X_1,\cdots,X_n&gt;)=\frac{1}{1+exp(w_0+\sum_{i}w_iX_i)}$$$$P(Y=1|X
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><img src="/ml_tutorial/images/sigmoid.svg" alt="sigmoid">
-<em>Sigmoid Function</em></p>
+<em>Fig1. Sigmoid Function</em></p>
 
 </div>
 </div>
@@ -143,6 +143,15 @@ $$P(Y=0|X=&lt;X_1,\cdots,X_n&gt;)=\frac{1}{1+exp(w_0+\sum_{i}w_iX_i)}$$$$P(Y=1|X
 <h2 id="Logistic-Regression-is-Linear">Logistic Regression is Linear<a class="anchor-link" href="#Logistic-Regression-is-Linear">&#182;</a></h2><p>The reason that logistic regression is linear is that, the outcome is a linear combinations of the inputs and parameters.</p>
 $$\frac{P(Y=1|X)}{P(Y=0|X)} = \exp(w_0+\sum_{i=1}^{n}w_iX_i)$$<p>which implies:</p>
 $$\ln\frac{P(Y=1|X)}{P(Y=0|X)} = w_0+\sum_{i=1}^{n}w_iX_i$$<p>where $w_0+\sum_{i=1}^{n}w_iX_i$ is the linear classification rule.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Decision-Boundary">Decision Boundary<a class="anchor-link" href="#Decision-Boundary">&#182;</a></h2><p>Since logistic regression prediction function returns a probability between 0 and 1, in order to predict which class this data belongs we need to set a threshold. For each data point, if the estimated probability is above this threshold, we classify the point into class 1, and if it's below the threshold, we classify the point into class 2.</p>
+<p>If $P(Y=1|X)\geq0.5$, class $=1$, and if $P(Y=1|X)&lt;0.5$, class $=0$.
+{% include note.html content='Decision boundary can be linear (a line) or non-linear (a curve or higher order polynomial). Polynomial order can be increased to get complex decision boundary.' %}</p>
 
 </div>
 </div>
@@ -195,6 +204,76 @@ $$\mathbf{w^*}=\underset{\mathbf{w}}{\arg\max}\quad \ln\left[P(\mathbf{w})\prod_
 $$J(\mathbf{w})=-\sum_j \left[ Y^j \ln P(Y^j=1|X^j,\mathbf{w}) + (1-Y^j) \ln P(Y^j=0|X^j,\mathbf{w})\right]+\lambda\sum_{i=1}^{n}w_i^2$$<p>where $\lambda \sum_{i=1}^{n}w_i^2$ is called a <strong>regularization</strong> term. Regularization helps reduce the overfitting, and also keeps the weights near to zero (i.e. discourage the weights from getting large values).</p>
 <p>And the modified gradient descent rule is:</p>
 $$w_i=w_i-\eta \left [\frac{\partial J_D(\mathbf{w})}{\partial w_i} + \lambda w_i \right ]$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Logistic-Regression-Model-Fitting-using-Cost-Function">Logistic Regression Model Fitting using Cost Function<a class="anchor-link" href="#Logistic-Regression-Model-Fitting-using-Cost-Function">&#182;</a></h2><p>In the first part above, we learned how to fit parameters for logistic regression model using two primary principles: (a) maximum likelihood (conditional) estimates (MLE), and (b) map a posteriori estimation. In this section, we show how to train a logistic regression model (i.e. find the parameters $w$) by defining and minimizing a <strong>cost</strong> function.</p>
+<p>In general, while training a classification model, our goal is to find a model that minimizes error. For logistic regression, we would like to find the parameters $w$ that minimize the number of misclassifications. Therefore, we define a cost function based on the parameters and find the set of parameters that give the minimum cost/error.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Cost-Function-for-Logistic-Regression">Cost Function for Logistic Regression<a class="anchor-link" href="#Cost-Function-for-Logistic-Regression">&#182;</a></h2><p><em>A cost function primarily measures how wrong a machine learning model is in terms of estimating the relationship between $X$ and $y$.</em> Therefore, a cost function aims to penalize bad choices for the parameters to be optimized.</p>
+<p>We can not use the linear regression cost function for logistic regression. If we make use of mean squared error for logistic regression, we will end up with a non-convex function of parameters $w$ (due to non-linear sigmoid function). Thus, gradient descent <em>cannot</em> guarantee that it finds the global minimum.</p>
+<p><img src="/ml_tutorial/images/con_nonconvex.png" alt="convex">
+<em>Fig2. Convex and non-convex functions. (<a href="&quot;https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc&quot;">image source</a>)</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Instead of Mean Squared Error, we use a cost function called <strong>Cross-entropy</strong> (or Log Loss). The cross-entropy cost functions can be divided into two functions: one for $y=0$ and one for $y=1$.</p>
+<p>Training data:  $D = \{&lt;x^1,y^1&gt;,\cdots,&lt;x^m,y^m&gt;\}$.</p>
+<p>Every instance has $n+1$ features. $x=&lt;x_0,\cdots,x_n&gt;$, where $x_0=1$</p>
+<p>$w$ is the vector of parameters: $w=&lt;w_0,\cdots,w_n&gt;$</p>
+<p>And, $h_{w}(x) = P(y=1|x,w)=\dfrac{1}{1+e^{-wx}}$</p>
+<p>The cost functions for each data point $i$ are:</p>
+<ul>
+<li>$J_{y=1}^i(w)=-\log(h_{w}(x^i))$ if $y=1$</li>
+<li>$J_{y=0}^i(w)=-\log(1-h_{w}(x^i))$ if $y=0$</li>
+</ul>
+<p>We can interpret cost functions as follows:</p>
+<ol>
+<li>if $y=1$:<ul>
+<li>if $h_w(x)=0$ and $y=1$, cost is very large (infinite)</li>
+<li>if $h_w(x)=1$ and $y=1$, cost $=0$</li>
+</ul>
+</li>
+</ol>
+<p><img src="/ml_tutorial/images/cost_1.svg" alt="&quot;cost Function&quot;">
+<em>Fig3. cost function $-log(h(x))$ vs $h(x)$ when y=1</em></p>
+<ol>
+<li>if $y=0$:<ul>
+<li>if $h_w(x)=1$ and $y=0$, cost is very large (infinite)<ul>
+<li>if $h_w(x)=0$ and $y=0$, cost $=0$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><img src="/ml_tutorial/images/cost_0.svg" alt="&quot;Cost Function&quot;">
+<em>Fig4. cost function $-log(1-h(x))$ vs $h(x)$ when y=0</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The two cost functions can be combined into a single function:</p>
+$$J(w)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^i\log(h_{w}(x^i))+(1-y^i)\log(1-h_{w}(x^i))\right]$$<p>{% include note.html content='$y=0$ or $1$ always' %}</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The cost function $J(w)$ that we drived here is the same function we obtained by using MLE.</p>
+
 </div>
 </div>
 </div>
