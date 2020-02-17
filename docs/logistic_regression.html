@@ -286,7 +286,7 @@ $$J(w)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^i\log(h_{w}(x^i))+(1-y^i)\log(1-h_{w}(x
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="load_data" class="doc_header"><code>load_data</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L11" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_data</code>(<strong><code>file_name</code></strong>)</p>
+<h4 id="load_data" class="doc_header"><code>load_data</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L12" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_data</code>(<strong><code>file_name</code></strong>)</p>
 </blockquote>
 <p>Read the csv data file with name <code>file_name</code>
 and return a Pandas DataFrame.</p>
@@ -311,9 +311,9 @@ and return a Pandas DataFrame.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="plot_data" class="doc_header"><code>plot_data</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_data</code>(<strong><code>data</code></strong>)</p>
+<h4 id="plot_data" class="doc_header"><code>plot_data</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>plot_data</code>(<strong><code>data</code></strong>)</p>
 </blockquote>
-<p>Create the scattor plot of the <code>data</code> and
+<p>Create the scatter plot of the <code>data</code> and
 return the chart object</p>
 
 </div>
@@ -336,7 +336,7 @@ return the chart object</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="sigmoid" class="doc_header"><code>sigmoid</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sigmoid</code>(<strong><code>z</code></strong>)</p>
+<h4 id="sigmoid" class="doc_header"><code>sigmoid</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>sigmoid</code>(<strong><code>z</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -359,7 +359,7 @@ return the chart object</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="predict" class="doc_header"><code>predict</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict</code>(<strong><code>examples</code></strong>, <strong><code>parameters</code></strong>)</p>
+<h4 id="predict" class="doc_header"><code>predict</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L38" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>predict</code>(<strong><code>examples</code></strong>, <strong><code>parameters</code></strong>)</p>
 </blockquote>
 <p>Compute the probability of being y=1 for all the <code>examples</code> given <code>parameters</code>.
 Return a 1D array of probabilities.</p>
@@ -384,7 +384,7 @@ Return a 1D array of probabilities.</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="decision_boundary" class="doc_header"><code>decision_boundary</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L46" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>decision_boundary</code>(<strong><code>prob</code></strong>)</p>
+<h4 id="decision_boundary" class="doc_header"><code>decision_boundary</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>decision_boundary</code>(<strong><code>prob</code></strong>)</p>
 </blockquote>
 <p>Convert a probability <code>prob</code> into a class and
 return 1 if <code>prob</code> &gt;= 0.5, otherwise return 0</p>
@@ -409,7 +409,7 @@ return 1 if <code>prob</code> &gt;= 0.5, otherwise return 0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="classify" class="doc_header"><code>classify</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L54" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>classify</code>(<strong><code>predictions</code></strong>)</p>
+<h4 id="classify" class="doc_header"><code>classify</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L55" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>classify</code>(<strong><code>predictions</code></strong>)</p>
 </blockquote>
 <p>Convert a array of probabilities of the <code>predictions</code> into an array of classes.
 Return an N-element array of 0s (False) and 1s (True)</p>
@@ -434,7 +434,7 @@ Return an N-element array of 0s (False) and 1s (True)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="cost_function" class="doc_header"><code>cost_function</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L63" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cost_function</code>(<strong><code>examples</code></strong>, <strong><code>labels</code></strong>, <strong><code>parameters</code></strong>)</p>
+<h4 id="cost_function" class="doc_header"><code>cost_function</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L64" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>cost_function</code>(<strong><code>examples</code></strong>, <strong><code>labels</code></strong>, <strong><code>parameters</code></strong>)</p>
 </blockquote>
 <p>Compute the cost using Mean Absolute Error
 <code>examples</code>: array of (examples,features) of shape (100,3),
@@ -462,7 +462,7 @@ Return an N-element array of 0s (False) and 1s (True)</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="train" class="doc_header"><code>train</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L91" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train</code>(<strong><code>examples</code></strong>, <strong><code>labels</code></strong>, <strong><code>parameters</code></strong>, <strong><code>learning_rate</code></strong>, <strong><code>iterations</code></strong>)</p>
+<h4 id="train" class="doc_header"><code>train</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L92" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train</code>(<strong><code>examples</code></strong>, <strong><code>labels</code></strong>, <strong><code>parameters</code></strong>, <strong><code>learning_rate</code></strong>, <strong><code>iterations</code></strong>)</p>
 </blockquote>
 <p>Train the logistic regression model
 <code>examples</code>   : training examples,
@@ -492,7 +492,7 @@ return the parameters w and an array of all the costs</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="update_weights" class="doc_header"><code>update_weights</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>update_weights</code>(<strong><code>examples</code></strong>, <strong><code>labels</code></strong>, <strong><code>parameters</code></strong>, <strong><code>learning_rate</code></strong>)</p>
+<h4 id="update_weights" class="doc_header"><code>update_weights</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L119" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>update_weights</code>(<strong><code>examples</code></strong>, <strong><code>labels</code></strong>, <strong><code>parameters</code></strong>, <strong><code>learning_rate</code></strong>)</p>
 </blockquote>
 <p>update the vector of parameters using the gradient descent rule
 <code>examples</code>: array of examples with shape (200, 3),
@@ -520,7 +520,7 @@ return the new vector of parameters</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="get_accuracy" class="doc_header"><code>get_accuracy</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L150" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_accuracy</code>(<strong><code>predicted_labels</code></strong>, <strong><code>actual_labels</code></strong>)</p>
+<h4 id="get_accuracy" class="doc_header"><code>get_accuracy</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/logistic_regression.py#L151" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_accuracy</code>(<strong><code>predicted_labels</code></strong>, <strong><code>actual_labels</code></strong>)</p>
 </blockquote>
 <p>Measure the accuracy of the model
 <code>predicted_labels</code>: labels that the model is predicted,
@@ -536,7 +536,7 @@ return the new vector of parameters</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's take a look at the data.</p>
+<h3 id="Explore-and-Run-the-Code">Explore and Run the Code<a class="anchor-link" href="#Explore-and-Run-the-Code">&#182;</a></h3><p>Let's take a look at the data.</p>
 
 </div>
 </div>
@@ -546,7 +546,8 @@ return the new vector of parameters</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;data/data_logregression.csv&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read the training set file and create a data object</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;data/data_logregression.csv&quot;</span><span class="p">)</span>
 <span class="n">data</span>
 </pre></div>
 
@@ -673,7 +674,7 @@ return the new vector of parameters</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's represent the data with scattor plot.</p>
+<p>Let's represent the data with scatter plot.</p>
 
 </div>
 </div>
@@ -683,7 +684,8 @@ return the new vector of parameters</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plot_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Display the scatter chart of the training data</span>
+<span class="n">plot_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -698,10 +700,10 @@ return the new vector of parameters</p>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-f17800eda83544fd8bf648f0ddb1c7b8"></div>
+<div id="altair-viz-adbe5c0fe1a645709ac884f492dc91d8"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-f17800eda83544fd8bf648f0ddb1c7b8");
+    const outputDiv = document.getElementById("altair-viz-adbe5c0fe1a645709ac884f492dc91d8");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
@@ -752,27 +754,46 @@ return the new vector of parameters</p>
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We initialize the variables before start training (i.e. fitting the paramaters).</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;passed&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># emprical value. Experiment with different learning rates.</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.1</span>
-<span class="n">parameters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># x_0, x_1, x_2 where x_0 = 1</span>
+<span class="n">num_features</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="c1"># w_0, w_1, w_2</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_features</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">iterations</span> <span class="o">=</span> <span class="mi">3000</span>
+
+<span class="c1"># number of training examples</span>
 <span class="n">num_examples</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-<span class="c1"># x_0, x_1, x_2</span>
-<span class="n">num_features</span> <span class="o">=</span> <span class="mi">3</span>
-<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">num_examples</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-<span class="n">examples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;studied&quot;</span><span class="p">,</span><span class="s2">&quot;slept&quot;</span><span class="p">]])</span>
+<span class="c1"># class labels (i.e. passed/failed) of the training examples</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;passed&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># matrix of (examples, features)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">num_examples</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;studied&quot;</span><span class="p">,</span><span class="s2">&quot;slept&quot;</span><span class="p">]])</span>
 <span class="n">x</span>  <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">examples</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
+<span class="c1"># Fit the model</span>
 <span class="n">parameters</span><span class="p">,</span> <span class="n">cost_history</span> <span class="o">=</span> <span class="n">train</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">parameters</span><span class="p">,</span><span class="n">learning_rate</span><span class="p">,</span><span class="n">iterations</span><span class="p">)</span>
+
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;w = </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">parameters</span><span class="p">))</span>
+
+<span class="c1"># Compute the accuracy i.e. total number of correctly predicted labels</span>
+<span class="c1"># divide by total number of predictions</span>
 <span class="n">predictions</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">parameters</span><span class="p">)</span>
 <span class="n">predicted_labels</span> <span class="o">=</span> <span class="n">classify</span><span class="p">(</span><span class="n">predictions</span><span class="p">)</span>
 <span class="n">accuracy</span> <span class="o">=</span> <span class="n">get_accuracy</span><span class="p">(</span><span class="n">predicted_labels</span><span class="p">,</span><span class="n">labels</span><span class="p">)</span>
@@ -788,6 +809,13 @@ return the new vector of parameters</p>
 
 <div class="output_area">
 
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>100%|██████████| 3000/3000 [00:00&lt;00:00, 17595.70it/s]</pre>
+</div>
+</div>
+
+<div class="output_area">
+
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>iter: 1000, cost: 0.3025
 iter: 2000, cost: 0.2644
@@ -800,17 +828,32 @@ accuracy = 0.89
 </div>
 </div>
 
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
 </div>
 </div>
 
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Verify-Gradient-Descent-is-Running-Correctly">Verify Gradient Descent is Running Correctly<a class="anchor-link" href="#Verify-Gradient-Descent-is-Running-Correctly">&#182;</a></h3><p>We plot the cost $J(w)$ as a function of the number or iterations, and ensure that $J(w)$ is decreasing in every iteration.</p>
+
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># prepare data to plot cost vs. iterations</span>
-<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">3000</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># prepare the data to plot cost vs. iterations</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">iterations</span><span class="p">)</span>
 <span class="n">yy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cost_history</span><span class="p">)</span>
 <span class="n">source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="n">xx</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="n">yy</span><span class="p">})</span>
 
@@ -833,10 +876,10 @@ accuracy = 0.89
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-d1a1c7748faf408e90c289faf0834584"></div>
+<div id="altair-viz-0a495989918a4e41bccd69ef45d75032"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-d1a1c7748faf408e90c289faf0834584");
+    const outputDiv = document.getElementById("altair-viz-0a495989918a4e41bccd69ef45d75032");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
@@ -887,21 +930,32 @@ accuracy = 0.89
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Plot-the-Decision-Boundary">Plot the Decision Boundary<a class="anchor-link" href="#Plot-the-Decision-Boundary">&#182;</a></h3><p>We also can plot the decision boundary and see how two classes (passed/failed) are separated. The decision boundary equation is $w_0+w_1x_1+w_2x_2=0$. Therefore, we predict $y=1$ if $w_0+w_1x_1+w_2x_2\geq 0$, otherwise we predict $y=0$. Considering our example, the decision boundary is a line with equation: $$x_2 = -\frac{w_0}{w_2}-\frac{w_1}{w_2}x_1$$</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">w_0</span><span class="p">,</span><span class="n">w_1</span><span class="p">,</span><span class="n">w_2</span><span class="p">)</span> <span class="o">=</span> <span class="n">parameters</span>
-
 <span class="n">x_points</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="c1"># decision boundary line rule</span>
 <span class="n">decision_boundary_line</span> <span class="o">=</span> <span class="o">-</span><span class="p">(</span><span class="n">w_1</span><span class="o">/</span><span class="n">w_2</span><span class="p">)</span> <span class="o">*</span> <span class="n">x_points</span> <span class="o">-</span><span class="p">(</span><span class="n">w_0</span> <span class="o">/</span> <span class="n">w_2</span><span class="p">)</span>
+
 <span class="n">source</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span><span class="n">x_points</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">:</span><span class="n">decision_boundary_line</span><span class="p">})</span>
 <span class="n">db_chart</span> <span class="o">=</span> <span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">mark_line</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;studied&quot;</span><span class="p">),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;slept&quot;</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">Scale</span><span class="p">(</span><span class="n">domain</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">]))</span>
 <span class="p">)</span>
 <span class="n">data_chart</span> <span class="o">=</span> <span class="n">plot_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="c1"># plot the training data and the decision boundary line</span>
 <span class="n">data_chart</span> <span class="o">+</span> <span class="n">db_chart</span>
 </pre></div>
 
@@ -917,10 +971,10 @@ accuracy = 0.89
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-59fc88c517f042eda3c1dcb5cf82afc6"></div>
+<div id="altair-viz-a0b3b71501e54197b9f45480e33177eb"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-59fc88c517f042eda3c1dcb5cf82afc6");
+    const outputDiv = document.getElementById("altair-viz-a0b3b71501e54197b9f45480e33177eb");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
@@ -970,6 +1024,14 @@ accuracy = 0.89
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p>[1] Tom Mitchell. <a href="http://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf">Naive Bayes and Logistic Regression</a></p>
+<p>[2] Machine Learning Glossary. <a href="https://ml-cheatsheet.readthedocs.io/en/latest/logistic_regression.html">Logistic Regression</a></p>
+
+</div>
+</div>
 </div>
 </div>
  

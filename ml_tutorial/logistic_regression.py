@@ -7,6 +7,7 @@ __all__ = ['load_data', 'plot_data', 'sigmoid', 'predict', 'decision_boundary', 
 import numpy as np
 import pandas as pd
 import altair as alt
+from tqdm import tqdm
 
 def load_data(file_name):
     """
@@ -19,7 +20,7 @@ def load_data(file_name):
 # Cell
 def plot_data(data):
     """
-    Create the scattor plot of the `data` and
+    Create the scatter plot of the `data` and
     return the chart object
     """
     base = alt.Chart(data).mark_point(size=100,filled=True).encode(
@@ -101,7 +102,7 @@ def train(examples, labels, parameters, learning_rate, iterations):
     """
     cost_history = []
 
-    for i in range(1,iterations + 1):
+    for i in tqdm(range(1,iterations + 1)):
         parameters = update_weights(examples, labels, parameters, learning_rate)
 
         #Calculate error for auditing purposes
