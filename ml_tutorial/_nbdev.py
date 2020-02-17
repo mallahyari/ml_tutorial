@@ -6,7 +6,16 @@ index = {"generate_data": "01_linear_regression.ipynb",
          "make_point_plot": "01_linear_regression.ipynb",
          "make_line_plot": "01_linear_regression.ipynb",
          "gradient_descent": "01_linear_regression.ipynb",
-         "sigmoid": "02_logistic_regression.ipynb"}
+         "load_data": "02_logistic_regression.ipynb",
+         "plot_data": "02_logistic_regression.ipynb",
+         "sigmoid": "02_logistic_regression.ipynb",
+         "predict": "02_logistic_regression.ipynb",
+         "decision_boundary": "02_logistic_regression.ipynb",
+         "classify": "02_logistic_regression.ipynb",
+         "cost_function": "02_logistic_regression.ipynb",
+         "train": "02_logistic_regression.ipynb",
+         "update_weights": "02_logistic_regression.ipynb",
+         "get_accuracy": "02_logistic_regression.ipynb"}
 
 modules = ["linear_regression.py",
            "logistic_regression.py"]
