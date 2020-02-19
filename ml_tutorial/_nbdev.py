@@ -2,22 +2,24 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"generate_data": "01_linear_regression.ipynb",
-         "make_point_plot": "01_linear_regression.ipynb",
-         "make_line_plot": "01_linear_regression.ipynb",
-         "gradient_descent": "01_linear_regression.ipynb",
-         "load_data": "02_logistic_regression.ipynb",
-         "plot_data": "02_logistic_regression.ipynb",
-         "sigmoid": "02_logistic_regression.ipynb",
-         "predict": "02_logistic_regression.ipynb",
-         "decision_boundary": "02_logistic_regression.ipynb",
-         "classify": "02_logistic_regression.ipynb",
-         "cost_function": "02_logistic_regression.ipynb",
-         "train": "02_logistic_regression.ipynb",
-         "update_weights": "02_logistic_regression.ipynb",
-         "get_accuracy": "02_logistic_regression.ipynb"}
+index = {"flip_coin": "01_mle_map.ipynb",
+         "generate_data": "03_linear_regression.ipynb",
+         "make_point_plot": "03_linear_regression.ipynb",
+         "make_line_plot": "03_linear_regression.ipynb",
+         "gradient_descent": "03_linear_regression.ipynb",
+         "load_data": "04_logistic_regression.ipynb",
+         "plot_data": "04_logistic_regression.ipynb",
+         "sigmoid": "04_logistic_regression.ipynb",
+         "predict": "04_logistic_regression.ipynb",
+         "decision_boundary": "04_logistic_regression.ipynb",
+         "classify": "04_logistic_regression.ipynb",
+         "cost_function": "04_logistic_regression.ipynb",
+         "train": "04_logistic_regression.ipynb",
+         "update_weights": "04_logistic_regression.ipynb",
+         "get_accuracy": "04_logistic_regression.ipynb"}
 
-modules = ["linear_regression.py",
+modules = ["mle_map.py",
+           "linear_regression.py",
            "logistic_regression.py"]
 
 doc_url = "https://sci2lab.github.io/ml_tutorial/"

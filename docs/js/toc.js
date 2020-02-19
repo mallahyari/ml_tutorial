@@ -73,7 +73,7 @@
         for(i = this_level; i > level; i--) {
           html += "<"+settings.listType+">"+((i-level == 2) ? "<li class=\"hide_content\">" : "<li>")
         }
-        html += "<a href='" + base_url + "#" + header.id + "'>" + txt + "</a>";
+        html += "<a href='" + base_url + "#" + header.id + "' target='_blank'>" + txt + "</a>";
       }
       level = this_level; // update for the next one
     });

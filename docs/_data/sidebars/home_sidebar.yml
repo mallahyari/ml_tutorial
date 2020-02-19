@@ -10,8 +10,11 @@ entries:
       title: Overview
       url: /
     - output: web,pdf
+      title: Introduction to MLE and MAP
+      url: /mle_map
+    - output: web,pdf
       title: Naive Bayes Classifier
-      url: /core
+      url: /naive_bayes
     - output: web,pdf
       title: Linear Regression
       url: /linear_regression

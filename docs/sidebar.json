@@ -1,7 +1,8 @@
 {
   "ml_tutorial": {
     "Overview": "/",
-    "Naive Bayes Classifier": "/core",
+    "Introduction to MLE and MAP": "/mle_map",
+    "Naive Bayes Classifier": "/naive_bayes",
     "Linear Regression": "/linear_regression",
     "Logistic Regression": "/logistic_regression"
   }

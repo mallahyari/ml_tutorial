@@ -9,6 +9,15 @@ I would like to give full credit to several outstanding individuals including To
 ## Topics
 Topics are constantly updated and new tutorial is added. The current topics are:
 
-[1- Naive Bayes Classifier](core) (in progress)
+[1- Introduction to MLE and MAP](mle_map)
 
-[2- Linear Regression](linear_regression)
+
+[2- Naive Bayes Classifier](core) (in progress)
+
+
+[3- Linear Regression](linear_regression)
+
+
+[4- Logistic Regression](logistic_regression)
+
+
