@@ -220,7 +220,8 @@ $$w_i=w_i-\eta \left [\frac{\partial J_D(\mathbf{w})}{\partial w_i} + \lambda w_
 <p>The cost functions for each data point $i$ are:</p>
 <ul>
 <li>$J_{y=1}^i(w)=-\log(h_{w}(x^i))$ if $y=1$</li>
-<li>$J_{y=0}^i(w)=-\log(1-h_{w}(x^i))$ if $y=0$</li>
+<li>$J_{y=0}^i(w)=-\log(1-h_{w}(x^i))$ if $y=0$
+{% include note.html content='The benefit of taking the logarithm is that these smooth monotonic functions (i.e. always increasing or always decreasing functions) make it easy to calculate the gradient and minimize cost.' %}</li>
 </ul>
 <p>We can interpret cost functions as follows:</p>
 <ol>
@@ -257,7 +258,8 @@ $$J(w)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^i\log(h_{w}(x^i))+(1-y^i)\log(1-h_{w}(x
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The cost function $J(w)$ that we drived here is the same function we obtained by using MLE.</p>
+<p>If we take the derivative of the cost function $J(w)$, we have:</p>
+$$\frac{\partial J(w)}{\partial w_j}=\sum_{i=1}^{m}x_j^i\left(y^i-h_w(x^i)\right)$$<p>which is the same function we obtained by taking the derivative of expression while computing MLCE.</p>
 
 </div>
 </div>
@@ -702,10 +704,10 @@ return the new vector of parameters</p>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-d8d5b75574934fe88ccbfea1b2fd30a9"></div>
+<div id="altair-viz-6b57311a998640cbaf9e43c82fb5a373"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-d8d5b75574934fe88ccbfea1b2fd30a9");
+    const outputDiv = document.getElementById("altair-viz-6b57311a998640cbaf9e43c82fb5a373");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
@@ -812,7 +814,7 @@ return the new vector of parameters</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 3000/3000 [00:00&lt;00:00, 26084.41it/s]</pre>
+<pre>100%|██████████| 3000/3000 [00:00&lt;00:00, 24881.77it/s]</pre>
 </div>
 </div>
 
@@ -878,10 +880,10 @@ accuracy = 0.89
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-c774099ee65544fa9e998704c5e311d0"></div>
+<div id="altair-viz-bafdccd9c83948c8b1daaf0b876eedd3"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-c774099ee65544fa9e998704c5e311d0");
+    const outputDiv = document.getElementById("altair-viz-bafdccd9c83948c8b1daaf0b876eedd3");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
@@ -973,10 +975,10 @@ accuracy = 0.89
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-d09c005789d643218dc8b8113b36cd39"></div>
+<div id="altair-viz-14751fb4b3d14e2694c56bd935b8cdf9"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-d09c005789d643218dc8b8113b36cd39");
+    const outputDiv = document.getElementById("altair-viz-14751fb4b3d14e2694c56bd935b8cdf9");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
@@ -1026,6 +1028,21 @@ accuracy = 0.89
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Multi-class-Logistic-Regression">Multi-class Logistic Regression<a class="anchor-link" href="#Multi-class-Logistic-Regression">&#182;</a></h2><p>If we have $K$ classes, $y=\{0,1,\cdots,K-1\}$ instead of two, $y=\{0,1\}$, we can expand our binary logistic regression into a multiclass classification. There are two approaches for multiclass logistic regression:</p>
+<p>1- One versus all:</p>
+<ul>
+<li>We train $K$ binary logistic regression classifier for each class, and choose the class with the biggest probability (i.e. most likely class).</li>
+</ul>
+<p>2- Softmax:</p>
+<ul>
+<li>Softmax is a function that takes as input a vector of $K$ real numbers, and normalizes it into a probability distribution consisting of $K$ probabilities proportional to the exponentials of the input numbers. Thus, the predicted probability for the $i'th$ class given a sample vector $x$ and a weighting vector $w$ is:</li>
+</ul>
+$$P(y=i|x,w) = \dfrac{e^{w^Tx}}{\sum_{i=1}^{K}e^{w_i^Tx}}$$
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">

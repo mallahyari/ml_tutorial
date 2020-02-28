@@ -77,10 +77,10 @@ def cost_function(examples, labels, parameters):
     class1_cost = -labels*np.log(predictions)
 
     #Take the error when label=0
-    class2_cost = (1-labels)*np.log(1-predictions)
+    class2_cost = -(1-labels)*np.log(1-predictions)
 
     #Take the sum of both costs
-    cost = class1_cost - class2_cost
+    cost = class1_cost + class2_cost
 
     #Take the average cost
     cost = cost.sum() / observations
@@ -129,7 +129,7 @@ def update_weights(examples, labels, parameters, learning_rate):
     #1 - Get Predictions
     predictions = predict(examples, parameters)
 
-    #2 Transpose features from (200, 3) to (3, 200)
+    # Transpose features from (200, 3) to (3, 200)
     # So we can multiply w the (200,1)  cost matrix.
     # Returns a (3,1) matrix holding 3 partial derivatives --
     # one for each feature -- representing the aggregate
