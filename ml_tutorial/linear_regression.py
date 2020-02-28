@@ -6,10 +6,12 @@ __all__ = ['generate_data', 'make_point_plot', 'make_line_plot', 'gradient_desce
 import numpy as np
 import pandas as pd
 import altair as alt
-def generate_data():
+
+
+def generate_data(n):
     """It generates dummy data."""
-    noise = np.random.randn(100,1)
-    X = 2 * np.random.rand(100,1)
+    noise = np.random.randn(n,1)
+    X = 2 * np.random.rand(n,1)
     y = 5 + 3 * X + noise
     return X,y
 
@@ -45,8 +47,6 @@ def gradient_descent(data,w_0_t,w_1_t,learning_rate,num_iterations):
     w_1 = 0
     (X,y) = data
     N = len(X)
-    w_0_t = 0
-    w_1_t = 0
     for t in range(0,num_iterations):
         w_0_deriv = np.zeros((N,N))
         w_1_deriv = np.zeros((N,N))
