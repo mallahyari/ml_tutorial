@@ -180,7 +180,7 @@ $$RSS(w_0,w_1)=\sum_{i=1}^{m}(y_i-[w_0+w_1x_i])^2$$<p>We <em>minimize</em> the c
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>{% include image.html height="500" align="left" max-width="500" file="/ml_tutorial/images/lr_house_line_ex.png" %}</p>
-<p>{% include image.html height="500" max-width="500" file="/ml_tutorial/images/lr_house_ex.png" %}</p>
+<p>{% include image.html height="500" align="right" max-width="500" file="/ml_tutorial/images/lr_house_ex.png" %}</p>
 
 </div>
 </div>
@@ -196,7 +196,7 @@ $$y_i=w_0+w_1x_i+w_2x_i^2+\cdots+w_nx_i^n+\epsilon_i$$<p>We treat each $x_i^p$ f
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Overfitting-Problem">Overfitting Problem<a class="anchor-link" href="#Overfitting-Problem">&#182;</a></h2><p>We fit a quadratic function and look at the plot and notice that quadratic fit is better than a line. Then, we might think a higher order polynomial even fits the data better. We try 13th order polynomial and minimize the residual sum of squares. The residual sum of error is quite small, which means this 13th order polynomial is the best fit for the data. However, based on this function the price my house is unrealistically low whereas I think my house isn't worth so little.</p>
-<p>{% include image.html height="650" file="/ml_tutorial/images/linear_regression_2_13.svg" %}</p>
+<p>{% include image.html height="700" file="/ml_tutorial/images/linear_regression_2_13.svg" %}</p>
 <!-- ![](img/linear_regression_2_13.svg) -->
 
 <p>Quadratic function: $\hat{y}=w_0+w_1x+w_2x^2$, and 13th order polynomial: $\hat{y}=w_0+w_1x+w_2x^2+\cdots w_{13}x^{13}$</p>
@@ -334,7 +334,7 @@ $w_1^{(t+1)} = w_1^{(t)} - \eta\frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="generate_data" class="doc_header"><code>generate_data</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/linear_regression.py#L9" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_data</code>()</p>
+<h4 id="generate_data" class="doc_header"><code>generate_data</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/linear_regression.py#L11" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>generate_data</code>(<strong><code>n</code></strong>)</p>
 </blockquote>
 <p>It generates dummy data.</p>
 
@@ -358,7 +358,7 @@ $w_1^{(t+1)} = w_1^{(t)} - \eta\frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_point_plot" class="doc_header"><code>make_point_plot</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/linear_regression.py#L17" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_point_plot</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
+<h4 id="make_point_plot" class="doc_header"><code>make_point_plot</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/linear_regression.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_point_plot</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
 </blockquote>
 <p>It plots the point chart of the data</p>
 
@@ -382,7 +382,7 @@ $w_1^{(t+1)} = w_1^{(t)} - \eta\frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="make_line_plot" class="doc_header"><code>make_line_plot</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/linear_regression.py#L29" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_line_plot</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
+<h4 id="make_line_plot" class="doc_header"><code>make_line_plot</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/linear_regression.py#L31" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>make_line_plot</code>(<strong><code>x</code></strong>, <strong><code>y</code></strong>)</p>
 </blockquote>
 <p>It plots the line chart of the data</p>
 
@@ -406,7 +406,7 @@ $w_1^{(t+1)} = w_1^{(t)} - \eta\frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="gradient_descent" class="doc_header"><code>gradient_descent</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/linear_regression.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>gradient_descent</code>(<strong><code>data</code></strong>, <strong><code>w_0_t</code></strong>, <strong><code>w_1_t</code></strong>, <strong><code>learning_rate</code></strong>, <strong><code>num_iterations</code></strong>)</p>
+<h4 id="gradient_descent" class="doc_header"><code>gradient_descent</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/linear_regression.py#L42" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>gradient_descent</code>(<strong><code>data</code></strong>, <strong><code>w_0_t</code></strong>, <strong><code>w_1_t</code></strong>, <strong><code>learning_rate</code></strong>, <strong><code>num_iterations</code></strong>)</p>
 </blockquote>
 <p>Gradient descent implementation, which gets <code>data</code>, starting <code>w_0</code> and <code>w_1</code>, <code>learning_rate</code>
 and the number of iterations <code>num_iterations</code></p>
@@ -421,7 +421,7 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Run-an-Example">Run an Example<a class="anchor-link" href="#Run-an-Example">&#182;</a></h2><p>In this example, we generate some linear-looking data and then find the line that fits the data. The function that we use to generate the data is $y=5+3x+\text{Gaussian noise}$. Our goal is to find $\theta=[w_0,w_1]$ where $w_0=5$ and $w_1=3$ or close enough, as we have noise and it makes it impossible to recover the exact paratmeters of the function. We use the <a href="/ml_tutorial/linear_regression_old#generate_data"><code>generate_data</code></a> function to generate the training data.</p>
+<h2 id="Run-an-Example">Run an Example<a class="anchor-link" href="#Run-an-Example">&#182;</a></h2><p>In this example, we generate some linear-looking data and then find the line that fits the data. The function that we use to generate the data is $y=5+3x+\text{Gaussian noise}$. Our goal is to find $\theta=[w_0,w_1]$ where $w_0=5$ and $w_1=3$ or close enough, as we have noise and it makes it impossible to recover the exact paratmeters of the function. We use the <a href="/ml_tutorial/linear_regression#generate_data"><code>generate_data</code></a> function to generate the training data.</p>
 
 </div>
 </div>
@@ -528,7 +528,7 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We set the initial parameters to 0:  $w_0^{(0)} = w_1^{(0)} = 0$, define the number of iterations of the graditent descent algorithm as well as the learning rate. Then, we run the <a href="/ml_tutorial/linear_regression_old#gradient_descent"><code>gradient_descent</code></a> function. The outputs of this function are the estimated parameters $w_0$ and $w_1$.</p>
+<p>We set the initial parameters to 0:  $w_0^{(0)} = w_1^{(0)} = 0$, define the number of iterations of the graditent descent algorithm as well as the learning rate. Then, we run the <a href="/ml_tutorial/linear_regression#gradient_descent"><code>gradient_descent</code></a> function. The outputs of this function are the estimated parameters $w_0$ and $w_1$.</p>
 
 </div>
 </div>
