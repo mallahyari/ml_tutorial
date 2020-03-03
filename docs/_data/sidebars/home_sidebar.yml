@@ -21,6 +21,9 @@ entries:
     - output: web,pdf
       title: Logistic Regression
       url: /logistic_regression
+    - output: web,pdf
+      title: Neural Network
+      url: /neural_network
     output: web
     title: ml_tutorial
   output: web
