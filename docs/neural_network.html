@@ -57,7 +57,7 @@ $$\hat{y}=\sigma(b + \sum_{i=1}^n w_ix_i)$$<p>where $\sigma (t)=\frac{1}{1+e^{-t
 <h2 id="Importance-of-Activation-Functions">Importance of Activation Functions<a class="anchor-link" href="#Importance-of-Activation-Functions">&#182;</a></h2><p>The purpose of activation functions is to introduce <strong><em>non-linearity</em></strong> into the network, which enables the network to separate the data that is not linearly separable. Linear functions always create linear decisions while non-linear functions allow to approximate arbitrarily complex functions.</p>
 <p><img src="/ml_tutorial/images/nn_linear.png" alt="">
 <img src="/ml_tutorial/images/nn_nonlinear.png" alt="">
-<em>Fig3. Left: Linear activation functions produce linear decisions. Right: Non-Linear activation functions produce non-linear decisions</em></p>
+<em>Fig3. Left: Linear activation functions produce linear decisions. Right: Non-Linear activation functions produce non-linear decisions</em>. You can play with these examples in this <a href="http://cs.stanford.edu/people/karpathy/convnetjs/demo/classify2d.html">ConvNetsJS demo</a></p>
 
 </div>
 </div>
@@ -100,12 +100,11 @@ $$\hat{y}=\sigma(b + \sum_{i=1}^n w_ix_i)$$<p>where $\sigma (t)=\frac{1}{1+e^{-t
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># forward-pass of a 3-layer neural network:</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># forward-pass of a 2-layer neural network:</span>
 <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="c1"># activation function (use sigmoid)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># random input vector of three numbers (3x1)</span>
-<span class="n">h</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span> <span class="c1"># calculate first hidden layer activations (4x1)</span>
-<span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span> <span class="c1"># calculate second hidden layer activations (4x1)</span>
-<span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W3</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b3</span> <span class="c1"># output neuron (1x1)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span> <span class="c1"># calculate hidden layer activations (4x1)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span> <span class="c1"># output neuron (1x1)</span>
 </pre></div>
 
     </div>

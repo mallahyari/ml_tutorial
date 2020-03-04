@@ -12,7 +12,7 @@ Topics are constantly updated and new tutorial is added. The current topics are:
 [1- Introduction to MLE and MAP](mle_map)
 
 
-[2- Naive Bayes Classifier](core) (in progress)
+2- Naive Bayes Classifier (coming soon)
 
 
 [3- Linear Regression](linear_regression)
