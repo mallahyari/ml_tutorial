@@ -55,13 +55,10 @@ Feed-forward step fundamentally means *repeated matrix multiplications combined 
 
 ![](images/nn_forward.jpeg)
 
-``` python
-# forward-pass of a 2-layer neural network:
-f = lambda x: 1/(1 + np.exp(-x)) # activation function (use sigmoid)
-x = np.random.randn(3, 1) # random input vector of three numbers (3x1)
-h1 = f(np.dot(W1, x) + b1) # calculate first hidden layer activations (4x1)
-out = f(np.dot(W2, h1) + b2) # output neuron (1x1)
-```
+Therefore, the forward-pass is:
+
+![](images/nn_forward_full.jpeg)
+
 
 We need to learn the Parameters `W1,W2,b1,b2` of the above network. Please note that the input `x` could be an entire batch of training data, where each example would be a column of `x`.
 
@@ -71,29 +68,29 @@ We need to learn the Parameters `W1,W2,b1,b2` of the above network. Please note 
 
 performing a forward-pass of the network gives us the predictions. Therefore, we must evaluate the "goodness" of our predictions, which means we need to measure how far off our predictions are. **Loss function** enables us to do that. The loss function measures the cost caused by incorrect predictions.
 
-if $\mathcal{L}(\hat{y}^{(i)},y^{(i)})$ is the loss of each example $i$ in the training set, for $i=1,2,\cdots,m$, then total loss $J(\mathbf{W})$ over the entire dataset is:
+if $\mathcal{L}(\hat{y}^{(i)},y^{(i)})$ is the loss of each example $i$ in the training set, for $i=1,2,\cdots,m$, then total loss $J(W)$ over the entire dataset is:
 
-$$J(\mathbf{W})=\frac{1}{m}\sum_{i=1}^m \mathcal{L}(\hat{y}^{(i)},y^{(i)})$$
+$$J(W)=\frac{1}{m}\sum_{i=1}^m \mathcal{L}(\hat{y}^{(i)},y^{(i)})$$
 
-Please note that $\mathbf{W}=[\mathbf{W}^{(1)}, \mathbf{W}^{(2)},\cdots, \mathbf{W}^{(n)}]$, where $\mathbf{W}^{(j)}$ is matrix of weights of layer $j$
+Please note that $W=[W^{(1)}, W^{(2)},\cdots, W^{(L)}]$, where $W^{(j)}$ is matrix of weights of layer $j$
 
 ### Cross Entropy Loss
 
 Cross entropy loss is used in classification problems and outputs a probability between 0 and 0.
 
-$$J(\mathbf{W})=\frac{1}{m}\sum_{i=1}^m \left[ y^{(i)}\log(\hat{y}^{(i)}) + (1-y^{(i)})\log(1-\hat{y}^{(i)})\right]$$
+$$J(W)=\frac{1}{m}\sum_{i=1}^m \left[ y^{(i)}\log(\hat{y}^{(i)}) + (1-y^{(i)})\log(1-\hat{y}^{(i)})\right]$$
 
 ### Mean Squared Error Loss
 
 Mean squared error loss is used in regression problems and outputs a real-valued number.
 
-$$J(\mathbf{W})=\frac{1}{m}\sum_{i=1}^m \left( y^{(i)} - \hat{y}^{(i)} \right)^2$$
+$$J(W)=\frac{1}{m}\sum_{i=1}^m \left( y^{(i)} - \hat{y}^{(i)} \right)^2$$
 
 ### Backpropagation
 
 Our goal in training is to find the weights and biases that minimizes the loss function:
 
-$$\mathbf{W}^* = \underset{\mathbf{W}}{\arg\min}\ J(\mathbf{W})$$
+$$W^* = \underset{W}{\arg\min}\ J(W)$$
 
 After we measured the loss, we need to find a way to **propagate** the error back, and update our weights and biases, in order to decrease the loss. But how much should we adjust the weights and biases.
 
@@ -103,7 +100,7 @@ Gradient descent algorithm:
 1. Initialize the weights randomly $\sim N(0,\sigma^2)$
 2. Loop until convergence:
    1. Compute gradient, $\frac{\partial J(\mathbf{W})}{\partial \mathbf{W}}$
-   2. Update weights, $\mathbf{W} = \mathbf{W}-\eta \frac{\partial J(\mathbf{W})}{\partial \mathbf{W}}$
+   2. Update weights, $W = W-\eta \frac{\partial J(W)}{\partial W}$
 3. Return weights
 
 For instance, if we are going to compute the gradient with respect to $w_1$, in our example network below, we have:
