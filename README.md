@@ -21,6 +21,6 @@ Topics are constantly updated and new tutorial is added. The current topics are:
 [4- Logistic Regression](logistic_regression)
 
 
-[5- Neural Networks](neural_network) (in progress)
+[5- Neural Networks](neural_network)
 
 
