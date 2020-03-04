@@ -27,7 +27,7 @@ summary: "Summary: Classification, Neural Network, Gradient Descent, Backpropaga
 <h2 id="What's-a-neural-network?">What's a neural network?<a class="anchor-link" href="#What's-a-neural-network?">&#182;</a></h2><p>Without delving into brain analogies, I simply describe neural network as an algorithm for approximating functions. In the context of machine learning, neural network is a function that maps input to desired output, given a set of inputs $x$ and output $y$.</p>
 <p>Neural networks are a collection of a densely interconnected set of simple units, organazied into a <em>input layer</em>, one or more <em>hidden layers</em> and an <em>output layer</em>.</p>
 <p>The diagram below shows an architecture of a 3-layer neural network.</p>
-<p><img src="/ml_tutorial/images/nn_ex_1.jpeg" alt="">
+<p><img src="/ml_tutorial/images/nn_ex_2.jpeg" alt="">
 <em>Fig1. A 3-layer neural network with three inputs, two hidden layers of 4 neurons each and one output layer. <a href="http://cs231n.github.io/neural-networks-1/">[Image Source]</a></em></p>
 
 </div>
@@ -73,9 +73,8 @@ $$\hat{y}=\sigma(b + \sum_{i=1}^n w_ix_i)$$<p>where $\sigma (t)=\frac{1}{1+e^{-t
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Training-a-Neural-Network">Training a Neural Network<a class="anchor-link" href="#Training-a-Neural-Network">&#182;</a></h2><p>We will see how we can train a neural network through an example. Let's assume that out neural network architecture looks like the image shown below.</p>
-<p><img src="/ml_tutorial/images/nn_ex_1.jpeg" alt="">
-<em>Fig6. A 3-layer neural network with three inputs, two hidden layers of 4 neurons each and one output layer. [<a href="http://cs231n.github.io/neural-networks-1/">Image Source</a>]</em></p>
+<h2 id="Training-a-Neural-Network">Training a Neural Network<a class="anchor-link" href="#Training-a-Neural-Network">&#182;</a></h2><p>We will see how we can train a neural network through an example. Let's assume that our neural network architecture looks like the image shown below.</p>
+<p><img src="/ml_tutorial/images/nn_ex_1.jpeg" alt=""></p>
 <p>We can see that the weights $\mathbf{W}$ and biases $\mathbf{b}$ are the only variables that affect the output $\hat{y}$. Therefore, training a neural network essentially means finding the right values for the weights and biases so that they can determine the best predictions. In other words, the process of fine-tuning the weights and biases from the input data is called training neural network.</p>
 <p>Training a neural network involves two steps:</p>
 <ul>
@@ -90,7 +89,8 @@ $$\hat{y}=\sigma(b + \sum_{i=1}^n w_ix_i)$$<p>where $\sigma (t)=\frac{1}{1+e^{-t
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Feed-forward-computation">Feed-forward computation<a class="anchor-link" href="#Feed-forward-computation">&#182;</a></h3><p>Feed-forward step fundamentally means <em>repeated matrix multiplications combined with activation function</em>. Considering our example network, we convert the different variables into vectors and matrices. Therefore, the input  would be a [3x1] vector. The weights of the first hidden layer <code>W1</code> would be a [4x3] matrix, and its biases <code>b1</code> would be a [4x1] vector. In this layer, each neuron has its weights in a row of <code>W1</code>, so the matrix vector multiplication <code>np.dot(W1,x)</code> evaluates the activations of all neurons in this layer. Similarly, for the second hidden layer, <code>W2</code> and <code>b2</code> would be of size [4x4] and [4x1] respectively. Finally, for the last layer (output layer), <code>W3</code> and <code>b3</code> would be of size [1x4] and [1x1], respectively. The full forward pass of this 3-layer neural network is then simply three matrix multiplications, merged with the application of the activation function:</p>
+<h3 id="Feed-forward-computation">Feed-forward computation<a class="anchor-link" href="#Feed-forward-computation">&#182;</a></h3><p>Feed-forward step fundamentally means <em>repeated matrix multiplications combined with activation function</em>. Considering our example network, we convert the different variables into vectors and matrices. Therefore, the input  would be a [3x1] vector. The weights of the hidden layer <code>W1</code> would be a [4x3] matrix, and its biases <code>b1</code> would be a [4x1] vector. In this layer, each neuron has its weights in a row of <code>W1</code>, so the matrix vector multiplication <code>np.dot(W1,x)</code> evaluates the activations of all neurons in this layer. For the last layer (output layer), <code>W2</code> and <code>b2</code> would be of size [1x4] and [1x1], respectively. The full forward pass of this 3-layer neural network is then simply three matrix multiplications, merged with the application of the activation function:</p>
+<p><img src="/ml_tutorial/images/nn_forward.jpeg" alt=""></p>
 
 </div>
 </div>
@@ -103,8 +103,8 @@ $$\hat{y}=\sigma(b + \sum_{i=1}^n w_ix_i)$$<p>where $\sigma (t)=\frac{1}{1+e^{-t
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># forward-pass of a 3-layer neural network:</span>
 <span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span> <span class="c1"># activation function (use sigmoid)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="c1"># random input vector of three numbers (3x1)</span>
-<span class="n">h1</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span> <span class="c1"># calculate first hidden layer activations (4x1)</span>
-<span class="n">h2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">h1</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span> <span class="c1"># calculate second hidden layer activations (4x1)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span><span class="p">)</span> <span class="c1"># calculate first hidden layer activations (4x1)</span>
+<span class="n">out</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W2</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span><span class="p">)</span> <span class="c1"># calculate second hidden layer activations (4x1)</span>
 <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W3</span><span class="p">,</span> <span class="n">h2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b3</span> <span class="c1"># output neuron (1x1)</span>
 </pre></div>
 
@@ -115,7 +115,7 @@ $$\hat{y}=\sigma(b + \sum_{i=1}^n w_ix_i)$$<p>where $\sigma (t)=\frac{1}{1+e^{-t
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We need to learn the Parameters <code>W1,W2,W3,b1,b2,b3</code> of the above network. Please note that the input <code>x</code> could be an entire batch of training data, where each example would be a column of <code>x</code>. In addition, the output layer usually doesn't have activation function and represents a real-valued number.
+<p>We need to learn the Parameters <code>W1,W2,b1,b2</code> of the above network. Please note that the input <code>x</code> could be an entire batch of training data, where each example would be a column of <code>x</code>.
 {% include note.html content='The forward pass of a fully-connected layer corresponds to one matrix multiplication followed by a bias offset and an activation function.' %}</p>
 
 </div>
@@ -124,8 +124,45 @@ $$\hat{y}=\sigma(b + \sum_{i=1}^n w_ix_i)$$<p>where $\sigma (t)=\frac{1}{1+e^{-t
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Loss-Function">Loss Function<a class="anchor-link" href="#Loss-Function">&#182;</a></h3><p>performing a forward-pass of the network gives us the predictions. Therefore, we must evaluate the "goodness" of our predictions, which means we need to measure how far off our predictions are. <strong>Loss function</strong> enables us to do that. The loss function measures the cost caused by incorrect predictions.</p>
-<p>if $\mathcal{L}(\hat{y}^{(i)},y^{(i)})$ is the loss of each example $i$ in the training set, for $i=1,2,\cdots,m$, then total loss $J(w)$ over the entire dataset is:</p>
-$$J(w)=\frac{1}{m}\sum_{i=1}^m \mathcal{L}(\hat{y}^{(i)},y^{(i)})$$
+<p>if $\mathcal{L}(\hat{y}^{(i)},y^{(i)})$ is the loss of each example $i$ in the training set, for $i=1,2,\cdots,m$, then total loss $J(\mathbf{W})$ over the entire dataset is:</p>
+$$J(\mathbf{W})=\frac{1}{m}\sum_{i=1}^m \mathcal{L}(\hat{y}^{(i)},y^{(i)})$$<p>Please note that $\mathbf{W}=[\mathbf{W}^{(1)}, \mathbf{W}^{(2)},\cdots, \mathbf{W}^{(n)}]$, where $\mathbf{W}^{(j)}$ is matrix of weights of layer $j$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Cross-Entropy-Loss">Cross Entropy Loss<a class="anchor-link" href="#Cross-Entropy-Loss">&#182;</a></h3><p>Cross entropy loss is used in classification problems and outputs a probability between 0 and 0.</p>
+$$J(\mathbf{W})=\frac{1}{m}\sum_{i=1}^m \left[ y^{(i)}\log(\hat{y}^{(i)}) + (1-y^{(i)})\log(1-\hat{y}^{(i)})\right]$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Mean-Squared-Error-Loss">Mean Squared Error Loss<a class="anchor-link" href="#Mean-Squared-Error-Loss">&#182;</a></h3><p>Mean squared error loss is used in regression problems and outputs a real-valued number.</p>
+$$J(\mathbf{W})=\frac{1}{m}\sum_{i=1}^m \left( y^{(i)} - \hat{y}^{(i)} \right)^2$$
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Backpropagation">Backpropagation<a class="anchor-link" href="#Backpropagation">&#182;</a></h3><p>Our goal in training is to find the weights and biases that minimizes the loss function:</p>
+$$\mathbf{W}^* = \underset{\mathbf{W}}{\arg\min}\ J(\mathbf{W})$$<p>After we measured the loss, we need to find a way to <strong>propagate</strong> the error back, and update our weights and biases, in order to decrease the loss. But how much should we adjust the weights and biases.</p>
+<p>In order to find the appropriate amount of change in the weights and biases, we need to take the derivative of the loss function with respect to the weights and biases. The process of computing gradients of expressions through recursive application of chain rule is called <strong>backpropagation</strong>. When we have the gradients, we can use the <em>gradient descent</em> algorithm to update the weights.</p>
+<p>Gradient descent algorithm:</p>
+<ol>
+<li>Initialize the weights randomly $\sim N(0,\sigma^2)$</li>
+<li>Loop until convergence:<ol>
+<li>Compute gradient, $\frac{\partial J(\mathbf{W})}{\partial \mathbf{W}}$</li>
+<li>Update weights, $\mathbf{W} = \mathbf{W}-\eta \frac{\partial J(\mathbf{W})}{\partial \mathbf{W}}$</li>
+</ol>
+</li>
+<li>Return weights</li>
+</ol>
+<p>For instance, if we are going to compute the gradient with respect to $w_1$, in our example network below, we have:
+<img src="/ml_tutorial/images/nn_backprop.jpeg" alt=""></p>
+<p>We need to repeat this <strong>for every weight in the network</strong> using gradients from later layers.</p>
+
 </div>
 </div>
 </div>
