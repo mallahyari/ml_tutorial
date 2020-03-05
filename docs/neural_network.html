@@ -158,6 +158,423 @@ $$W^* = \underset{W}{\arg\min}\ J(W)$$<p>After we measured the loss, we need to 
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">altair</span> <span class="k">as</span> <span class="nn">alt</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(([</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">n_hidden_units</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.01</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">W1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">n_hidden_units</span><span class="p">)</span>
+<span class="n">W2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_hidden_units</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">deriv_sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">sigmoid</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">feedforward</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">):</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">W1</span><span class="p">)</span> <span class="o">+</span> <span class="n">b1</span>
+    <span class="n">a1</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z1</span><span class="p">)</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span><span class="n">W2</span><span class="p">)</span> <span class="o">+</span> <span class="n">b2</span>
+    <span class="n">y_hat</span>  <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">,</span><span class="n">y_hat</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">cross_entropy</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">y_hat</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">y</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">y_hat</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">y_hat</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">loss</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">backprop</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">):</span>
+    <span class="n">delta_2</span> <span class="o">=</span> <span class="n">y_hat</span> <span class="o">-</span> <span class="n">y</span>
+<span class="c1">#     print(&quot;delta_2: &quot;,delta_2.shape)</span>
+<span class="c1">#     print(&quot;a1: &quot;,a1.shape)</span>
+    <span class="n">dW2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span><span class="n">delta_2</span><span class="p">)</span>
+<span class="c1">#     print(&quot;dw2: &quot;,dW2.shape)</span>
+    <span class="n">db2</span> <span class="o">=</span> <span class="n">delta_2</span>
+    <span class="n">delta_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">delta_2</span><span class="p">,</span><span class="n">W2</span><span class="o">.</span><span class="n">T</span><span class="p">),</span><span class="n">deriv_sigmoid</span><span class="p">(</span><span class="n">a1</span><span class="p">))</span>
+    <span class="n">dW1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="p">,</span><span class="n">delta_1</span><span class="p">)</span>
+<span class="c1">#     print(&quot;dW1: &quot;,dW1.shape)</span>
+    <span class="n">db1</span> <span class="o">=</span> <span class="n">delta_1</span>
+<span class="c1">#     print(&quot;delta_1: &quot;,delta_1.shape)</span>
+    
+    <span class="n">W2</span> <span class="o">=</span> <span class="n">W2</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dW2</span>
+    <span class="n">b2</span> <span class="o">=</span> <span class="n">b2</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">db2</span>
+    <span class="n">W1</span> <span class="o">=</span> <span class="n">W1</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">dW1</span>
+    <span class="n">b1</span> <span class="o">=</span> <span class="n">b1</span> <span class="o">-</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">db1</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">):</span>
+    <span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">,</span><span class="n">_</span> <span class="o">=</span> <span class="n">feedforward</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">)</span>
+    <span class="n">backprop</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">)</span>
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">W1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">n_hidden_units</span><span class="p">)</span>
+<span class="n">W2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">n_hidden_units</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">b1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">b2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1001</span><span class="p">):</span>
+    <span class="n">train</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Iteration: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Actual Output: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+        <span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">_</span><span class="p">,</span><span class="n">predictions</span> <span class="o">=</span> <span class="n">feedforward</span><span class="p">(</span><span class="n">W1</span><span class="p">,</span><span class="n">W2</span><span class="p">,</span><span class="n">b1</span><span class="p">,</span><span class="n">b2</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Predicted Output: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">predictions</span><span class="p">))</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">cross_entropy</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">predictions</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;loss: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">loss</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Iteration: 100
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+Iteration: 200
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+Iteration: 300
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+Iteration: 400
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+Iteration: 500
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+Iteration: 600
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+Iteration: 700
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+Iteration: 800
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+Iteration: 900
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+Iteration: 1000
+Actual Output: [[0]
+ [1]
+ [1]
+ [0]]
+Predicted Output: [[0.40525042]
+ [0.36678009]
+ [0.38933529]
+ [0.3583797 ]]
+loss: 0.7274201564061159
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">y_hat</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>(1, 4)</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+      
+<span class="c1"># Each row is a training example, each column is a feature  [X1, X2, X3]</span>
+<span class="n">X</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<span class="n">y</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(([</span><span class="mi">0</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">],[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="c1"># Define useful functions    </span>
+
+<span class="c1"># Activation function</span>
+<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">t</span><span class="p">))</span>
+
+<span class="c1"># Derivative of sigmoid</span>
+<span class="k">def</span> <span class="nf">sigmoid_derivative</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">p</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p</span><span class="p">)</span>
+
+<span class="c1"># Class definition</span>
+<span class="k">class</span> <span class="nc">NeuralNetwork</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">input</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights1</span><span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">4</span><span class="p">)</span> <span class="c1"># considering we have 4 nodes in the hidden layer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span> <span class="n">zeros</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        
+    <span class="k">def</span> <span class="nf">feedforward</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer1</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights1</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer1:&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">layer1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">layer2</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights2</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;layer2:&quot;</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">layer1</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">layer2</span>
+        
+    <span class="k">def</span> <span class="nf">backprop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">d_weights2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer1</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span><span class="o">*</span><span class="n">sigmoid_derivative</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">))</span>
+        <span class="n">d_weights1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">)</span><span class="o">*</span><span class="n">sigmoid_derivative</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">output</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">weights2</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="n">sigmoid_derivative</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layer1</span><span class="p">))</span>
+    
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights1</span> <span class="o">+=</span> <span class="n">d_weights1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weights2</span> <span class="o">+=</span> <span class="n">d_weights2</span>
+
+    <span class="k">def</span> <span class="nf">train</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">feedforward</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backprop</span><span class="p">()</span>
+        
+
+<span class="n">NN</span> <span class="o">=</span> <span class="n">NeuralNetwork</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span> <span class="c1"># trains the NN 1,000 times</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">==</span><span class="mi">0</span><span class="p">:</span> 
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;for iteration # &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Input : </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Actual Output: </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">))</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Predicted Output: </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">NN</span><span class="o">.</span><span class="n">feedforward</span><span class="p">()))</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Loss: </span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">square</span><span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">NN</span><span class="o">.</span><span class="n">feedforward</span><span class="p">()))))</span> <span class="c1"># mean sum squared loss</span>
+        <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+  
+    <span class="n">NN</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>for iteration # 0
+
+Input : 
+[[0. 0. 1.]
+ [0. 1. 1.]
+ [1. 0. 1.]
+ [1. 1. 1.]]
+Actual Output: 
+[[0.]
+ [1.]
+ [1.]
+ [0.]]
+layer1: (4, 4)
+layer2: (4, 4)
+Predicted Output: 
+[[0.77842021]
+ [0.81218904]
+ [0.79778738]
+ [0.8247389 ]]
+layer1: (4, 4)
+layer2: (4, 4)
+Loss: 
+0.34057379480712885
+
+
+layer1: (4, 4)
+layer2: (4, 4)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
 </div>
  
 
