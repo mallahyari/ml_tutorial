@@ -553,7 +553,8 @@ return the new vector of parameters</p>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Read the training set file and create a data object</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s2">&quot;data/data_logregression.csv&quot;</span><span class="p">)</span>
+<span class="n">file_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">,</span><span class="s2">&quot;data_logregression.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">file_name</span><span class="p">)</span>
 <span class="n">data</span>
 </pre></div>
 
@@ -706,10 +707,10 @@ return the new vector of parameters</p>
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-6b57311a998640cbaf9e43c82fb5a373"></div>
+<div id="altair-viz-91501bec71a943e0bcb3e7ed4c824c9a"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-6b57311a998640cbaf9e43c82fb5a373");
+    const outputDiv = document.getElementById("altair-viz-91501bec71a943e0bcb3e7ed4c824c9a");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
@@ -816,7 +817,7 @@ return the new vector of parameters</p>
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>100%|██████████| 3000/3000 [00:00&lt;00:00, 24881.77it/s]</pre>
+<pre>100%|██████████| 3000/3000 [00:00&lt;00:00, 23169.45it/s]</pre>
 </div>
 </div>
 
@@ -882,10 +883,10 @@ accuracy = 0.89
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-bafdccd9c83948c8b1daaf0b876eedd3"></div>
+<div id="altair-viz-e65cba4c401d448ca5b4fdd5e7b73489"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-bafdccd9c83948c8b1daaf0b876eedd3");
+    const outputDiv = document.getElementById("altair-viz-e65cba4c401d448ca5b4fdd5e7b73489");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
@@ -977,10 +978,10 @@ accuracy = 0.89
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-14751fb4b3d14e2694c56bd935b8cdf9"></div>
+<div id="altair-viz-0247ff7271d2495c94f9ae65ff7446f8"></div>
 <script type="text/javascript">
   (function(spec, embedOpt){
-    const outputDiv = document.getElementById("altair-viz-14751fb4b3d14e2694c56bd935b8cdf9");
+    const outputDiv = document.getElementById("altair-viz-0247ff7271d2495c94f9ae65ff7446f8");
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
       "vega-lib": "https://cdn.jsdelivr.net/npm//vega-lib?noext",
