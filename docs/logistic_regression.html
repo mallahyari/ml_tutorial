@@ -6,6 +6,7 @@ keywords: fastai
 sidebar: home_sidebar
 
 summary: "Summary: Classification, Logistic Regression, Gradient Descent, Overfitting, Regularization"
+description: "Summary: Classification, Logistic Regression, Gradient Descent, Overfitting, Regularization"
 ---
 <!--
 
@@ -18,33 +19,34 @@ summary: "Summary: Classification, Logistic Regression, Gradient Descent, Overfi
 -->
 
 <div class="container" id="notebook-container">
-    
+    {% raw %}
+        
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Definition">Definition<a class="anchor-link" href="#Definition">&#182;</a></h2><p>Logistic regression is a classification technique used for binary classification problems such as classifying tumors as malignant / not malignant, classifying emails as spam / not spam.</p>
+<h2 id="Definition">Definition<a class="anchor-link" href="#Definition"> </a></h2><p>Logistic regression is a classification technique used for binary classification problems such as classifying tumors as malignant / not malignant, classifying emails as spam / not spam.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Recap">Recap<a class="anchor-link" href="#Recap">&#182;</a></h2>
+<h2 id="Recap">Recap<a class="anchor-link" href="#Recap"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Classification">Classification<a class="anchor-link" href="#Classification">&#182;</a></h3><p><strong>Classification</strong> is a learning algorithm that determines which discrete category a new example (instance) belongs, given a set of training instances $X$ with their observed categories $Y$. Binary classification is a classification task where $Y$ has two possible values $0,1$. If $Y$ has more than two possible values, it is called a multi-class classification.</p>
+<h3 id="Classification">Classification<a class="anchor-link" href="#Classification"> </a></h3><p><strong>Classification</strong> is a learning algorithm that determines which discrete category a new example (instance) belongs, given a set of training instances $X$ with their observed categories $Y$. Binary classification is a classification task where $Y$ has two possible values $0,1$. If $Y$ has more than two possible values, it is called a multi-class classification.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Can-we-use-Linear-Regression-for-classification-problems?">Can we use Linear Regression for classification problems?<a class="anchor-link" href="#Can-we-use-Linear-Regression-for-classification-problems?">&#182;</a></h3><p>Thare are two main issues with using linear regression for classification:</p>
+<h3 id="Can-we-use-Linear-Regression-for-classification-problems?">Can we use Linear Regression for classification problems?<a class="anchor-link" href="#Can-we-use-Linear-Regression-for-classification-problems?"> </a></h3><p>Thare are two main issues with using linear regression for classification:</p>
 <ol>
 <li><p>Linear regression outputs values for $Y$ that can be much larger than 1 or much lower than 0, but our classes are 0 and 1.</p>
 </li>
@@ -59,7 +61,7 @@ summary: "Summary: Classification, Logistic Regression, Gradient Descent, Overfi
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Naive-Bayes">Naive Bayes<a class="anchor-link" href="#Naive-Bayes">&#182;</a></h3><p>If we have consider Naive Bayes assumption, then we have:
+<h3 id="Naive-Bayes">Naive Bayes<a class="anchor-link" href="#Naive-Bayes"> </a></h3><p>If we have consider Naive Bayes assumption, then we have:
 $$P(X_1\cdots X_d|Y)=\prod_{i=1}^{d}P(X_i|Y)$$</p>
 <p>We also assume parametric form for $P(X_i|Y)$ and $P(Y)$. Then, we use MLE or MAP to estimate the parameters.</p>
 <p>At last, Naive Bayes classifier for a $X^{new} = &lt;X_1,X_2,\cdots X_d&gt;$ is:</p>
@@ -69,7 +71,7 @@ $$Y^{new} =\underset{y}{\arg\max}\quad P(Y=y_k)\prod_i P(X^{new}_i|Y=y_K)$$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Generative-vs-Discriminative-Classifiers">Generative vs Discriminative Classifiers<a class="anchor-link" href="#Generative-vs-Discriminative-Classifiers">&#182;</a></h2><p>Training a classifier involves estimating $P(Y|X)$.</p>
+<h2 id="Generative-vs-Discriminative-Classifiers">Generative vs Discriminative Classifiers<a class="anchor-link" href="#Generative-vs-Discriminative-Classifiers"> </a></h2><p>Training a classifier involves estimating $P(Y|X)$.</p>
 <p>i. Generative classifiers (e.g. Naive Bayes):</p>
 <ul>
 <li>Assume some functional form for $P(X,Y)$, i.e. $P(X|Y)$ and $P(Y)$</li>
@@ -88,7 +90,7 @@ $$Y^{new} =\underset{y}{\arg\max}\quad P(Y=y_k)\prod_i P(X^{new}_i|Y=y_K)$$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Logistic-Regression">Logistic Regression<a class="anchor-link" href="#Logistic-Regression">&#182;</a></h2><p>Logistic regression is a classification method for binary classification problems, where input $X$ is a vector of discrete or real-valued variables and $Y$ is discrete (boolean valued). The idea is to learn $P(Y|X)$ directly from observed data.</p>
+<h2 id="Logistic-Regression">Logistic Regression<a class="anchor-link" href="#Logistic-Regression"> </a></h2><p>Logistic regression is a classification method for binary classification problems, where input $X$ is a vector of discrete or real-valued variables and $Y$ is discrete (boolean valued). The idea is to learn $P(Y|X)$ directly from observed data.</p>
 <p>Let's consider learning $f:X\rightarrow Y$ where,</p>
 <ul>
 <li>$X$ is a vector of real-valued features, $&lt;X_1,\cdots,X_n&gt;$</li>
@@ -104,7 +106,7 @@ $$P(Y=0|X=&lt;X_1,\cdots,X_n&gt;)=\frac{1}{1+exp(w_0+\sum_{i}w_iX_i)}$$$$P(Y=1|X
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Logistic-Function">Logistic Function<a class="anchor-link" href="#Logistic-Function">&#182;</a></h2><p>In Logistic regression $P(Y|X)$ follows the form of the sigmoid function, which means logistic regression gives the <em>probability</em> that an instance belongs to class $1$ or class $0$.</p>
+<h2 id="Logistic-Function">Logistic Function<a class="anchor-link" href="#Logistic-Function"> </a></h2><p>In Logistic regression $P(Y|X)$ follows the form of the sigmoid function, which means logistic regression gives the <em>probability</em> that an instance belongs to class $1$ or class $0$.</p>
 
 </div>
 </div>
@@ -125,7 +127,7 @@ $$g(z)=\frac{1}{1+e^{-z}}$$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Logistic-Regression-is-Linear">Logistic Regression is Linear<a class="anchor-link" href="#Logistic-Regression-is-Linear">&#182;</a></h2><p>The reason that logistic regression is linear is that, the outcome is a linear combinations of the inputs and parameters.</p>
+<h2 id="Logistic-Regression-is-Linear">Logistic Regression is Linear<a class="anchor-link" href="#Logistic-Regression-is-Linear"> </a></h2><p>The reason that logistic regression is linear is that, the outcome is a linear combinations of the inputs and parameters.</p>
 $$\frac{P(Y=1|X)}{P(Y=0|X)} = \exp(w_0+\sum_{i=1}^{n}w_iX_i)$$<p>which implies:</p>
 $$\ln\frac{P(Y=1|X)}{P(Y=0|X)} = w_0+\sum_{i=1}^{n}w_iX_i$$<p>where $w_0+\sum_{i=1}^{n}w_iX_i$ is the linear classification rule.</p>
 
@@ -134,7 +136,7 @@ $$\ln\frac{P(Y=1|X)}{P(Y=0|X)} = w_0+\sum_{i=1}^{n}w_iX_i$$<p>where $w_0+\sum_{i
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Decision-Boundary">Decision Boundary<a class="anchor-link" href="#Decision-Boundary">&#182;</a></h2><p>Since logistic regression prediction function returns a probability between 0 and 1, in order to predict which class this data belongs we need to set a threshold. For each data point, if the estimated probability is above this threshold, we classify the point into class 1, and if it's below the threshold, we classify the point into class 2.</p>
+<h2 id="Decision-Boundary">Decision Boundary<a class="anchor-link" href="#Decision-Boundary"> </a></h2><p>Since logistic regression prediction function returns a probability between 0 and 1, in order to predict which class this data belongs we need to set a threshold. For each data point, if the estimated probability is above this threshold, we classify the point into class 1, and if it's below the threshold, we classify the point into class 2.</p>
 <p>If $P(Y=1|X)\geq0.5$, class $=1$, and if $P(Y=1|X)&lt;0.5$, class $=0$.
 {% include note.html content='Decision boundary can be linear (a line) or non-linear (a curve or higher order polynomial). Polynomial order can be increased to get complex decision boundary.' %}</p>
 
@@ -143,7 +145,7 @@ $$\ln\frac{P(Y=1|X)}{P(Y=0|X)} = w_0+\sum_{i=1}^{n}w_iX_i$$<p>where $w_0+\sum_{i
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Training-Logistic-Regression:-MLCE">Training Logistic Regression: MLCE<a class="anchor-link" href="#Training-Logistic-Regression:-MLCE">&#182;</a></h2><p>We have a collection of training data $D = \{&lt;X^1,Y^1&gt;,\cdots,&lt;X^M,Y^M&gt;\}$. We need to find the parameters $\mathbf{w}=&lt;w_0,\cdots,w_n&gt;$ that <strong>maximize the conditional likelihood</strong> of the training data.</p>
+<h2 id="Training-Logistic-Regression:-MLCE">Training Logistic Regression: MLCE<a class="anchor-link" href="#Training-Logistic-Regression:-MLCE"> </a></h2><p>We have a collection of training data $D = \{&lt;X^1,Y^1&gt;,\cdots,&lt;X^M,Y^M&gt;\}$. We need to find the parameters $\mathbf{w}=&lt;w_0,\cdots,w_n&gt;$ that <strong>maximize the conditional likelihood</strong> of the training data.</p>
 <p>Data likelihood $=\prod_j P(&lt;X^j,Y^j&gt;|\mathbf{w})$, thus data <strong>conditional</strong> likelihood $=\prod_j P(Y^j|X^j,\mathbf{w})$.</p>
 <p>therefore,
 $$W_{MLCE}=\underset{\mathbf{w}}{\arg\max}\prod_j P(Y^j|X^j,\mathbf{w})$$</p>
@@ -167,7 +169,7 @@ $$<p>$J(\mathbf{w})$ is a convex function, so we can always find global minimum.
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Gradient-Descent-algorithm-for-Logistic-Regression">Gradient Descent algorithm for Logistic Regression<a class="anchor-link" href="#Gradient-Descent-algorithm-for-Logistic-Regression">&#182;</a></h2><ol>
+<h2 id="Gradient-Descent-algorithm-for-Logistic-Regression">Gradient Descent algorithm for Logistic Regression<a class="anchor-link" href="#Gradient-Descent-algorithm-for-Logistic-Regression"> </a></h2><ol>
 <li>Compute the gradient of $J_D(\mathbf{w})$ over the entire training set $D$:
 $$\nabla J_D(\mathbf{w}) = \left [\frac{\partial J_D(\mathbf{w})}{\partial w_0},\cdots \frac{\partial J_D(\mathbf{w})}{\partial w_n} \right]$$</li>
 </ol>
@@ -184,7 +186,7 @@ $$\frac{\partial J_D(\mathbf{w})}{\partial w_i}=\sum_{j=1}^{M}X_i^j\left[Y^j-\ha
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Using-Maximum-a-Posteriori-(MAP)-to-Estimate-Parameters">Using Maximum a Posteriori (MAP) to Estimate Parameters<a class="anchor-link" href="#Using-Maximum-a-Posteriori-(MAP)-to-Estimate-Parameters">&#182;</a></h2><p>We assume Gaussian distributions for the prior: $\mathbf{w} \sim N(0,\sigma I)$.Thus,</p>
+<h2 id="Using-Maximum-a-Posteriori-(MAP)-to-Estimate-Parameters">Using Maximum a Posteriori (MAP) to Estimate Parameters<a class="anchor-link" href="#Using-Maximum-a-Posteriori-(MAP)-to-Estimate-Parameters"> </a></h2><p>We assume Gaussian distributions for the prior: $\mathbf{w} \sim N(0,\sigma I)$.Thus,</p>
 $$\mathbf{w^*}=\underset{\mathbf{w}}{\arg\max}\quad \ln\left[P(\mathbf{w})\prod_j P(Y^j|X^j,\mathbf{w})\right]$$<p>Therefore,</p>
 $$J(\mathbf{w})=-\sum_j \left[ Y^j \ln P(Y^j=1|X^j,\mathbf{w}) + (1-Y^j) \ln P(Y^j=0|X^j,\mathbf{w})\right]+\lambda\sum_{i=1}^{n}w_i^2$$<p>where $\lambda \sum_{i=1}^{n}w_i^2$ is called a <strong>regularization</strong> term. Regularization helps reduce the overfitting, and also keeps the weights near to zero (i.e. discourage the weights from getting large values).</p>
 <p>And the modified gradient descent rule is:</p>
@@ -194,7 +196,7 @@ $$w_i=w_i-\eta \left [\frac{\partial J_D(\mathbf{w})}{\partial w_i} + \lambda w_
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Logistic-Regression-Model-Fitting-using-Cost-Function">Logistic Regression Model Fitting using Cost Function<a class="anchor-link" href="#Logistic-Regression-Model-Fitting-using-Cost-Function">&#182;</a></h2><p>In the first part above, we learned how to fit parameters for logistic regression model using two primary principles: (a) maximum likelihood (conditional) estimates (MLE), and (b) map a posteriori estimation. In this section, we show how to train a logistic regression model (i.e. find the parameters $w$) by defining and minimizing a <strong>cost</strong> function.</p>
+<h2 id="Logistic-Regression-Model-Fitting-using-Cost-Function">Logistic Regression Model Fitting using Cost Function<a class="anchor-link" href="#Logistic-Regression-Model-Fitting-using-Cost-Function"> </a></h2><p>In the first part above, we learned how to fit parameters for logistic regression model using two primary principles: (a) maximum likelihood (conditional) estimates (MLE), and (b) map a posteriori estimation. In this section, we show how to train a logistic regression model (i.e. find the parameters $w$) by defining and minimizing a <strong>cost</strong> function.</p>
 <p>In general, while training a classification model, our goal is to find a model that minimizes the  error. For logistic regression, we would like to find the parameters $w$ that minimize the number of misclassifications. Therefore, we define a cost function based on the parameters and find the set of parameters that give the minimum cost/error.</p>
 
 </div>
@@ -202,7 +204,7 @@ $$w_i=w_i-\eta \left [\frac{\partial J_D(\mathbf{w})}{\partial w_i} + \lambda w_
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Cost-Function-for-Logistic-Regression">Cost Function for Logistic Regression<a class="anchor-link" href="#Cost-Function-for-Logistic-Regression">&#182;</a></h2><p><em>A cost function primarily measures how wrong a machine learning model is in terms of estimating the relationship between $X$ and $y$.</em> Therefore, a cost function aims to penalize bad choices for the parameters to be optimized.</p>
+<h2 id="Cost-Function-for-Logistic-Regression">Cost Function for Logistic Regression<a class="anchor-link" href="#Cost-Function-for-Logistic-Regression"> </a></h2><p><em>A cost function primarily measures how wrong a machine learning model is in terms of estimating the relationship between $X$ and $y$.</em> Therefore, a cost function aims to penalize bad choices for the parameters to be optimized.</p>
 <p>We cannot use the linear regression cost function for logistic regression. If we make use of mean squared error for logistic regression, we will end up with a non-convex function of parameters $w$ (due to non-linear sigmoid function). Thus, gradient descent <em>cannot</em> guarantee that it finds the global minimum.</p>
 <p><img src="/ml_tutorial/images/con_nonconvex.png" alt="convex">
 <em>Fig2. Convex and non-convex functions. (<a href="https://towardsdatascience.com/logistic-regression-detailed-overview-46c4da4303bc">image source</a>)</em></p>
@@ -266,14 +268,14 @@ $$\frac{\partial J(w)}{\partial w_j}=\sum_{i=1}^{m}x_j^i\left(y^i-h_w(x^i)\right
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Example:-Predict-whether-a-student-will-pass-or-fail-an-exam">Example: Predict whether a student will pass or fail an exam<a class="anchor-link" href="#Example:-Predict-whether-a-student-will-pass-or-fail-an-exam">&#182;</a></h2><p>We are given a <a href="&quot;https://www.scilab.org/tutorials/machine-learning-%E2%80%93-logistic-regression-tutorial&quot;">dataset</a> on students exam results and we would like to predict whether a student will pass or fail based on the number of hours and the amount of sleep they had.</p>
+<h2 id="Example:-Predict-whether-a-student-will-pass-or-fail-an-exam">Example: Predict whether a student will pass or fail an exam<a class="anchor-link" href="#Example:-Predict-whether-a-student-will-pass-or-fail-an-exam"> </a></h2><p>We are given a <a href="&quot;https://www.scilab.org/tutorials/machine-learning-%E2%80%93-logistic-regression-tutorial&quot;">dataset</a> on students exam results and we would like to predict whether a student will pass or fail based on the number of hours and the amount of sleep they had.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Implemented-Functions">Implemented Functions<a class="anchor-link" href="#Implemented-Functions">&#182;</a></h3><p>All the functions, their implementations and documentations are described below. Some of functions are adopted from <a href="https://ml-cheatsheet.readthedocs.io/en/latest/logistic_regression.html">here</a>.</p>
+<h3 id="Implemented-Functions">Implemented Functions<a class="anchor-link" href="#Implemented-Functions"> </a></h3><p>All the functions, their implementations and documentations are described below. Some of functions are adopted from <a href="https://ml-cheatsheet.readthedocs.io/en/latest/logistic_regression.html">here</a>.</p>
 
 </div>
 </div>
@@ -540,7 +542,7 @@ return the new vector of parameters</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Explore-and-Run-the-Code">Explore and Run the Code<a class="anchor-link" href="#Explore-and-Run-the-Code">&#182;</a></h3><p>Let's take a look at the data.</p>
+<h3 id="Explore-and-Run-the-Code">Explore and Run the Code<a class="anchor-link" href="#Explore-and-Run-the-Code"> </a></h3><p>Let's take a look at the data.</p>
 
 </div>
 </div>
@@ -846,7 +848,7 @@ accuracy = 0.89
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Verify-Gradient-Descent-is-Running-Correctly">Verify Gradient Descent is Running Correctly<a class="anchor-link" href="#Verify-Gradient-Descent-is-Running-Correctly">&#182;</a></h3><p>We plot the cost $J(w)$ as a function of the number or iterations, and ensure that $J(w)$ is decreasing in every iteration.</p>
+<h3 id="Verify-Gradient-Descent-is-Running-Correctly">Verify Gradient Descent is Running Correctly<a class="anchor-link" href="#Verify-Gradient-Descent-is-Running-Correctly"> </a></h3><p>We plot the cost $J(w)$ as a function of the number or iterations, and ensure that $J(w)$ is decreasing in every iteration.</p>
 
 </div>
 </div>
@@ -936,7 +938,7 @@ accuracy = 0.89
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Plot-the-Decision-Boundary">Plot the Decision Boundary<a class="anchor-link" href="#Plot-the-Decision-Boundary">&#182;</a></h3><p>We also can plot the decision boundary and see how two classes (passed/failed) are separated. The decision boundary equation is $w_0+w_1x_1+w_2x_2=0$. Therefore, we predict $y=1$ if $w_0+w_1x_1+w_2x_2\geq 0$, otherwise we predict $y=0$. Considering our example, the decision boundary is a line with equation: $$x_2 = -\frac{w_0}{w_2}-\frac{w_1}{w_2}x_1$$</p>
+<h3 id="Plot-the-Decision-Boundary">Plot the Decision Boundary<a class="anchor-link" href="#Plot-the-Decision-Boundary"> </a></h3><p>We also can plot the decision boundary and see how two classes (passed/failed) are separated. The decision boundary equation is $w_0+w_1x_1+w_2x_2=0$. Therefore, we predict $y=1$ if $w_0+w_1x_1+w_2x_2\geq 0$, otherwise we predict $y=0$. Considering our example, the decision boundary is a line with equation: $$x_2 = -\frac{w_0}{w_2}-\frac{w_1}{w_2}x_1$$</p>
 
 </div>
 </div>
@@ -1031,7 +1033,7 @@ accuracy = 0.89
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Multi-class-Logistic-Regression">Multi-class Logistic Regression<a class="anchor-link" href="#Multi-class-Logistic-Regression">&#182;</a></h2><p>If we have $K$ classes, $y=\{0,1,\cdots,K-1\}$ instead of two, $y=\{0,1\}$, we can expand our binary logistic regression into a multiclass classification. There are two approaches for multiclass logistic regression:</p>
+<h2 id="Multi-class-Logistic-Regression">Multi-class Logistic Regression<a class="anchor-link" href="#Multi-class-Logistic-Regression"> </a></h2><p>If we have $K$ classes, $y=\{0,1,\cdots,K-1\}$ instead of two, $y=\{0,1\}$, we can expand our binary logistic regression into a multiclass classification. There are two approaches for multiclass logistic regression:</p>
 <p>1- One versus all:</p>
 <ul>
 <li>We train $K$ binary logistic regression classifier for each class, and choose the class with the biggest probability (i.e. most likely class).</li>
@@ -1046,7 +1048,7 @@ $$P(y=i|x,w) = \dfrac{e^{w^Tx}}{\sum_{i=1}^{K}e^{w_i^Tx}}$$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-deal-with-categorical-(discrete)-input-features?">How to deal with categorical (discrete) input features?<a class="anchor-link" href="#How-to-deal-with-categorical-(discrete)-input-features?">&#182;</a></h2><p>The input features often include numeric (continuous) as well as categorical (discrete) features. For instance,  salary, age, price, etc. are numeric features and gender (male/female), country of birth (e.g. US, Australia, ...), color (e.g. yellow, blue,...) and zip codes (10005, 98360,...) are categorical features.  Therefore, the questions becomes: How to multiply categorical features by coefficients?</p>
+<h2 id="How-to-deal-with-categorical-(discrete)-input-features?">How to deal with categorical (discrete) input features?<a class="anchor-link" href="#How-to-deal-with-categorical-(discrete)-input-features?"> </a></h2><p>The input features often include numeric (continuous) as well as categorical (discrete) features. For instance,  salary, age, price, etc. are numeric features and gender (male/female), country of birth (e.g. US, Australia, ...), color (e.g. yellow, blue,...) and zip codes (10005, 98360,...) are categorical features.  Therefore, the questions becomes: How to multiply categorical features by coefficients?</p>
 <p>When we have categorical input features, we must convert them into numeric features. One common way to encode categories as numeric features is via <em>one-hot encoding</em>.</p>
 <p><img src="/ml_tutorial/images/logistic_regression_2_onehot.png" alt="">
 <em>Fig5. One-hot encoding. [<a href="https://naadispeaks.wordpress.com/2018/04/09/one-hot-encoding-in-practice/">Image Source</a>]</em></p>
@@ -1056,12 +1058,13 @@ $$P(y=i|x,w) = \dfrac{e^{w^Tx}}{\sum_{i=1}^{K}e^{w_i^Tx}}$$
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p>[1] Tom Mitchell. <a href="http://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf">Naive Bayes and Logistic Regression</a></p>
+<h2 id="References">References<a class="anchor-link" href="#References"> </a></h2><p>[1] Tom Mitchell. <a href="http://www.cs.cmu.edu/~tom/mlbook/NBayesLogReg.pdf">Naive Bayes and Logistic Regression</a></p>
 <p>[2] Machine Learning Glossary. <a href="https://ml-cheatsheet.readthedocs.io/en/latest/logistic_regression.html">Logistic Regression</a></p>
 
 </div>
 </div>
 </div>
+    {% endraw %}
 </div>
  
 

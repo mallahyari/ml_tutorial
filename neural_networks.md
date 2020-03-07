@@ -76,9 +76,16 @@ Please note that $W=[W^{(1)}, W^{(2)},\cdots, W^{(L)}]$, where $W^{(j)}$ is matr
 
 ### Cross Entropy Loss
 
-Cross entropy loss is used in classification problems and outputs a probability between 0 and 0.
+Cross entropy loss is used in classification problems and outputs a probability between 0 and 0. If problem is a *binary* classification, the binary cross entropy loss is:
 
-$$J(W)=\frac{1}{m}\sum_{i=1}^m \left[ y^{(i)}\log(\hat{y}^{(i)}) + (1-y^{(i)})\log(1-\hat{y}^{(i)})\right]$$
+$$J(W)=-\frac{1}{m}\sum_{i=1}^m \left[ y^{(i)}\log(\hat{y}^{(i)}) + (1-y^{(i)})\log(1-\hat{y}^{(i)})\right]$$
+
+When the number of classes is $K$, where $K>2$ (i.e. multi-class classification), we essentially calculate a separate loss for each class label per training example and sum the result. Therefore the cross entropy loss is:
+
+$$J(W)=-\frac{1}{m}\sum_{i=1}^m \sum_{c=1}^K y^{(i)}_c\log(\hat{y}^{(i)}_c) + (1-y^{(i)}_c)\log(1-\hat{y}^{(i)}_c)$$
+
+
+
 
 ### Mean Squared Error Loss
 
@@ -94,19 +101,91 @@ $$W^* = \underset{W}{\arg\min}\ J(W)$$
 
 After we measured the loss, we need to find a way to **propagate** the error back, and update our weights and biases, in order to decrease the loss. But how much should we adjust the weights and biases.
 
-In order to find the appropriate amount of change in the weights and biases, we need to take the derivative of the loss function with respect to the weights and biases. The process of computing gradients of expressions through recursive application of chain rule is called **backpropagation**. When we have the gradients, we can use the *gradient descent* algorithm to update the weights.
-
-Gradient descent algorithm:
-1. Initialize the weights randomly $\sim N(0,\sigma^2)$
-2. Loop until convergence:
-   1. Compute gradient, $\frac{\partial J(\mathbf{W})}{\partial \mathbf{W}}$
-   2. Update weights, $W = W-\eta \frac{\partial J(W)}{\partial W}$
-3. Return weights
+In order to find the appropriate amount of change in the weights and biases, we need to take the derivative of the loss function with respect to the weights and biases. The process of computing gradients of expressions through recursive application of chain rule is called **backpropagation**. When we have the gradients, we can use the *gradient descent* algorithm to update the weights (i.e. minimize the loss function).
 
 For instance, if we are going to compute the gradient with respect to $w_1$, in our example network below, we have:
 ![](images/nn_backprop.jpeg)
 
 We need to repeat this **for every weight in the network** using gradients from later layers.
+
+### Gradient Descent
+
+Gradient descent algorithm is as follows:
+1. Initialize the weights randomly $\sim N(0,\sigma^2)$
+2. Loop until convergence:
+   - For all the examples
+      - Compute gradient, $\frac{\partial J(\mathbf{W})}{\partial \mathbf{W}}$
+
+   - Update weights, $W = W-\eta \frac{\partial J(W)}{\partial W}$
+3. Return weights
+
+![](images/nn_gradient_descent.jpg)
+*Fig5. Representation of a loss function with two parameters.[[Image Source](https://stackoverflow.com/questions/39340429/what-is-the-meaning-of-iterations-of-neural-network-gradient-descent-steps-epo/48012097)]*
+
+
+Since gradient descent algorithm iterates over all the training examples and then updates the weights, it will be slow when the size of the training set is too large. Thus, instead of using gradient descent, we will use **Stochastic Gradient Descent (SGD)**. Stochastic gradient descent picks a single example and updates the weight. Therefore, SGD is easy to compute. However it's very noisy. Below is SGD algorithm:
+
+1. Initialize the weights randomly $\sim N(0,\sigma^2)$
+2. Loop until convergence:
+   - Pick single example $i$
+   - Compute gradient, $\frac{\partial J_i(\mathbf{W})}{\partial \mathbf{W}}$
+
+   - Update weights, $W = W-\eta \frac{\partial J(W)}{\partial W}$
+3. Return weights
+
+Although SGD reduce the computations enormously, it's very noisy because it randomly picks one data point from the whole data set at each iteration. Therefore, in practice, we choose a small number of data points instead of just one point at each step, which is called **mini-batch gradient descent**. Mini-batch gradient descent has the goodness of gradient descent and speed of SGD, and it's algorithm is:
+
+1. Initialize the weights randomly $\sim N(0,\sigma^2)$
+2. Loop until convergence:
+   - For a batch of $B$ examples
+      - Compute gradient, $\frac{\partial J(\mathbf{W})}{\partial \mathbf{W}}$
+
+   - Update weights, $W = W-\eta \frac{\partial J(W)}{\partial W}$
+3. Return weights
+
+### Setting the Learning Rate in Gradient Descent
+
+When using gradient descent, one of the hyperparameters that we need to set is *learning rate* or *step size* $\eta$. Learning rate controls the amount that weights are updated during training. So it determines how quickly or slowly the neural network is trained. If the learning rate is large, the model learns faster. However, we may risk overshooting the lowest point and find a sub-optimal final set of weights. A small learning rate allows the model to learn a more optimal or even globally optimal set of weights but may take significantly longer to train.
+
+![](images/nn_learningrate.png)
+*Fig6. Learning rate with different values. [[Image Source](https://www.jeremyjordan.me/nn-learning-rate/)]*
+
+### How to Find the Optimal Learning Rate
+
+**Approach 1.** Try many different learning rates and see which one works well.
+
+**Approach 2.** Learning rate annealing (or adaptive learning rate). In this approach we start with a relatively high learning rate and then gradually lowering the learning rate during training. The most common form of adaptive learning rate is a *step decay* where the learning rate is reduced by some percentage after a set number of training epochs.
+
+### Overfitting Problem
+
+![](images/nn_overfitting.png)
+*Fig6. Model fitting scenarios. [[Image Source](https://medium.com/analytics-vidhya/regularization-in-machine-learning-and-deep-learning-f5fa06a3e58a)]*
+
+Underfitting is when the learning model is too simple (i.e. represented by too few features or regularized too much) that it cannot model the training data and generalize to new data. Underfitted models have high bias and low variance. They tend to have low variance in their predictions because they are simple, and have high bias towards outcomes because they cannot learn the underlying data and destroy the accuracy of the model. On the contrary, overfitting is a problem when a learning model learns the data too well that it starts learning the noise or random fluctuations in the training data. Therefore, the model closely explains the training data but fails to generalize to new data. Overfitted models tend to have high variance and low bias because they are more complex, they have more flexibility (low bias) and can capture more variations of the data (high variance). Thus, there should always be a trade-off between bias and variance of the model.
+
+### How to Prevent Overfitting
+
+**Regularization.** It's a technique that constrains the models to be simpler, so it discourages complex models, which helps improve the generalization of the model on the unseen data. Lasso regularization (L1) and ridge regularization (L2) are most popular techniques. The basic idea is these techniques add a penalty term to the cost function and try the disallow the coefficients from getting so large by pushing them to zero.
+
+**Dropout.** It's another popular technique for preventing overfitting in training neural networks. The intuition is to drop out some of the units (i.e. randomly set some activations to zero).
+
+![](images/nn_dropout.png)
+*Fig7. Dropout neural network. [[Image Source](http://jmlr.org/papers/volume15/srivastava14a/srivastava14a.pdf)]*
+
+**Early Stopping.** In this technique, we set an arbitrarily large number of epochs and stop the training when the performance of the model stops improving on the validation dataset. An epoch is one full pass of the training dataset.
+
+![](images/nn_early_stopping.png)
+*Fig8. Early stopping. [[Image Source](https://mc.ai/why-early-stopping-works-as-regularization/)]*
+
+### Full Backpropagation Step of the Example 2-layer Network
+
+The full backpropagation of our model is: ($\odot$ is the element-wise multiplication)
+
+![](images/nn_backprop_full.jpeg)
+
+### Let's Code it Up
+
+Now it's time to put it all together and implement our example neural network.
 
 
 

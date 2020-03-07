@@ -16,11 +16,13 @@ index = {"flip_coin": "01_mle_map.ipynb",
          "cost_function": "04_logistic_regression.ipynb",
          "train": "04_logistic_regression.ipynb",
          "update_weights": "04_logistic_regression.ipynb",
-         "get_accuracy": "04_logistic_regression.ipynb"}
+         "get_accuracy": "04_logistic_regression.ipynb",
+         "NeuralNetwork": "05_neural_network.ipynb"}
 
 modules = ["mle_map.py",
            "linear_regression.py",
-           "logistic_regression.py"]
+           "logistic_regression.py",
+           "neural_network.py"]
 
 doc_url = "https://sci2lab.github.io/ml_tutorial/"
 
