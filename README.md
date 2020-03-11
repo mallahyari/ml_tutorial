@@ -24,3 +24,7 @@ Topics are constantly updated and new tutorial is added. The current topics are:
 [5- Neural Networks](neural_network)
 
 
+[6- Convolutional Neural Networks](cnn)
+
+
+
