@@ -159,7 +159,254 @@ Unlike ordinary neural networks that each neuron in one layer is connected to al
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation"> </a></h2>
+<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation"> </a></h2><p>As a practice, I created a ConvNet to classify latex symbols. Particularly, I download the HASY data set of handwritten symbols from <a href="https://github.com/MartinThoma/HASY">here</a>. It includes 369 classes including Arabic numerals and Latin characters. I split the dataset into 80% train, 20% test and trained the CNN on training set. For training I used the Google colab utilizing GPU computations. Here's the <a href="https://colab.research.google.com/drive/1bHlH4bGh5uUg4W20VGD7D-1bNwjLT7BX">link</a>
+to colab notebook. I got the accuracy of 81.75% on the test set. It definitely has room to be improved. The architecture of the CNN is as follows:</p>
+
+<pre><code>Model: "sequential"
+_________________________________________________________________
+Layer (type)                 Output Shape              Param #   
+=================================================================
+conv2d (Conv2D)              (None, 32, 32, 128)       1280      
+_________________________________________________________________
+conv2d_1 (Conv2D)            (None, 32, 32, 128)       147584    
+_________________________________________________________________
+max_pooling2d (MaxPooling2D) (None, 16, 16, 128)       0         
+_________________________________________________________________
+dropout (Dropout)            (None, 16, 16, 128)       0         
+_________________________________________________________________
+conv2d_2 (Conv2D)            (None, 16, 16, 128)       409728    
+_________________________________________________________________
+max_pooling2d_1 (MaxPooling2 (None, 8, 8, 128)         0         
+_________________________________________________________________
+flatten (Flatten)            (None, 8192)              0         
+_________________________________________________________________
+dense (Dense)                (None, 128)               1048704   
+_________________________________________________________________
+dropout_1 (Dropout)          (None, 128)               0         
+_________________________________________________________________
+dense_1 (Dense)              (None, 128)               16512     
+_________________________________________________________________
+dense_2 (Dense)              (None, 369)               47601     
+=================================================================
+Total params: 1,671,409
+Trainable params: 1,671,409
+Non-trainable params: 0</code></pre>
+<p>In order to make this project more interesting, I converted the python-keras model into a Tenserflowjs model, then developed a simple Web application using Javascript, loaded the model and used it for predicting latex symbol by drawing symbols in a canvas. Here's the <a href="https://github.com/sci2lab/tensorflowjs/tree/master/latexRecognizer">GitHub link</a> for the Web app. Below is a snapshot of how it works:</p>
+<p><img src="/ml_tutorial/images/cnn_latexrecognizer.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Utilize-Colab-GPU-Capability">Utilize Colab GPU Capability<a class="anchor-link" href="#Utilize-Colab-GPU-Capability"> </a></h2><p>The complete code is shown below. However, I strongly recommend to execute it while you have access to GPU, otherwise it will be very slow.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="get_num_lines" class="doc_header"><code>get_num_lines</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/cnn.py#L20" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>get_num_lines</code>(<strong><code>file_name</code></strong>)</p>
+</blockquote>
+<p>Counts the number of lines in the file.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="load_symbols" class="doc_header"><code>load_symbols</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/cnn.py#L31" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_symbols</code>(<strong><code>file_name</code></strong>)</p>
+</blockquote>
+<p>Reads the file having symbols and create two maps: <code>id2latex</code> and <code>latex2id</code>
+to encode the symbols and retrieve them easily.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="load_data" class="doc_header"><code>load_data</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/cnn.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_data</code>(<strong><code>label_file_name</code></strong>, <strong><code>latex2id</code></strong>)</p>
+</blockquote>
+<p>Reads the data file and create and return <code>data</code> and <code>labels</code> lists.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Create id2latex and latex2id maps</span>
+<span class="n">symbol_file_name</span> <span class="o">=</span> <span class="s1">&#39;symbols.csv&#39;</span>
+<span class="n">data_file_name</span>   <span class="o">=</span> <span class="s1">&#39;hasy-data-labels.csv&#39;</span>
+<span class="n">id2latex</span><span class="p">,</span><span class="n">latex2id</span> <span class="o">=</span> <span class="n">load_symbols</span><span class="p">(</span><span class="n">symbol_file_name</span><span class="p">)</span>
+<span class="n">data</span><span class="p">,</span><span class="n">labels</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="n">data_file_name</span><span class="p">,</span><span class="n">latex2id</span><span class="p">)</span>
+
+<span class="c1"># Randomly pick an example and display it</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="mi">83643</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">fromarray</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">sample</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">id2latex</span><span class="p">[</span><span class="n">labels</span><span class="p">[</span><span class="n">sample</span><span class="p">]])</span>
+
+<span class="c1"># Split the data into train and test sets</span>
+<span class="n">train_data</span><span class="p">,</span><span class="n">test_data</span><span class="p">,</span><span class="n">train_labels</span><span class="p">,</span><span class="n">test_labels</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="n">labels</span><span class="p">,</span><span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># Normalizing train and test data</span>
+<span class="n">normalized_train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">train_data</span><span class="p">)</span><span class="o">/</span><span class="mf">255.0</span>
+<span class="n">normalized_test_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">test_data</span><span class="p">)</span><span class="o">/</span><span class="mf">255.0</span>
+
+<span class="c1"># One-hot encoding of labels for train and test datasets</span>
+<span class="n">encoded_train_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">train_labels</span><span class="p">))</span>
+<span class="n">encoded_test_labels</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">keras</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">to_categorical</span><span class="p">(</span><span class="n">test_labels</span><span class="p">))</span>
+
+<span class="c1"># Reshaping train and test sets, i.e. changing from (32, 32) to (32, 32, 1)</span>
+<span class="n">normalized_train_data</span> <span class="o">=</span> <span class="n">normalized_train_data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">normalized_test_data</span> <span class="o">=</span> <span class="n">normalized_test_data</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Input shape = </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">normalized_train_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of classes =  </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">encoded_train_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+<span class="c1"># Define intial variables</span>
+<span class="n">input_features</span> <span class="o">=</span> <span class="n">normalized_train_data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">n_classes</span> <span class="o">=</span> <span class="n">encoded_train_labels</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">128</span>
+<span class="n">epochs</span> <span class="o">=</span> <span class="mi">15</span>
+
+<span class="c1"># Define the CNN model</span>
+
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">,</span> <span class="n">input_shape</span><span class="o">=</span><span class="p">(</span><span class="n">input_features</span><span class="p">,</span><span class="n">input_features</span><span class="p">,</span><span class="mi">1</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Conv2D</span><span class="p">(</span><span class="mi">128</span><span class="p">,(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="s1">&#39;same&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">MaxPooling2D</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Flatten</span><span class="p">())</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;relu&#39;</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="n">n_classes</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">))</span>
+
+<span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+
+<span class="c1"># Train the model</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span> <span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">normalized_train_data</span><span class="p">,</span><span class="n">encoded_train_labels</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="n">epochs</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">normalized_test_data</span><span class="p">,</span><span class="n">encoded_test_labels</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>Train on 134586 samples, validate on 33647 samples
+Epoch 1/15
+134586/134586 [==============================] - 55s 412us/sample - loss: 2.9116 - accuracy: 0.3689 - val_loss: 1.1192 - val_accuracy: 0.6942
+Epoch 2/15
+134586/134586 [==============================] - 48s 357us/sample - loss: 1.6461 - accuracy: 0.5727 - val_loss: 0.8604 - val_accuracy: 0.7529
+Epoch 3/15
+134586/134586 [==============================] - 48s 356us/sample - loss: 1.3399 - accuracy: 0.6383 - val_loss: 0.7842 - val_accuracy: 0.7749
+Epoch 4/15
+134586/134586 [==============================] - 48s 356us/sample - loss: 1.1756 - accuracy: 0.6739 - val_loss: 0.7115 - val_accuracy: 0.7893
+Epoch 5/15
+134586/134586 [==============================] - 48s 354us/sample - loss: 1.0635 - accuracy: 0.7013 - val_loss: 0.7017 - val_accuracy: 0.7889
+Epoch 6/15
+134586/134586 [==============================] - 48s 355us/sample - loss: 0.9863 - accuracy: 0.7164 - val_loss: 0.6497 - val_accuracy: 0.8052
+Epoch 7/15
+134586/134586 [==============================] - 48s 354us/sample - loss: 0.9254 - accuracy: 0.7306 - val_loss: 0.6536 - val_accuracy: 0.8029
+Epoch 8/15
+134586/134586 [==============================] - 48s 356us/sample - loss: 0.8730 - accuracy: 0.7439 - val_loss: 0.6280 - val_accuracy: 0.8069
+Epoch 9/15
+134586/134586 [==============================] - 48s 354us/sample - loss: 0.8305 - accuracy: 0.7530 - val_loss: 0.6123 - val_accuracy: 0.8149
+Epoch 10/15
+134586/134586 [==============================] - 48s 356us/sample - loss: 0.7942 - accuracy: 0.7614 - val_loss: 0.6133 - val_accuracy: 0.8117
+Epoch 11/15
+134586/134586 [==============================] - 48s 354us/sample - loss: 0.7660 - accuracy: 0.7686 - val_loss: 0.5940 - val_accuracy: 0.8172
+Epoch 12/15
+134586/134586 [==============================] - 48s 355us/sample - loss: 0.7425 - accuracy: 0.7735 - val_loss: 0.5928 - val_accuracy: 0.8185
+Epoch 13/15
+134586/134586 [==============================] - 48s 355us/sample - loss: 0.7229 - accuracy: 0.7775 - val_loss: 0.5971 - val_accuracy: 0.8167
+Epoch 14/15
+134586/134586 [==============================] - 48s 355us/sample - loss: 0.7039 - accuracy: 0.7822 - val_loss: 0.5893 - val_accuracy: 0.8198
+Epoch 15/15
+134586/134586 [==============================] - 48s 355us/sample - loss: 0.6867 - accuracy: 0.7867 - val_loss: 0.5890 - val_accuracy: 0.8175</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">score</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">normalized_test_data</span><span class="p">,</span> <span class="n">encoded_test_labels</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test loss: </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test accuracy: </span><span class="si">{:.2f}</span><span class="s1">%&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">score</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="mi">100</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>Test loss: 0.589
+Test accuracy: 81.75%</code></pre>
+
 </div>
 </div>
 </div>
@@ -171,6 +418,303 @@ Unlike ordinary neural networks that each neuron in one layer is connected to al
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://github.com/keras-team/keras/blob/master/examples/addition_rnn.py</span>
+<span class="c1"># #hide</span>
+<span class="c1"># import tensorflow as tf</span>
+<span class="c1"># from tensorflow import keras</span>
+<span class="c1"># from tensorflow.keras.models import Sequential</span>
+<span class="c1"># from tensorflow.keras import layers</span>
+<span class="c1"># import numpy as np</span>
+<span class="c1"># from six.moves import range</span>
+
+
+<span class="c1"># class CharacterTable(object):</span>
+<span class="c1">#     &quot;&quot;&quot;Given a set of characters:</span>
+<span class="c1">#     + Encode them to a one-hot integer representation</span>
+<span class="c1">#     + Decode the one-hot or integer representation to their character output</span>
+<span class="c1">#     + Decode a vector of probabilities to their character output</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     def __init__(self, chars):</span>
+<span class="c1">#         &quot;&quot;&quot;Initialize character table.</span>
+<span class="c1">#         # Arguments</span>
+<span class="c1">#             chars: Characters that can appear in the input.</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         self.chars = sorted(set(chars))</span>
+<span class="c1">#         self.char_indices = dict((c, i) for i, c in enumerate(self.chars))</span>
+<span class="c1">#         self.indices_char = dict((i, c) for i, c in enumerate(self.chars))</span>
+
+<span class="c1">#     def encode(self, C, num_rows):</span>
+<span class="c1">#         &quot;&quot;&quot;One-hot encode given string C.</span>
+<span class="c1">#         # Arguments</span>
+<span class="c1">#             C: string, to be encoded.</span>
+<span class="c1">#             num_rows: Number of rows in the returned one-hot encoding. This is</span>
+<span class="c1">#                 used to keep the # of rows for each data the same.</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         x = np.zeros((num_rows, len(self.chars)))</span>
+<span class="c1">#         for i, c in enumerate(C):</span>
+<span class="c1">#             x[i, self.char_indices[c]] = 1</span>
+<span class="c1">#         return x</span>
+
+<span class="c1">#     def decode(self, x, calc_argmax=True):</span>
+<span class="c1">#         &quot;&quot;&quot;Decode the given vector or 2D array to their character output.</span>
+<span class="c1">#         # Arguments</span>
+<span class="c1">#             x: A vector or a 2D array of probabilities or one-hot representations;</span>
+<span class="c1">#                 or a vector of character indices (used with `calc_argmax=False`).</span>
+<span class="c1">#             calc_argmax: Whether to find the character index with maximum</span>
+<span class="c1">#                 probability, defaults to `True`.</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         if calc_argmax:</span>
+<span class="c1">#             x = x.argmax(axis=-1)</span>
+<span class="c1">#         return &#39;&#39;.join(self.indices_char[x] for x in x)</span>
+
+
+<span class="c1"># class colors:</span>
+<span class="c1">#     ok = &#39;\033[92m&#39;</span>
+<span class="c1">#     fail = &#39;\033[91m&#39;</span>
+<span class="c1">#     close = &#39;\033[0m&#39;</span>
+
+<span class="c1"># # Parameters for the model and dataset.</span>
+<span class="c1"># TRAINING_SIZE = 50000</span>
+<span class="c1"># DIGITS = 3</span>
+<span class="c1"># REVERSE = True</span>
+
+<span class="c1"># # Maximum length of input is &#39;int + int&#39; (e.g., &#39;345+678&#39;). Maximum length of</span>
+<span class="c1"># # int is DIGITS.</span>
+<span class="c1"># MAXLEN = DIGITS + 1 + DIGITS</span>
+
+<span class="c1"># # All the numbers, plus sign and space for padding.</span>
+<span class="c1"># chars = &#39;0123456789+ &#39;</span>
+<span class="c1"># ctable = CharacterTable(chars)</span>
+
+<span class="c1"># questions = []</span>
+<span class="c1"># expected = []</span>
+<span class="c1"># seen = set()</span>
+<span class="c1"># print(&#39;Generating data...&#39;)</span>
+<span class="c1"># while len(questions) &lt; TRAINING_SIZE:</span>
+<span class="c1">#     f = lambda: int(&#39;&#39;.join(np.random.choice(list(&#39;0123456789&#39;))</span>
+<span class="c1">#                     for i in range(np.random.randint(1, DIGITS + 1))))</span>
+<span class="c1">#     a, b = f(), f()</span>
+<span class="c1">#     # Skip any addition questions we&#39;ve already seen</span>
+<span class="c1">#     # Also skip any such that x+Y == Y+x (hence the sorting).</span>
+<span class="c1">#     key = tuple(sorted((a, b)))</span>
+<span class="c1">#     if key in seen:</span>
+<span class="c1">#         continue</span>
+<span class="c1">#     seen.add(key)</span>
+<span class="c1">#     # Pad the data with spaces such that it is always MAXLEN.</span>
+<span class="c1">#     q = &#39;{}+{}&#39;.format(a, b)</span>
+<span class="c1">#     query = q + &#39; &#39; * (MAXLEN - len(q))</span>
+<span class="c1">#     ans = str(a + b)</span>
+<span class="c1">#     # Answers can be of maximum size DIGITS + 1.</span>
+<span class="c1">#     ans += &#39; &#39; * (DIGITS + 1 - len(ans))</span>
+<span class="c1">#     if REVERSE:</span>
+<span class="c1">#         # Reverse the query, e.g., &#39;12+345  &#39; becomes &#39;  543+21&#39;. (Note the</span>
+<span class="c1">#         # space used for padding.)</span>
+<span class="c1">#         query = query[::-1]</span>
+<span class="c1">#     questions.append(query)</span>
+<span class="c1">#     expected.append(ans)</span>
+<span class="c1"># print(&#39;Total addition questions:&#39;, len(questions))</span>
+
+<span class="c1"># print(&#39;Vectorization...&#39;)</span>
+<span class="c1"># x = np.zeros((len(questions), MAXLEN, len(chars)), dtype=np.bool)</span>
+<span class="c1"># y = np.zeros((len(questions), DIGITS + 1, len(chars)), dtype=np.bool)</span>
+<span class="c1"># for i, sentence in enumerate(questions):</span>
+<span class="c1">#     x[i] = ctable.encode(sentence, MAXLEN)</span>
+<span class="c1"># for i, sentence in enumerate(expected):</span>
+<span class="c1">#     y[i] = ctable.encode(sentence, DIGITS + 1)</span>
+
+<span class="c1"># # Shuffle (x, y) in unison as the later parts of x will almost all be larger</span>
+<span class="c1"># # digits.</span>
+<span class="c1"># indices = np.arange(len(y))</span>
+<span class="c1"># np.random.shuffle(indices)</span>
+<span class="c1"># x = x[indices]</span>
+<span class="c1"># y = y[indices]</span>
+
+<span class="c1"># # Explicitly set apart 10% for validation data that we never train over.</span>
+<span class="c1"># split_at = len(x) - len(x) // 10</span>
+<span class="c1"># (x_train, x_val) = x[:split_at], x[split_at:]</span>
+<span class="c1"># (y_train, y_val) = y[:split_at], y[split_at:]</span>
+
+<span class="c1"># print(&#39;Training Data:&#39;)</span>
+<span class="c1"># print(x_train.shape)</span>
+<span class="c1"># print(y_train.shape)</span>
+
+<span class="c1"># print(&#39;Validation Data:&#39;)</span>
+<span class="c1"># print(x_val.shape)</span>
+<span class="c1"># print(y_val.shape)</span>
+
+<span class="c1"># # Try replacing GRU, or SimpleRNN.</span>
+<span class="c1"># RNN = layers.LSTM</span>
+<span class="c1"># HIDDEN_SIZE = 128</span>
+<span class="c1"># BATCH_SIZE = 128</span>
+<span class="c1"># LAYERS = 1</span>
+
+<span class="c1"># print(&#39;Build model...&#39;)</span>
+<span class="c1"># model = Sequential()</span>
+<span class="c1"># # &quot;Encode&quot; the input sequence using an RNN, producing an output of HIDDEN_SIZE.</span>
+<span class="c1"># # Note: In a situation where your input sequences have a variable length,</span>
+<span class="c1"># # use input_shape=(None, num_feature).</span>
+<span class="c1"># model.add(RNN(HIDDEN_SIZE, input_shape=(MAXLEN, len(chars))))</span>
+<span class="c1"># # As the decoder RNN&#39;s input, repeatedly provide with the last output of</span>
+<span class="c1"># # RNN for each time step. Repeat &#39;DIGITS + 1&#39; times as that&#39;s the maximum</span>
+<span class="c1"># # length of output, e.g., when DIGITS=3, max output is 999+999=1998.</span>
+<span class="c1"># model.add(layers.RepeatVector(DIGITS + 1))</span>
+<span class="c1"># # The decoder RNN could be multiple layers stacked or a single layer.</span>
+<span class="c1"># for _ in range(LAYERS):</span>
+<span class="c1">#     # By setting return_sequences to True, return not only the last output but</span>
+<span class="c1">#     # all the outputs so far in the form of (num_samples, timesteps,</span>
+<span class="c1">#     # output_dim). This is necessary as TimeDistributed in the below expects</span>
+<span class="c1">#     # the first dimension to be the timesteps.</span>
+<span class="c1">#     model.add(RNN(HIDDEN_SIZE, return_sequences=True))</span>
+
+<span class="c1"># # Apply a dense layer to the every temporal slice of an input. For each of step</span>
+<span class="c1"># # of the output sequence, decide which character should be chosen.</span>
+<span class="c1"># model.add(layers.TimeDistributed(layers.Dense(len(chars), activation=&#39;softmax&#39;)))</span>
+<span class="c1"># model.compile(loss=&#39;categorical_crossentropy&#39;,</span>
+<span class="c1">#               optimizer=&#39;adam&#39;,</span>
+<span class="c1">#               metrics=[&#39;accuracy&#39;])</span>
+<span class="c1"># model.summary()</span>
+
+<span class="c1"># # Train the model each generation and show predictions against the validation</span>
+<span class="c1"># # dataset.</span>
+<span class="c1"># for iteration in range(1, 1):</span>
+<span class="c1">#     print()</span>
+<span class="c1">#     print(&#39;-&#39; * 50)</span>
+<span class="c1">#     print(&#39;Iteration&#39;, iteration)</span>
+<span class="c1">#     model.fit(x_train, y_train,</span>
+<span class="c1">#               batch_size=BATCH_SIZE,</span>
+<span class="c1">#               epochs=1,</span>
+<span class="c1">#               validation_data=(x_val, y_val))</span>
+<span class="c1">#     # Select 10 samples from the validation set at random so we can visualize</span>
+<span class="c1">#     # errors.</span>
+<span class="c1">#     for i in range(10):</span>
+<span class="c1">#         ind = np.random.randint(0, len(x_val))</span>
+<span class="c1">#         rowx, rowy = x_val[np.array([ind])], y_val[np.array([ind])]</span>
+<span class="c1">#         preds = model.predict_classes(rowx, verbose=0)</span>
+<span class="c1">#         q = ctable.decode(rowx[0])</span>
+<span class="c1">#         correct = ctable.decode(rowy[0])</span>
+<span class="c1">#         guess = ctable.decode(preds[0], calc_argmax=False)</span>
+<span class="c1">#         print(&#39;Q&#39;, q[::-1] if REVERSE else q, end=&#39; &#39;)</span>
+<span class="c1">#         print(&#39;T&#39;, correct, end=&#39; &#39;)</span>
+<span class="c1">#         if correct == guess:</span>
+<span class="c1">#             print(colors.ok + &#39;☑&#39; + colors.close, end=&#39; &#39;)</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             print(colors.fail + &#39;☒&#39; + colors.close, end=&#39; &#39;)</span>
+<span class="c1">#         print(guess)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># https://github.com/keras-team/keras/blob/master/examples/imdb_cnn.py</span>
+
+<span class="c1"># &#39;&#39;&#39;</span>
+<span class="c1"># #This example demonstrates the use of Convolution1D for text classification.</span>
+<span class="c1"># Gets to 0.89 test accuracy after 2 epochs. &lt;/br&gt;</span>
+<span class="c1"># 90s/epoch on Intel i5 2.4Ghz CPU. &lt;/br&gt;</span>
+<span class="c1"># 10s/epoch on Tesla K40 GPU.</span>
+<span class="c1"># &#39;&#39;&#39;</span>
+<span class="c1"># from __future__ import print_function</span>
+
+<span class="c1"># from keras.preprocessing import sequence</span>
+<span class="c1"># from keras.models import Sequential</span>
+<span class="c1"># from keras.layers import Dense, Dropout, Activation</span>
+<span class="c1"># from keras.layers import Embedding</span>
+<span class="c1"># from keras.layers import Conv1D, GlobalMaxPooling1D</span>
+<span class="c1"># from keras.datasets import imdb</span>
+
+<span class="c1"># # set parameters:</span>
+<span class="c1"># max_features = 5000</span>
+<span class="c1"># maxlen = 400</span>
+<span class="c1"># batch_size = 32</span>
+<span class="c1"># embedding_dims = 50</span>
+<span class="c1"># filters = 250</span>
+<span class="c1"># kernel_size = 3</span>
+<span class="c1"># hidden_dims = 250</span>
+<span class="c1"># epochs = 2</span>
+
+<span class="c1"># print(&#39;Loading data...&#39;)</span>
+<span class="c1"># (x_train, y_train), (x_test, y_test) = imdb.load_data(num_words=max_features)</span>
+<span class="c1"># print(len(x_train), &#39;train sequences&#39;)</span>
+<span class="c1"># print(len(x_test), &#39;test sequences&#39;)</span>
+
+<span class="c1"># print(&#39;Pad sequences (samples x time)&#39;)</span>
+<span class="c1"># x_train = sequence.pad_sequences(x_train, maxlen=maxlen)</span>
+<span class="c1"># x_test = sequence.pad_sequences(x_test, maxlen=maxlen)</span>
+<span class="c1"># print(&#39;x_train shape:&#39;, x_train.shape)</span>
+<span class="c1"># print(&#39;x_test shape:&#39;, x_test.shape)</span>
+
+<span class="c1"># print(&#39;Build model...&#39;)</span>
+<span class="c1"># model = Sequential()</span>
+
+<span class="c1"># # we start off with an efficient embedding layer which maps</span>
+<span class="c1"># # our vocab indices into embedding_dims dimensions</span>
+<span class="c1"># model.add(Embedding(max_features,</span>
+<span class="c1">#                     embedding_dims,</span>
+<span class="c1">#                     input_length=maxlen))</span>
+<span class="c1"># model.add(Dropout(0.2))</span>
+
+<span class="c1"># # we add a Convolution1D, which will learn filters</span>
+<span class="c1"># # word group filters of size filter_length:</span>
+<span class="c1"># model.add(Conv1D(filters,</span>
+<span class="c1">#                  kernel_size,</span>
+<span class="c1">#                  padding=&#39;valid&#39;,</span>
+<span class="c1">#                  activation=&#39;relu&#39;,</span>
+<span class="c1">#                  strides=1))</span>
+<span class="c1"># # we use max pooling:</span>
+<span class="c1"># model.add(GlobalMaxPooling1D())</span>
+
+<span class="c1"># # We add a vanilla hidden layer:</span>
+<span class="c1"># model.add(Dense(hidden_dims))</span>
+<span class="c1"># model.add(Dropout(0.2))</span>
+<span class="c1"># model.add(Activation(&#39;relu&#39;))</span>
+
+<span class="c1"># # We project onto a single unit output layer, and squash it with a sigmoid:</span>
+<span class="c1"># model.add(Dense(1))</span>
+<span class="c1"># model.add(Activation(&#39;sigmoid&#39;))</span>
+
+<span class="c1"># model.compile(loss=&#39;binary_crossentropy&#39;,</span>
+<span class="c1">#               optimizer=&#39;adam&#39;,</span>
+<span class="c1">#               metrics=[&#39;accuracy&#39;])</span>
+<span class="c1"># model.fit(x_train, y_train,</span>
+<span class="c1">#           batch_size=batch_size,</span>
+<span class="c1">#           epochs=epochs,</span>
+<span class="c1">#           validation_data=(x_test, y_test))</span>
+
+
+<span class="c1"># We can see that the 2D in Conv2D means each channel in the input and filter is 2 dimensional(as we see in the gif example) </span>
+<span class="c1"># and 1D in Conv1D means each channel in the input and filter is 1 dimensional(as we see in the cat and dog NLP example).</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
 </div>
     {% endraw %}
 </div>
