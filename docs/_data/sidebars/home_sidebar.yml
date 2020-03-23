@@ -27,6 +27,9 @@ entries:
     - output: web,pdf
       title: Convolutional Neural Networks
       url: /cnn
+    - output: web,pdf
+      title: Title
+      url: /Untitled
     output: web
     title: ml_tutorial
   output: web
