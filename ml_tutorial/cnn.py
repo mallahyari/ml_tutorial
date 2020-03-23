@@ -12,7 +12,6 @@ from tqdm import tqdm
 from PIL import Image
 import os
 import matplotlib.pyplot as plt
-# import altair as alt
 import numpy as np
 import pandas as pd
 
