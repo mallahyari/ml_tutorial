@@ -29,7 +29,7 @@ entries:
       url: /cnn
     - output: web,pdf
       title: Title
-      url: /Untitled
+      url: /rnn_lstm
     output: web
     title: ml_tutorial
   output: web
