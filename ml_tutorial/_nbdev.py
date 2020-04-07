@@ -7,7 +7,7 @@ index = {"flip_coin": "01_mle_map.ipynb",
          "make_point_plot": "03_linear_regression.ipynb",
          "make_line_plot": "03_linear_regression.ipynb",
          "gradient_descent": "03_linear_regression.ipynb",
-         "load_data": "06_cnn.ipynb",
+         "load_data": "07_autoencoder.ipynb",
          "plot_data": "04_logistic_regression.ipynb",
          "sigmoid": "04_logistic_regression.ipynb",
          "predict": "04_logistic_regression.ipynb",
@@ -19,13 +19,17 @@ index = {"flip_coin": "01_mle_map.ipynb",
          "get_accuracy": "04_logistic_regression.ipynb",
          "NeuralNetwork": "05_neural_network.ipynb",
          "get_num_lines": "06_cnn.ipynb",
-         "load_symbols": "06_cnn.ipynb"}
+         "load_symbols": "06_cnn.ipynb",
+         "get_pixel": "07_autoencoder.ipynb",
+         "change_image_background": "07_autoencoder.ipynb",
+         "create_augmentor_pipeline": "07_autoencoder.ipynb"}
 
 modules = ["mle_map.py",
            "linear_regression.py",
            "logistic_regression.py",
            "neural_network.py",
-           "cnn.py"]
+           "cnn.py",
+           "autoencoder.py"]
 
 doc_url = "https://sci2lab.github.io/ml_tutorial/"
 

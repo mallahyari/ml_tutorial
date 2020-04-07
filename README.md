@@ -27,4 +27,7 @@ Topics are constantly updated and new tutorial is added. The current topics are:
 [6- Convolutional Neural Networks](cnn)
 
 
+[7- Autoencoders](autoencoder)
+
+
 

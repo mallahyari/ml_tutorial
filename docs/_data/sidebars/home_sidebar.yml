@@ -28,8 +28,8 @@ entries:
       title: Convolutional Neural Networks
       url: /cnn
     - output: web,pdf
-      title: Title
-      url: /rnn_lstm
+      title: Autoencoders
+      url: /autoencoder
     output: web
     title: ml_tutorial
   output: web
