@@ -32,7 +32,7 @@ entries:
       url: /autoencoder
     - output: web,pdf
       title: Text Search using TF-IDF and Elasticsearch
-      url: /qa_tfidf
+      url: /tfidf
     output: web
     title: ml_tutorial
   output: web

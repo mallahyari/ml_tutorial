@@ -30,4 +30,7 @@ Topics are constantly updated and new tutorial is added. The current topics are:
 [7- Autoencoders](autoencoder)
 
 
+[8- Text Search using TF-IDF and Elasticsearch](tfidf)
+
+
 

@@ -8,6 +8,6 @@
     "Neural Network": "/neural_network",
     "Convolutional Neural Networks": "/cnn",
     "Autoencoders": "/autoencoder",
-    "Text Search using TF-IDF and Elasticsearch": "/qa_tfidf"
+    "Text Search using TF-IDF and Elasticsearch": "/tfidf"
   }
 }
