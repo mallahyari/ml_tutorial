@@ -344,7 +344,7 @@ Output directory set to data/converted/output.</pre>
 <span class="n">normalized_train_data</span> <span class="o">=</span> <span class="n">train_data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span><span class="o">/</span><span class="mf">255.0</span>
 <span class="n">normalized_test_data</span> <span class="o">=</span> <span class="n">test_data</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span><span class="o">/</span><span class="mf">255.0</span>
 
-<span class="c1"># Reshaping train and test sets, i.e. changing from (128, 128) to (128, 128, 1)</span>
+<span class="c1"># Reshaping train and test sets, i.e. changing from (64, 64) to (64, 64, 1)</span>
 <span class="n">normalized_train_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">normalized_train_data</span><span class="p">,</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">normalized_test_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">normalized_test_data</span><span class="p">,</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Normalization and reshaping is done.&#39;</span><span class="p">)</span>

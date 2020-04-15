@@ -7,6 +7,7 @@
     "Logistic Regression": "/logistic_regression",
     "Neural Network": "/neural_network",
     "Convolutional Neural Networks": "/cnn",
-    "Autoencoders": "/autoencoder"
+    "Autoencoders": "/autoencoder",
+    "Text Search using TF-IDF and Elasticsearch": "/qa_tfidf"
   }
 }

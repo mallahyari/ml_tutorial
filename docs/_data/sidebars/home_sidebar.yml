@@ -30,6 +30,9 @@ entries:
     - output: web,pdf
       title: Autoencoders
       url: /autoencoder
+    - output: web,pdf
+      title: Text Search using TF-IDF and Elasticsearch
+      url: /qa_tfidf
     output: web
     title: ml_tutorial
   output: web
