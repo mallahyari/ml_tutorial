@@ -3,7 +3,7 @@
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"flip_coin": "01_mle_map.ipynb",
-         "generate_data": "03_linear_regression.ipynb",
+         "generate_data": "09_rnn.ipynb",
          "make_point_plot": "03_linear_regression.ipynb",
          "make_line_plot": "03_linear_regression.ipynb",
          "gradient_descent": "03_linear_regression.ipynb",
@@ -31,7 +31,9 @@ index = {"flip_coin": "01_mle_map.ipynb",
          "index_data": "08_tfidf.ipynb",
          "index_batch": "08_tfidf.ipynb",
          "run_query_loop": "08_tfidf.ipynb",
-         "handle_query": "08_tfidf.ipynb"}
+         "handle_query": "08_tfidf.ipynb",
+         "encode": "09_rnn.ipynb",
+         "decode": "09_rnn.ipynb"}
 
 modules = ["mle_map.py",
            "linear_regression.py",
@@ -39,7 +41,8 @@ modules = ["mle_map.py",
            "neural_network.py",
            "cnn.py",
            "autoencoder.py",
-           "tfidf.py"]
+           "tfidf.py",
+           "rnn.py"]
 
 doc_url = "https://sci2lab.github.io/ml_tutorial/"
 

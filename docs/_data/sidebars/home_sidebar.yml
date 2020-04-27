@@ -33,6 +33,9 @@ entries:
     - output: web,pdf
       title: Text Search using TF-IDF and Elasticsearch
       url: /tfidf
+    - output: web,pdf
+      title: Recurrent Neural Networks
+      url: /rnn
     output: web
     title: ml_tutorial
   output: web

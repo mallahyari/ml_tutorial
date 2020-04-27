@@ -33,4 +33,8 @@ Topics are constantly updated and new tutorial is added. The current topics are:
 [8- Text Search using TF-IDF and Elasticsearch](tfidf)
 
 
+[9- Recurrent Neural Networks (RNN)](rnn)
+
+
+
 
