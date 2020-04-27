@@ -19,11 +19,14 @@ description: "Summary: Classification, Logistic Regression, Gradient Descent, Ov
 -->
 
 <div class="container" id="notebook-container">
-    {% raw %}
         
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Definition">Definition<a class="anchor-link" href="#Definition"> </a></h2><p>Logistic regression is a classification technique used for binary classification problems such as classifying tumors as malignant / not malignant, classifying emails as spam / not spam.</p>
@@ -62,10 +65,15 @@ description: "Summary: Classification, Logistic Regression, Gradient Descent, Ov
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Naive-Bayes">Naive Bayes<a class="anchor-link" href="#Naive-Bayes"> </a></h3><p>If we have consider Naive Bayes assumption, then we have:
-$$P(X_1\cdots X_d|Y)=\prod_{i=1}^{d}P(X_i|Y)$$</p>
+{% raw %}
+$$P(X_1\cdots X_d|Y)=\prod_{i=1}^{d}P(X_i|Y)$$
+{% endraw %}</p>
 <p>We also assume parametric form for $P(X_i|Y)$ and $P(Y)$. Then, we use MLE or MAP to estimate the parameters.</p>
 <p>At last, Naive Bayes classifier for a $X^{new} = &lt;X_1,X_2,\cdots X_d&gt;$ is:</p>
+<p>{% raw %}
 $$Y^{new} =\underset{y}{\arg\max}\quad P(Y=y_k)\prod_i P(X^{new}_i|Y=y_K)$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
@@ -100,7 +108,13 @@ $$Y^{new} =\underset{y}{\arg\max}\quad P(Y=y_k)\prod_i P(X^{new}_i|Y=y_K)$$
 <li>Assume $P(Y) \sim $ Bernoulli($\pi$)</li>
 </ul>
 <p>What does this imply about the form of $P(Y|X)$?</p>
-$$P(Y=0|X=&lt;X_1,\cdots,X_n&gt;)=\frac{1}{1+exp(w_0+\sum_{i}w_iX_i)}$$$$P(Y=1|X) = 1 - P(Y=1|X) = \frac{\exp(w_0+\sum_{i=1}^{n}w_iX_i)}{1+\exp(w_0+\sum_{i=1}^{n}w_iX_i)} $$
+<p>{% raw %}
+$$P(Y=0|X=&lt;X_1,\cdots,X_n&gt;)=\frac{1}{1+exp(w_0+\sum_{i}w_iX_i)}$$
+{% endraw %}</p>
+<p>{% raw %}
+$$P(Y=1|X) = 1 - P(Y=1|X) = \frac{\exp(w_0+\sum_{i=1}^{n}w_iX_i)}{1+\exp(w_0+\sum_{i=1}^{n}w_iX_i)} $$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
@@ -113,7 +127,10 @@ $$P(Y=0|X=&lt;X_1,\cdots,X_n&gt;)=\frac{1}{1+exp(w_0+\sum_{i}w_iX_i)}$$$$P(Y=1|X
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>{% raw %}
 $$g(z)=\frac{1}{1+e^{-z}}$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
@@ -128,8 +145,14 @@ $$g(z)=\frac{1}{1+e^{-z}}$$
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Logistic-Regression-is-Linear">Logistic Regression is Linear<a class="anchor-link" href="#Logistic-Regression-is-Linear"> </a></h2><p>The reason that logistic regression is linear is that, the outcome is a linear combinations of the inputs and parameters.</p>
-$$\frac{P(Y=1|X)}{P(Y=0|X)} = \exp(w_0+\sum_{i=1}^{n}w_iX_i)$$<p>which implies:</p>
-$$\ln\frac{P(Y=1|X)}{P(Y=0|X)} = w_0+\sum_{i=1}^{n}w_iX_i$$<p>where $w_0+\sum_{i=1}^{n}w_iX_i$ is the linear classification rule.</p>
+<p>{% raw %}
+$$\frac{P(Y=1|X)}{P(Y=0|X)} = \exp(w_0+\sum_{i=1}^{n}w_iX_i)$$
+{% endraw %}</p>
+<p>which implies:</p>
+<p>{% raw %}
+$$\ln\frac{P(Y=1|X)}{P(Y=0|X)} = w_0+\sum_{i=1}^{n}w_iX_i$$
+{% endraw %}</p>
+<p>where $w_0+\sum_{i=1}^{n}w_iX_i$ is the linear classification rule.</p>
 
 </div>
 </div>
@@ -148,7 +171,9 @@ $$\ln\frac{P(Y=1|X)}{P(Y=0|X)} = w_0+\sum_{i=1}^{n}w_iX_i$$<p>where $w_0+\sum_{i
 <h2 id="Training-Logistic-Regression:-MLCE">Training Logistic Regression: MLCE<a class="anchor-link" href="#Training-Logistic-Regression:-MLCE"> </a></h2><p>We have a collection of training data $D = \{&lt;X^1,Y^1&gt;,\cdots,&lt;X^M,Y^M&gt;\}$. We need to find the parameters $\mathbf{w}=&lt;w_0,\cdots,w_n&gt;$ that <strong>maximize the conditional likelihood</strong> of the training data.</p>
 <p>Data likelihood $=\prod_j P(&lt;X^j,Y^j&gt;|\mathbf{w})$, thus data <strong>conditional</strong> likelihood $=\prod_j P(Y^j|X^j,\mathbf{w})$.</p>
 <p>therefore,
-$$W_{MLCE}=\underset{\mathbf{w}}{\arg\max}\prod_j P(Y^j|X^j,\mathbf{w})$$</p>
+{% raw %}
+$$W_{MLCE}=\underset{\mathbf{w}}{\arg\max}\prod_j P(Y^j|X^j,\mathbf{w})$$
+{% endraw %}</p>
 <p>In order to make arithmetic easier, we work with the conditional log likelihood. Additionally, we know that maximizing a function is equivalent to <em>minimizing the negative of the function</em>. Therefore, we convert our problem to a minimization problem and apply the Gradient Descent algorithm to find the minimum.
 $$
 \begin{aligned}
@@ -171,9 +196,14 @@ $$<p>$J(\mathbf{w})$ is a convex function, so we can always find global minimum.
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Gradient-Descent-algorithm-for-Logistic-Regression">Gradient Descent algorithm for Logistic Regression<a class="anchor-link" href="#Gradient-Descent-algorithm-for-Logistic-Regression"> </a></h2><ol>
 <li>Compute the gradient of $J_D(\mathbf{w})$ over the entire training set $D$:
-$$\nabla J_D(\mathbf{w}) = \left [\frac{\partial J_D(\mathbf{w})}{\partial w_0},\cdots \frac{\partial J_D(\mathbf{w})}{\partial w_n} \right]$$</li>
+{% raw %}
+$$\nabla J_D(\mathbf{w}) = \left [\frac{\partial J_D(\mathbf{w})}{\partial w_0},\cdots \frac{\partial J_D(\mathbf{w})}{\partial w_n} \right]$$
+{% endraw %}</li>
 </ol>
-$$\frac{\partial J_D(\mathbf{w})}{\partial w_i}=\sum_{j=1}^{M}X_i^j\left[Y^j-\hat{P}(Y^j=1|X^j,\mathbf{w})\right]$$<p>We assume $X_0^j=1$, (for $j=0,1,\cdots M$)</p>
+<p>{% raw %}
+$$\frac{\partial J_D(\mathbf{w})}{\partial w_i}=\sum_{j=1}^{M}X_i^j\left[Y^j-\hat{P}(Y^j=1|X^j,\mathbf{w})\right]$$
+{% endraw %}</p>
+<p>We assume $X_0^j=1$, (for $j=0,1,\cdots M$)</p>
 <ol>
 <li>Do until satisfied:<ul>
 <li>Update the vector of parameters: $w_i=w_i-\eta \frac{\partial J_D(\mathbf{w})}{\partial w_i}$, (for $i=0,1,\cdots n$)</li>
@@ -187,10 +217,19 @@ $$\frac{\partial J_D(\mathbf{w})}{\partial w_i}=\sum_{j=1}^{M}X_i^j\left[Y^j-\ha
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Using-Maximum-a-Posteriori-(MAP)-to-Estimate-Parameters">Using Maximum a Posteriori (MAP) to Estimate Parameters<a class="anchor-link" href="#Using-Maximum-a-Posteriori-(MAP)-to-Estimate-Parameters"> </a></h2><p>We assume Gaussian distributions for the prior: $\mathbf{w} \sim N(0,\sigma I)$.Thus,</p>
-$$\mathbf{w^*}=\underset{\mathbf{w}}{\arg\max}\quad \ln\left[P(\mathbf{w})\prod_j P(Y^j|X^j,\mathbf{w})\right]$$<p>Therefore,</p>
-$$J(\mathbf{w})=-\sum_j \left[ Y^j \ln P(Y^j=1|X^j,\mathbf{w}) + (1-Y^j) \ln P(Y^j=0|X^j,\mathbf{w})\right]+\lambda\sum_{i=1}^{n}w_i^2$$<p>where $\lambda \sum_{i=1}^{n}w_i^2$ is called a <strong>regularization</strong> term. Regularization helps reduce the overfitting, and also keeps the weights near to zero (i.e. discourage the weights from getting large values).</p>
+<p>{% raw %}
+$$\mathbf{w^*}=\underset{\mathbf{w}}{\arg\max}\quad \ln\left[P(\mathbf{w})\prod_j P(Y^j|X^j,\mathbf{w})\right]$$
+{% endraw %}</p>
+<p>Therefore,</p>
+<p>{% raw %}
+$$J(\mathbf{w})=-\sum_j \left[ Y^j \ln P(Y^j=1|X^j,\mathbf{w}) + (1-Y^j) \ln P(Y^j=0|X^j,\mathbf{w})\right]+\lambda\sum_{i=1}^{n}w_i^2$$
+{% endraw %}</p>
+<p>where $\lambda \sum_{i=1}^{n}w_i^2$ is called a <strong>regularization</strong> term. Regularization helps reduce the overfitting, and also keeps the weights near to zero (i.e. discourage the weights from getting large values).</p>
 <p>And the modified gradient descent rule is:</p>
+<p>{% raw %}
 $$w_i=w_i-\eta \left [\frac{\partial J_D(\mathbf{w})}{\partial w_i} + \lambda w_i \right ]$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
@@ -253,7 +292,10 @@ $$w_i=w_i-\eta \left [\frac{\partial J_D(\mathbf{w})}{\partial w_i} + \lambda w_
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The two cost functions can be combined into a single function:</p>
-$$J(w)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^i\log(h_{w}(x^i))+(1-y^i)\log(1-h_{w}(x^i))\right]$$<p>{% include note.html content='$y=0$ or $1$ always' %}</p>
+<p>{% raw %}
+$$J(w)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^i\log(h_{w}(x^i))+(1-y^i)\log(1-h_{w}(x^i))\right]$$
+{% endraw %}
+{% include note.html content='$y=0$ or $1$ always' %}</p>
 
 </div>
 </div>
@@ -261,7 +303,10 @@ $$J(w)=-\frac{1}{m}\sum_{i=1}^{m}\left[y^i\log(h_{w}(x^i))+(1-y^i)\log(1-h_{w}(x
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If we take the derivative of the cost function $J(w)$, we have:</p>
-$$\frac{\partial J(w)}{\partial w_j}=\sum_{i=1}^{m}x_j^i\left(y^i-h_w(x^i)\right)$$<p>which is the same function we obtained by taking the derivative of expression while computing MLCE.</p>
+<p>{% raw %}
+$$\frac{\partial J(w)}{\partial w_j}=\sum_{i=1}^{m}x_j^i\left(y^i-h_w(x^i)\right)$$
+{% endraw %}</p>
+<p>which is the same function we obtained by taking the derivative of expression while computing MLCE.</p>
 
 </div>
 </div>
@@ -280,9 +325,15 @@ $$\frac{\partial J(w)}{\partial w_j}=\sum_{i=1}^{m}x_j^i\left(y^i-h_w(x^i)\right
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -305,9 +356,17 @@ and return a Pandas DataFrame.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -330,9 +389,17 @@ return the chart object</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -353,9 +420,17 @@ return the chart object</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -378,9 +453,17 @@ Return a 1D array of probabilities.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -403,9 +486,17 @@ return 1 if <code>prob</code> &gt;= 0.5, otherwise return 0</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -428,9 +519,17 @@ Return an N-element array of 0s (False) and 1s (True)</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -456,9 +555,17 @@ Return an N-element array of 0s (False) and 1s (True)</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -486,9 +593,17 @@ return the parameters w and an array of all the costs</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -514,9 +629,17 @@ return the new vector of parameters</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -540,6 +663,8 @@ return the new vector of parameters</p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Explore-and-Run-the-Code">Explore and Run the Code<a class="anchor-link" href="#Explore-and-Run-the-Code"> </a></h3><p>Let's take a look at the data.</p>
@@ -547,6 +672,8 @@ return the new vector of parameters</p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -671,6 +798,8 @@ return the new vector of parameters</p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Feature vector $x=[x_0,x_1,x_2]$ where $x_0=1, x_1="studied", x_2="slept"$. The labels are $y=\{0,1\}$ and parameters include $w=[w_0,w_1,w_2]$</p>
@@ -686,6 +815,8 @@ return the new vector of parameters</p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -761,6 +892,8 @@ return the new vector of parameters</p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We initialize the variables before start training (i.e. fitting the paramaters).</p>
@@ -768,6 +901,8 @@ return the new vector of parameters</p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -847,6 +982,8 @@ accuracy = 0.89
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Verify-Gradient-Descent-is-Running-Correctly">Verify Gradient Descent is Running Correctly<a class="anchor-link" href="#Verify-Gradient-Descent-is-Running-Correctly"> </a></h3><p>We plot the cost $J(w)$ as a function of the number or iterations, and ensure that $J(w)$ is decreasing in every iteration.</p>
@@ -854,6 +991,8 @@ accuracy = 0.89
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -937,6 +1076,8 @@ accuracy = 0.89
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Plot-the-Decision-Boundary">Plot the Decision Boundary<a class="anchor-link" href="#Plot-the-Decision-Boundary"> </a></h3><p>We also can plot the decision boundary and see how two classes (passed/failed) are separated. The decision boundary equation is $w_0+w_1x_1+w_2x_2=0$. Therefore, we predict $y=1$ if $w_0+w_1x_1+w_2x_2\geq 0$, otherwise we predict $y=0$. Considering our example, the decision boundary is a line with equation: $$x_2 = -\frac{w_0}{w_2}-\frac{w_1}{w_2}x_1$$</p>
@@ -944,6 +1085,8 @@ accuracy = 0.89
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1032,6 +1175,8 @@ accuracy = 0.89
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Multi-class-Logistic-Regression">Multi-class Logistic Regression<a class="anchor-link" href="#Multi-class-Logistic-Regression"> </a></h2><p>If we have $K$ classes, $y=\{0,1,\cdots,K-1\}$ instead of two, $y=\{0,1\}$, we can expand our binary logistic regression into a multiclass classification. There are two approaches for multiclass logistic regression:</p>
@@ -1043,7 +1188,10 @@ accuracy = 0.89
 <ul>
 <li>Softmax is a function that takes as input a vector of $K$ real numbers, and normalizes it into a probability distribution consisting of $K$ probabilities proportional to the exponentials of the input numbers. Thus, the predicted probability for the $i'th$ class given a sample vector $x$ and a weighting vector $w$ is:</li>
 </ul>
+<p>{% raw %}
 $$P(y=i|x,w) = \dfrac{e^{w^Tx}}{\sum_{i=1}^{K}e^{w_i^Tx}}$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
@@ -1065,7 +1213,6 @@ $$P(y=i|x,w) = \dfrac{e^{w^Tx}}{\sum_{i=1}^{K}e^{w_i^Tx}}$$
 </div>
 </div>
 </div>
-    {% endraw %}
 </div>
  
 

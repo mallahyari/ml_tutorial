@@ -19,11 +19,14 @@ description: "This tutorial describes linear regression technique and demonstrat
 -->
 
 <div class="container" id="notebook-container">
-    {% raw %}
         
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Definition">Definition<a class="anchor-link" href="#Definition"> </a></h2><p>Regression is an approach to modeling the relationship between a real-valued target $y$ (dependent variable) and data points $X$ (independent variables). In other words, linear regression describes the relationship between input and output and predicts the output based on the input data.
@@ -95,7 +98,10 @@ Examples of linear regression include, predicting the weight from gender, age, a
 <ul>
 <li>$(x^i,y^i)$: is the $i$th training example</li>
 </ul>
-$$\hat y = f(x) = w_0 + w_1x$$<p>where $w_0$ and $w_1$ are the paramaters of the $f(x)$ that we need to find.</p>
+<p>{% raw %}
+$$\hat y = f(x) = w_0 + w_1x$$
+{% endraw %}</p>
+<p>where $w_0$ and $w_1$ are the paramaters of the $f(x)$ that we need to find.</p>
 
 </div>
 </div>
@@ -110,7 +116,10 @@ $$\hat y = f(x) = w_0 + w_1x$$<p>where $w_0$ and $w_1$ are the paramaters of the
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Compute-Cost">Compute Cost<a class="anchor-link" href="#Compute-Cost"> </a></h3><p>We define the cost as the Residual Sum of Squares (RSS), which is:</p>
-$$RSS(w_0,w_1)=\sum_{i=1}^{m}(y_i-[w_0+w_1x_i])^2$$<p>We <em>minimize</em> the cost over all possible values of $w_0$ and $w_1$.</p>
+<p>{% raw %}
+$$RSS(w_0,w_1)=\sum_{i=1}^{m}(y_i-[w_0+w_1x_i])^2$$
+{% endraw %}</p>
+<p>We <em>minimize</em> the cost over all possible values of $w_0$ and $w_1$.</p>
 <p>{% include image.html max-width="700" file="/ml_tutorial/images/linear_regression_7.svg" %}</p>
 <!-- ![](img/linear_regression_7.svg) -->
 </div>
@@ -123,6 +132,8 @@ $$RSS(w_0,w_1)=\sum_{i=1}^{m}(y_i-[w_0+w_1x_i])^2$$<p>We <em>minimize</em> the c
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -151,6 +162,10 @@ $$RSS(w_0,w_1)=\sum_{i=1}^{m}(y_i-[w_0+w_1x_i])^2$$<p>We <em>minimize</em> the c
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -166,6 +181,10 @@ $$RSS(w_0,w_1)=\sum_{i=1}^{m}(y_i-[w_0+w_1x_i])^2$$<p>We <em>minimize</em> the c
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -179,6 +198,8 @@ $$RSS(w_0,w_1)=\sum_{i=1}^{m}(y_i-[w_0+w_1x_i])^2$$<p>We <em>minimize</em> the c
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>{% include image.html height="500" align="left" max-width="500" file="/ml_tutorial/images/lr_house_line_ex.png" %}</p>
@@ -190,7 +211,10 @@ $$RSS(w_0,w_1)=\sum_{i=1}^{m}(y_i-[w_0+w_1x_i])^2$$<p>We <em>minimize</em> the c
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Polynomial-Regression-Model">Polynomial Regression Model<a class="anchor-link" href="#Polynomial-Regression-Model"> </a></h2><p>If we represent the relationship between the independent variable $x$ and dependent variable $y$ as an $n$th degree polynomial, then the regression model is called <strong>polynomial regression</strong>. Therefore, we have:</p>
-$$y_i=w_0+w_1x_i+w_2x_i^2+\cdots+w_nx_i^n+\epsilon_i$$<p>We treat each $x_i^p$ for $p=1,\cdots,n$ as a different feature. i.e. $feature\ 1=x, feature\ 2=x^2,\cdots, feature\ n=x^n$.</p>
+<p>{% raw %}
+$$y_i=w_0+w_1x_i+w_2x_i^2+\cdots+w_nx_i^n+\epsilon_i$$
+{% endraw %}</p>
+<p>We treat each $x_i^p$ for $p=1,\cdots,n$ as a different feature. i.e. $feature\ 1=x, feature\ 2=x^2,\cdots, feature\ n=x^n$.</p>
 
 </div>
 </div>
@@ -224,7 +248,10 @@ the residual sum of squares, but it ends up leading to very bad predictions. Alt
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Regularization">Regularization<a class="anchor-link" href="#Regularization"> </a></h3><p>We add a penalty term to the Residual sum of squares (RSS). This extra term penalizes the parameters $w$ from getting large values. Therefore, instead of minimizing the RSS, we minimize the combination of RSS and this additional regularization expression.</p>
-$$J(\mathbf{w})=\sum_{i=1}^{m}\Big( y_i-f(x_i)\Big)^2+\lambda\|\mathbf{w}\|^2$$<p>where $\|\mathbf{w}\|^2 = \sqrt{w_1^2 +w_2^2+\cdots w_k^2}$, and $\lambda$ is a hyperparameter that balances tradeoff.</p>
+<p>{% raw %}
+$$J(\mathbf{w})=\sum_{i=1}^{m}\Big( y_i-f(x_i)\Big)^2+\lambda\|\mathbf{w}\|^2$$
+{% endraw %}</p>
+<p>where $\|\mathbf{w}\|^2 = \sqrt{w_1^2 +w_2^2+\cdots w_k^2}$, and $\lambda$ is a hyperparameter that balances tradeoff.</p>
 
 </div>
 </div>
@@ -232,7 +259,10 @@ $$J(\mathbf{w})=\sum_{i=1}^{m}\Big( y_i-f(x_i)\Big)^2+\lambda\|\mathbf{w}\|^2$$<
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Linear-Regression-General-Expansion">Linear Regression General Expansion<a class="anchor-link" href="#Linear-Regression-General-Expansion"> </a></h2><p>In general, if we have a dataset of $m$ instances with $k$ features, $\mathbf{x}=&lt;x_1,x_2,\cdots,x_k&gt;$ and a real valued target $y$, then the linear regression model takes the form:</p>
-$$y_i=w_0+w_1h_1(x_1)+w_2h_2(x_2)+\cdots+w_kh_k(x_k)+\epsilon_i= w_0 +\sum_{j=1}^{k}w_jh_j(x_i)+\epsilon_i$$<p>Considering our house price prediction, instead of using only area of the house, we can add more features such as number of bathrooms, number of bedrooms, age of the house, etc.</p>
+<p>{% raw %}
+$$y_i=w_0+w_1h_1(x_1)+w_2h_2(x_2)+\cdots+w_kh_k(x_k)+\epsilon_i= w_0 +\sum_{j=1}^{k}w_jh_j(x_i)+\epsilon_i$$
+{% endraw %}</p>
+<p>Considering our house price prediction, instead of using only area of the house, we can add more features such as number of bathrooms, number of bedrooms, age of the house, etc.</p>
 
 </div>
 </div>
@@ -253,7 +283,13 @@ $$y_i=w_0+w_1h_1(x_1)+w_2h_2(x_2)+\cdots+w_kh_k(x_k)+\epsilon_i= w_0 +\sum_{j=1}
 <ul>
 <li>In order to find coefficients, we need to minimize the <strong>mean residual square error</strong>:</li>
 </ul>
-$$J(\mathbf{w}) = \frac{1}{m}\sum_{i=1}^{m}\left( f(\mathbf{x}_i) - \left(w_0 +\sum_{j=1}^{k}w_jh_j(\mathbf{x})\right)\right)^2$$$$\mathbf{w}^* = \underset{\mathbf{w}}{\arg\min}\ J(\mathbf{w})$$<p>{% include note.html content='The reason it&#8217;s called <em>linear</em> regression is that the model is a linear combinations of the input features.' %}</p>
+<p>{% raw %}
+$$J(\mathbf{w}) = \frac{1}{m}\sum_{i=1}^{m}\left( f(\mathbf{x}_i) - \left(w_0 +\sum_{j=1}^{k}w_jh_j(\mathbf{x})\right)\right)^2$$
+{% endraw %}</p>
+<p>{% raw %}
+$$\mathbf{w}^* = \underset{\mathbf{w}}{\arg\min}\ J(\mathbf{w})$$
+{% endraw %}
+{% include note.html content='The reason it&#8217;s called <em>linear</em> regression is that the model is a linear combinations of the input features.' %}</p>
 
 </div>
 </div>
@@ -275,7 +311,10 @@ $$J(\mathbf{w}) = \frac{1}{m}\sum_{i=1}^{m}\left( f(\mathbf{x}_i) - \left(w_0 +\
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Since we are looling for a line to fit our training set, we need to find a function $\hat y = f(x)$ that estimates $y^i$ for all $1\leq i \leq m$. Thus, we have:</p>
-$$\hat y = f(x) = w_0 + w_1x$$<p>$w_0$ and $w_1$ are the paramaters that we need to find.</p>
+<p>{% raw %}
+$$\hat y = f(x) = w_0 + w_1x$$
+{% endraw %}</p>
+<p>$w_0$ and $w_1$ are the paramaters that we need to find.</p>
 
 </div>
 </div>
@@ -284,21 +323,33 @@ $$\hat y = f(x) = w_0 + w_1x$$<p>$w_0$ and $w_1$ are the paramaters that we need
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Cost-Function-(Error-Function)">Cost Function (Error Function)<a class="anchor-link" href="#Cost-Function-(Error-Function)"> </a></h2><p>We wish to estimate the actual $y$, i.e. we want to minimize the error as much as possible. The error is the difference between the actual $y^i$ and our estimated/predicted $\hat{y}^i$ for all $1\leq i \leq m$.</p>
 <p>The error/cost function is:</p>
+<p>{% raw %}
 $$J(w_0,w_1) = \frac{1}{m}\sum_{i=1}^{m}\left( y^i - (w_0 + w_1 x^i)\right)^2$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Precisely, we need to minimize the <strong>mean residual squared error</strong>:</p>
+<p>{% raw %}
 $$\text{minimize } J(w_0,w_1) = \underset{w0,w_1}{\arg\min} \frac{1}{m}\sum_{i=1}^{m}\left( \hat{y}^i - (w_0 + w_1 x^i)\right)^2$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Fitting-the-Linear-Regression-Model-using-Gradient-Descent-Algorithm">Fitting the Linear Regression Model using Gradient Descent Algorithm<a class="anchor-link" href="#Fitting-the-Linear-Regression-Model-using-Gradient-Descent-Algorithm"> </a></h2><p>In order to mininze the cost function, we need to take the gradient (i.e. derivative) of the function with resptect to our parameters $w_0$ and $w_1$, set it zero and solve for $w_0$ and $w_1$.</p>
-$$\frac{\partial{J}}{\partial{w_0}} = \frac{-2}{m} \sum_{i=1}^{m}\left(\hat{y}^i - (w_0 + w_1 x^i)\right)$$$$\frac{\partial{J}}{\partial{w_1}} = \frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (w_0 + w_1 x^i)\right)$$<p>{% include image.html max-width="500" file="/ml_tutorial/images/gradient_descent.png" %}</p>
+<p>{% raw %}
+$$\frac{\partial{J}}{\partial{w_0}} = \frac{-2}{m} \sum_{i=1}^{m}\left(\hat{y}^i - (w_0 + w_1 x^i)\right)$$
+{% endraw %}</p>
+<p>{% raw %}
+$$\frac{\partial{J}}{\partial{w_1}} = \frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (w_0 + w_1 x^i)\right)$$
+{% endraw %}</p>
+<p>{% include image.html max-width="500" file="/ml_tutorial/images/gradient_descent.png" %}</p>
 <p><em>image source: <a href="https://towardsdatascience.com/gradient-descent-algorithm-and-its-variants-10f652806a3">https://towardsdatascience.com/gradient-descent-algorithm-and-its-variants-10f652806a3</a></em></p>
 
 </div>
@@ -324,9 +375,15 @@ $w_1^{(t+1)} = w_1^{(t)} - \eta\frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -348,9 +405,17 @@ $w_1^{(t+1)} = w_1^{(t)} - \eta\frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -372,9 +437,17 @@ $w_1^{(t+1)} = w_1^{(t)} - \eta\frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -396,9 +469,17 @@ $w_1^{(t+1)} = w_1^{(t)} - \eta\frac{-2}{m} \sum_{i=1}^{m}x^i\left(\hat{y}^i - (
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -421,13 +502,17 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Run-an-Example">Run an Example<a class="anchor-link" href="#Run-an-Example"> </a></h2><p>In this example, we generate some linear-looking data and then find the line that fits the data. The function that we use to generate the data is $y=5+3x+\text{Gaussian noise}$. Our goal is to find $\theta=[w_0,w_1]$ where $w_0=5$ and $w_1=3$ or close enough, as we have noise and it makes it impossible to recover the exact paratmeters of the function. We use the <a href="/ml_tutorial/linear_regression#generate_data"><code>generate_data</code></a> function to generate the training data.</p>
+<h2 id="Run-an-Example">Run an Example<a class="anchor-link" href="#Run-an-Example"> </a></h2><p>In this example, we generate some linear-looking data and then find the line that fits the data. The function that we use to generate the data is $y=5+3x+\text{Gaussian noise}$. Our goal is to find $\theta=[w_0,w_1]$ where $w_0=5$ and $w_1=3$ or close enough, as we have noise and it makes it impossible to recover the exact paratmeters of the function. We use the <a href="/ml_tutorial/rnn#generate_data"><code>generate_data</code></a> function to generate the training data.</p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -444,6 +529,8 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The chart below shows the generated dataset.</p>
@@ -451,6 +538,8 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -528,6 +617,8 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We set the initial parameters to 0:  $w_0^{(0)} = w_1^{(0)} = 0$, define the number of iterations of the graditent descent algorithm as well as the learning rate. Then, we run the <a href="/ml_tutorial/linear_regression#gradient_descent"><code>gradient_descent</code></a> function. The outputs of this function are the estimated parameters $w_0$ and $w_1$.</p>
@@ -535,6 +626,8 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -570,6 +663,8 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The estimated parameters are $w_0 = 4.923$ and $w_1 = 2.97$ that are close enough to $w_0=5$ and $w_1=3$. Let's plot the line.</p>
@@ -577,6 +672,8 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -655,6 +752,10 @@ and the number of iterations <code>num_iterations</code></p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -697,6 +798,8 @@ learning_rate: 0.0020 =&gt; w_0 = [4.08495606], w_1 = [3.66089023]
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Graduate-Admission-Prediction">Graduate Admission Prediction<a class="anchor-link" href="#Graduate-Admission-Prediction"> </a></h2><p>We are going to use a dataset to predict the chance of getting admission in graduate school from the perspective of Indian students. The dataset is available at <a href="https://www.kaggle.com/mohansacharya/graduate-admissions">this link</a>.</p>
@@ -743,6 +846,8 @@ The dataset is owned by Mohan S Acharya.</p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -818,6 +923,10 @@ the column_type_hints argument
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -832,6 +941,10 @@ the column_type_hints argument
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -998,6 +1111,10 @@ the column_type_hints argument
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1083,6 +1200,10 @@ the column_type_hints argument
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1097,6 +1218,10 @@ the column_type_hints argument
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1129,6 +1254,7 @@ the column_type_hints argument
 
 </div>
     {% endraw %}
+
 </div>
  
 

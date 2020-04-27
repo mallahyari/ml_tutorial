@@ -6,6 +6,7 @@ keywords: fastai
 sidebar: home_sidebar
 
 summary: "Summary: Maximum Likelihood Estimation, Maximum a Posteriori Estimation, MLE, MAP"
+description: "Summary: Maximum Likelihood Estimation, Maximum a Posteriori Estimation, MLE, MAP"
 ---
 <!--
 
@@ -18,26 +19,33 @@ summary: "Summary: Maximum Likelihood Estimation, Maximum a Posteriori Estimatio
 -->
 
 <div class="container" id="notebook-container">
+        
+    {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Maximum-Likelihood-Estimation-(MLE)">Maximum Likelihood Estimation (MLE)<a class="anchor-link" href="#Maximum-Likelihood-Estimation-(MLE)">&#182;</a></h2><p>Maximum Likelihood Estimation (MLE) is a principle that estimates the parameters of a statistical model, which makes the observed data most probable. In other words, MLE maximizes the data likelihood.</p>
+<h2 id="Maximum-Likelihood-Estimation-(MLE)">Maximum Likelihood Estimation (MLE)<a class="anchor-link" href="#Maximum-Likelihood-Estimation-(MLE)"> </a></h2><p>Maximum Likelihood Estimation (MLE) is a principle that estimates the parameters of a statistical model, which makes the observed data most probable. In other words, MLE maximizes the data likelihood.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Parameter-Estimation:-Estimating-the-Probability-of-Heads">Parameter Estimation: Estimating the Probability of Heads<a class="anchor-link" href="#Parameter-Estimation:-Estimating-the-Probability-of-Heads">&#182;</a></h2><p>Let's assume we have a random variable $X$ representing a coin. We can estimate the probability that it will turn up heads ($X = 1$) or tails ($X = 0$).</p>
-<blockquote><p>Task: Estimate the probability of heads $\theta = P(X = 1)$</p>
+<h2 id="Parameter-Estimation:-Estimating-the-Probability-of-Heads">Parameter Estimation: Estimating the Probability of Heads<a class="anchor-link" href="#Parameter-Estimation:-Estimating-the-Probability-of-Heads"> </a></h2><p>Let's assume we have a random variable $X$ representing a coin. We can estimate the probability that it will turn up heads ($X = 1$) or tails ($X = 0$).</p>
+<blockquote><p>Task:Estimate the probability of heads $\theta = P(X = 1)$</p>
 </blockquote>
 <p>Evidently, if $P(X=1)=\theta$, then $P(X=0)=1-\theta$. Since we do not know the "true" probability of heads, i.e. $P(X=1) = \theta$, we will use $\hat\theta$ to refer to its estimate.</p>
 <p><strong>Question:</strong> <em>What is the probability of $\theta = P(X=1)?$</em></p>
 <p>In general, <em>Maximum Likelihood Estimation</em> principle asks to choose parameter $\theta$ that maximizes $P(Data|\theta)$, or in other words maximizes the probability of the observed data. We assume that $\theta$ belongs to the set $\Theta \subset \mathbb{R}^n$. Therefore,</p>
+<p>{% raw %}
 $$\hat\theta_{MLE} = \underset{\theta}{\arg\max}\ P(Data|\theta)$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
@@ -49,25 +57,46 @@ $$\hat\theta_{MLE} = \underset{\theta}{\arg\max}\ P(Data|\theta)$$
 <li>It turns up tails $\alpha_0$ times</li>
 </ul>
 <p>Intuitively, we can estimate the $P(X=1)$ from our training data (number of tosses) as the fraction of flips that ends up heads:</p>
-$$ P(X=1) = \frac{\alpha_1}{\alpha_1 + \alpha_0}$$<p>For instance, if we flip the coin 40 times, seeing 18 heads and 22 tails, then we can estimate that:</p>
-$$\hat\theta = P(X=1) = \frac{18}{40} = 0.45$$<p>And if we flip it 5 times, observing 3 heads and 2 tails, then we have:</p>
+<p>{% raw %}
+$$ P(X=1) = \frac{\alpha_1}{\alpha_1 + \alpha_0}$$
+{% endraw %}</p>
+<p>For instance, if we flip the coin 40 times, seeing 18 heads and 22 tails, then we can estimate that:</p>
+<p>{% raw %}
+$$\hat\theta = P(X=1) = \frac{18}{40} = 0.45$$
+{% endraw %}</p>
+<p>And if we flip it 5 times, observing 3 heads and 2 tails, then we have:</p>
+<p>{% raw %}
 $$\hat\theta = P(X=1) = \frac{3}{5} = 0.6$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="How-to-Calculate-MLE?">How to Calculate MLE?<a class="anchor-link" href="#How-to-Calculate-MLE?">&#182;</a></h2><p>First step in calculating the maximum likelihood estimator $\hat\theta$ is to define $P(Data|\theta)$. If we flip the coin once, then $P(Data|\theta) = \theta$ if the flip results in heads and $P(Data|\theta) = 1 - \theta$, if the flips turns tails. If we observe $D = \{1,0,1,1,0\}$ by tossing the coin 5 times, assuming the flips are independent and identically distributed (i.i.d), then we have:</p>
+<h2 id="How-to-Calculate-MLE?">How to Calculate MLE?<a class="anchor-link" href="#How-to-Calculate-MLE?"> </a></h2><p>First step in calculating the maximum likelihood estimator $\hat\theta$ is to define $P(Data|\theta)$. If we flip the coin once, then $P(Data|\theta) = \theta$ if the flip results in heads and $P(Data|\theta) = 1 - \theta$, if the flips turns tails. If we observe $D = \{1,0,1,1,0\}$ by tossing the coin 5 times, assuming the flips are independent and identically distributed (i.i.d), then we have:</p>
+<p>{% raw %}
 $$P(Data|\theta) = \theta\cdot(1-\theta)\cdot\theta\cdot\theta\cdot(1-\theta) = \theta^3\cdot(1-\theta)^2$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In general, if we flip the coin $n$ times, observing $\alpha_H$ heads and $\alpha_T$ tails, then</p>
-$$P(Data|\theta) = \theta^{\alpha_H}\cdot(1-\theta)^{\alpha_T}$$<p>The next step is to find the value of $\theta$ that maximizes the $P(Data|\theta)$. When finding the MLE, it is often easier to maximize the log-likelihood function since,</p>
-$$\underset{\theta}{\arg\max} \log P(Data|\theta) = \underset{\theta}{\arg\max}\ P(Data|\theta)$$<p>Let's call $J(\theta) = \log P(Data|\theta)$. Thus, in order to find the value of the $\theta$ that maximizes the $J(\theta)$, we calculate the derivative of $J(\theta)$ with respect to $\theta$, set it to zero and solve for $\theta$.</p>
-$$\frac{\partial J(\theta)}{\partial \theta} = \frac{\partial[\alpha_H \log \theta + \alpha_T \log (1-\theta)]}{\partial \theta}= \alpha_H \frac{1}{\theta} - \alpha_T \frac{1}{1-\theta} = 0$$<p>Solving this for $\theta$ gives, $$\hat{\theta} = \dfrac{\alpha_H}{\alpha_H + \alpha_T}$$</p>
+<p>{% raw %}
+$$P(Data|\theta) = \theta^{\alpha_H}\cdot(1-\theta)^{\alpha_T}$$
+{% endraw %}</p>
+<p>The next step is to find the value of $\theta$ that maximizes the $P(Data|\theta)$. When finding the MLE, it is often easier to maximize the log-likelihood function since,</p>
+<p>{% raw %}
+$$\underset{\theta}{\arg\max} \log P(Data|\theta) = \underset{\theta}{\arg\max}\ P(Data|\theta)$$
+{% endraw %}</p>
+<p>Let's call $J(\theta) = \log P(Data|\theta)$. Thus, in order to find the value of the $\theta$ that maximizes the $J(\theta)$, we calculate the derivative of $J(\theta)$ with respect to $\theta$, set it to zero and solve for $\theta$.</p>
+<p>{% raw %}
+$$\frac{\partial J(\theta)}{\partial \theta} = \frac{\partial[\alpha_H \log \theta + \alpha_T \log (1-\theta)]}{\partial \theta}= \alpha_H \frac{1}{\theta} - \alpha_T \frac{1}{1-\theta} = 0$$
+{% endraw %}</p>
+<p>Solving this for $\theta$ gives, $$\hat{\theta} = \dfrac{\alpha_H}{\alpha_H + \alpha_T}$$</p>
 
 </div>
 </div>
@@ -84,11 +113,14 @@ $$\frac{\partial J(\theta)}{\partial \theta} = \frac{\partial[\alpha_H \log \the
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Map-a-Posteriori-Estimation-(MAP)">Map a Posteriori Estimation (MAP)<a class="anchor-link" href="#Map-a-Posteriori-Estimation-(MAP)">&#182;</a></h2><p>Considering our coin flip example, we assume that the coin is a goverment minted coin, meaning the $\theta$ is close to $0.5$. What can do we now that we have prior knowledge? How can we estimate the probability of heads?</p>
+<h2 id="Map-a-Posteriori-Estimation-(MAP)">Map a Posteriori Estimation (MAP)<a class="anchor-link" href="#Map-a-Posteriori-Estimation-(MAP)"> </a></h2><p>Considering our coin flip example, we assume that the coin is a goverment minted coin, meaning the $\theta$ is close to $0.5$. What can do we now that we have prior knowledge? How can we estimate the probability of heads?</p>
 <p>We have prior knowledge about the coin, but particularly, at the beginning we do not have enough coin flips to estimate the probability of heads ($\theta$). However, we can add a number of <em>imaginary</em> coin flips. For instance, if we add 10 imaginary heads and 10 imaginary tails before we even start the first flip, $\hat{\theta}=\frac{10}{20}=0.5$, which describes our prior knowledge about the coin. After the first flip, if it turns up head $\hat{\theta}=\frac{1+10}{1+10+10}=0.52$.</p>
 <p>We can see that as the number of coin flips increases, our final estimate becomes better, but more importantly, when we don't have plenty of flips, our estimate is still reliable. The more confident we are about our prior assumptions, the higher number of imaginary flips we can consider. Thus, we have:</p>
-$$\hat{\theta} = \dfrac{\alpha_H + \lambda_H}{(\alpha_H+\lambda_H) + (\alpha_T+\lambda_T)}$$<p>where $\lambda_H$ and $\lambda_T$ are imaginary (or virtual) heads and tails respectively.</p>
-<h3 id="Bayesian-Approach">Bayesian Approach<a class="anchor-link" href="#Bayesian-Approach">&#182;</a></h3><p>We choose a Bayesian approach, therefore, rather than estimating a single $\theta$, we obtain a distribution over possible values of $\theta$. Then, choose the value of $\theta$ that is most probable, given the observed data and prior belief.</p>
+<p>{% raw %}
+$$\hat{\theta} = \dfrac{\alpha_H + \lambda_H}{(\alpha_H+\lambda_H) + (\alpha_T+\lambda_T)}$$
+{% endraw %}</p>
+<p>where $\lambda_H$ and $\lambda_T$ are imaginary (or virtual) heads and tails respectively.</p>
+<h3 id="Bayesian-Approach">Bayesian Approach<a class="anchor-link" href="#Bayesian-Approach"> </a></h3><p>We choose a Bayesian approach, therefore, rather than estimating a single $\theta$, we obtain a distribution over possible values of $\theta$. Then, choose the value of $\theta$ that is most probable, given the observed data and prior belief.</p>
 <p>We need Bayes rule to proceed.</p>
 <p>Chain rule: $$P(X,Y)=P(X|Y)P(Y)=P(Y|X)P(X)$$</p>
 <p>Bayes rule: $$P(X|Y)=\frac{P(Y|X)P(X)}{P(Y)}$$</p>
@@ -102,11 +134,13 @@ $$\hat{\theta} = \dfrac{\alpha_H + \lambda_H}{(\alpha_H+\lambda_H) + (\alpha_T+\
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="MLE-vs.-MAP">MLE vs. MAP<a class="anchor-link" href="#MLE-vs.-MAP">&#182;</a></h2><p>1- Maximum Likelihood estimation (MLE):</p>
+<h2 id="MLE-vs.-MAP">MLE vs. MAP<a class="anchor-link" href="#MLE-vs.-MAP"> </a></h2><p>1- Maximum Likelihood estimation (MLE):</p>
 <ul>
 <li>Choose value of $\theta$ that maximizes the probability of observed
 data.
-$$\hat{\theta}_{MLE}=\underset{\theta}{\arg\max}\ P(Data|\theta)$$</li>
+{% raw %}
+$$\hat{\theta}_{MLE}=\underset{\theta}{\arg\max}\ P(Data|\theta)$$
+{% endraw %}</li>
 </ul>
 <p>2- Maximum a posteriori (MAP) estimation:</p>
 <ul>
@@ -125,7 +159,7 @@ $$</li>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Map-Estimation-for-Binomial-Distribution">Map Estimation for Binomial Distribution<a class="anchor-link" href="#Map-Estimation-for-Binomial-Distribution">&#182;</a></h2><p>Likelihood is Binomial:$P(Data|\theta)={n\choose \alpha_H}\theta^{\alpha_H}(1-\theta)^{\alpha_T}$</p>
+<h2 id="Map-Estimation-for-Binomial-Distribution">Map Estimation for Binomial Distribution<a class="anchor-link" href="#Map-Estimation-for-Binomial-Distribution"> </a></h2><p>Likelihood is Binomial:$P(Data|\theta)={n\choose \alpha_H}\theta^{\alpha_H}(1-\theta)^{\alpha_T}$</p>
 <p>If we assume prior is Beta distribution: $P(\theta)=\frac{\theta^{\beta_H-1}(1-\theta)^\beta_T-1}{B(\beta_H,\beta_T)}\sim Beta(\beta_H, \beta_T)$</p>
 <p>$B(x,y)=\int_o^1 t^{x-1}(1-t)^{y-1}dt$</p>
 <p>Then, posterior is Beta distribution: $P(\theta|Data)\sim Beta(\beta_H+\alpha_H, \beta_T+\alpha_T)$</p>
@@ -151,13 +185,19 @@ $$<ul>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Implemented-Functions">Implemented Functions<a class="anchor-link" href="#Implemented-Functions">&#182;</a></h2>
+<h2 id="Implemented-Functions">Implemented Functions<a class="anchor-link" href="#Implemented-Functions"> </a></h2>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -180,6 +220,10 @@ return the number of heads grouped together in all the experiments.</p>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -196,6 +240,8 @@ return the number of heads grouped together in all the experiments.</p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's plot a chart and see the the number of heads in 30 flips in all the experiments.</p>
@@ -203,6 +249,8 @@ return the number of heads grouped together in all the experiments.</p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -287,6 +335,8 @@ return the number of heads grouped together in all the experiments.</p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>What does the plot look like? Does the bell shape ring a bell?</p>
@@ -295,6 +345,8 @@ return the number of heads grouped together in all the experiments.</p>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -384,6 +436,8 @@ return the number of heads grouped together in all the experiments.</p>
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>By comparing the charts we realize that</p>
@@ -399,7 +453,7 @@ return the number of heads grouped together in all the experiments.</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p>[1] Tom Mitchell <a href="http://www.cs.cmu.edu/~tom/mlbook/Joint_MLE_MAP.pdf">Estimating Probabilities</a></p>
+<h2 id="References">References<a class="anchor-link" href="#References"> </a></h2><p>[1] Tom Mitchell <a href="http://www.cs.cmu.edu/~tom/mlbook/Joint_MLE_MAP.pdf">Estimating Probabilities</a></p>
 
 </div>
 </div>

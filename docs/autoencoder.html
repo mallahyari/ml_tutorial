@@ -19,11 +19,14 @@ description: "Summary: Encoder, Decoder, Latent vector, Variational Autoencoder,
 -->
 
 <div class="container" id="notebook-container">
-    {% raw %}
         
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="What-are-Autoencoders?">What are Autoencoders?<a class="anchor-link" href="#What-are-Autoencoders?"> </a></h2><p>Autoencoders are neural networks that learn to efficiently compress and encode data then learn to reconstruct the data back from the reduced encoded representation to a representation that is as close to the original input as possible. Therefore, autoencoders reduce the dimentsionality of the input data i.e. reducing the number of features that describe input data.</p>
@@ -39,7 +42,10 @@ description: "Summary: Encoder, Decoder, Latent vector, Variational Autoencoder,
 </ol>
 <p>The model involves encoded function $g$ parameterized by $\phi$ and a decoder function $f$ parameterized by $\theta$. The bottleneck layer is $\mathbf{z}=g_{\phi}(\mathbf{x})$, and the reconstructed input $\mathbf{x'}=f_{\theta}(g_{\phi}(\mathbf{x}))$.</p>
 <p>For measuring the reconstruction loss, we can use the cross entropy (when activation function is sigmoid) or basic Mean Squared Error (MSE):</p>
+<p>{% raw %}
 $$L_{AE}(\theta,\phi)=\frac{1}{n}\sum_{i=1}^n (\mathbf{x}^{(i)}-f_{\theta}(g_{\phi}(\mathbf{x}^{(i)})))^2$$
+{% endraw %}</p>
+
 </div>
 </div>
 </div>
@@ -70,12 +76,22 @@ $$L_{AE}(\theta,\phi)=\frac{1}{n}\sum_{i=1}^n (\mathbf{x}^{(i)}-f_{\theta}(g_{\p
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -97,6 +113,10 @@ $$L_{AE}(\theta,\phi)=\frac{1}{n}\sum_{i=1}^n (\mathbf{x}^{(i)}-f_{\theta}(g_{\p
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -119,6 +139,10 @@ for all the images at folder <code>orig_dir_path</code> and place them into fold
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -140,6 +164,10 @@ for all the images at folder <code>orig_dir_path</code> and place them into fold
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 
 <div class="output_wrapper">
@@ -161,6 +189,8 @@ for all the images at folder <code>orig_dir_path</code> and place them into fold
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>{% include note.html content='The dataset contains several Farsi (Persian) characters written in <code>Moallah</code> font. It can replaced with any dataset of your interest.' %}</p>
@@ -168,6 +198,8 @@ for all the images at folder <code>orig_dir_path</code> and place them into fold
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -211,6 +243,10 @@ for all the images at folder <code>orig_dir_path</code> and place them into fold
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -257,6 +293,10 @@ Output directory set to data/converted/output.</pre>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -286,6 +326,10 @@ Output directory set to data/converted/output.</pre>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -335,6 +379,10 @@ Output directory set to data/converted/output.</pre>
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -371,12 +419,16 @@ Input shape = (64, 64, 1)
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Defining-the-Encoder">Defining the Encoder<a class="anchor-link" href="#Defining-the-Encoder"> </a></h3>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -450,12 +502,16 @@ _________________________________________________________________
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Defining-the-Decoder">Defining the Decoder<a class="anchor-link" href="#Defining-the-Decoder"> </a></h3>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -511,12 +567,16 @@ _________________________________________________________________
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Defining-the-Autoencoder">Defining the Autoencoder<a class="anchor-link" href="#Defining-the-Autoencoder"> </a></h3>
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -558,6 +618,10 @@ _________________________________________________________________
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -623,6 +687,10 @@ Epoch 15/15
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -672,6 +740,8 @@ Epoch 15/15
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>TensorBoard also provides plenty of useful information including measurements and visualizations during and after training. The snippet below shows the training loss in TensorBoard:</p>
@@ -680,6 +750,8 @@ Epoch 15/15
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -694,6 +766,10 @@ Epoch 15/15
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -735,6 +811,10 @@ Epoch 15/15
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -768,6 +848,8 @@ Epoch 15/15
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Variational-Autoencoders-(VAE)">Variational Autoencoders (VAE)<a class="anchor-link" href="#Variational-Autoencoders-(VAE)"> </a></h2><h3 id="Limitations-of-Autoencoders-for-Content-Generation">Limitations of Autoencoders for Content Generation<a class="anchor-link" href="#Limitations-of-Autoencoders-for-Content-Generation"> </a></h3><p>After we train an autoencoder, we might think whether we can use the model to create new content. Particularly, we may ask <em>can we take a point randomly from that latent space and decode it to get a new content?</em></p>
@@ -792,10 +874,22 @@ Epoch 15/15
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="VAE-Loss-Function">VAE Loss Function<a class="anchor-link" href="#VAE-Loss-Function"> </a></h3><p>The loss function that we need to minimize for VAE consists of two components: (a) reconstruction term, which is similar to the loss function of regular autoencoders; and (b) regularization term, which regularizes the latent space by making the distributions returned by the encoder close to a standard normal distribution. We use the Kullback-Leibler divergence to quantify the difference between the returned distribution and a standard Gaussian. KL divergence $D_{KL}(X\|Y)$ measures how much information is lost if the distribution $Y$ is used to represent $X$. I am not willing to go deeply into the mathmatical details of VAE, however, all the math details have been nicely described <a href="https://lilianweng.github.io/lil-log/2018/08/12/from-autoencoder-to-beta-vae.html">here</a> and <a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73">here</a> among other places.</p>
-$$L_{VAE}=\|\mathbf{x}-\mathbf{x'}\|^2 - D_{KL}[N(\mu_{\mathbf{x}},\sigma_{\mathbf{x}})\|N(0,1)]$$$$D_{KL}[N(\mu_{\mathbf{x}},\sigma_{\mathbf{x}})\|N(0,1)]=\frac{1}{2}\sum_{k} (\sigma_{\mathbf{x}} + \mu_{\mathbf{x}}^2 -1 - \log(\sigma_{\mathbf{x}}))$$<p>where $k$ is the dimension of the Gaussian. In practice, however, it’s better to model $\sigma_{\mathbf{x}}$ rather than $\log(\sigma_{\mathbf{x}})$ as it is more numerically stable to take exponent compared to computing log. Hence, our final KL divergence term is:</p>
-$$D_{KL}[N(\mu_{\mathbf{x}},\sigma_{\mathbf{x}})\|N(0,1)]=\frac{1}{2}\sum_{k} (\exp(\sigma_{\mathbf{x}}) + \mu_{\mathbf{x}}^2 -1 - \sigma_{\mathbf{x}})$$<p>What is important is that the VAE loss function involves generating samples from $\mathbf{z}\sim N(\mathbf{\mu},\mathbf{\sigma})$. Since Sampling is a stochastic process, we cannot backpropagate the gradient while training the model. To make it trainable, a simple trick, called reparametrization trick, is used to make the gradient descent possible despite the random sampling that occurs halfway of the architecture. In this trick, random variable $\mathbf{z}$ is expressed as a deterministic variable $\mathbf{z}=\mathcal{T}_{\phi}(\mathbf{x},\mathbf{\epsilon})$, where $\mathbf{\epsilon}$ is an auxiliary independent random variable, and the transformation function $\mathcal{T}_{\phi}$ parameterized by ϕ converts $\mathbf{\epsilon}$ to $\mathbf{z}$.</p>
+<p>{% raw %}
+$$L_{VAE}=\|\mathbf{x}-\mathbf{x'}\|^2 - D_{KL}[N(\mu_{\mathbf{x}},\sigma_{\mathbf{x}})\|N(0,1)]$$
+{% endraw %}</p>
+<p>{% raw %}
+$$D_{KL}[N(\mu_{\mathbf{x}},\sigma_{\mathbf{x}})\|N(0,1)]=\frac{1}{2}\sum_{k} (\sigma_{\mathbf{x}} + \mu_{\mathbf{x}}^2 -1 - \log(\sigma_{\mathbf{x}}))$$
+{% endraw %}</p>
+<p>where $k$ is the dimension of the Gaussian. In practice, however, it’s better to model $\sigma_{\mathbf{x}}$ rather than $\log(\sigma_{\mathbf{x}})$ as it is more numerically stable to take exponent compared to computing log. Hence, our final KL divergence term is:</p>
+<p>{% raw %}
+$$D_{KL}[N(\mu_{\mathbf{x}},\sigma_{\mathbf{x}})\|N(0,1)]=\frac{1}{2}\sum_{k} (\exp(\sigma_{\mathbf{x}}) + \mu_{\mathbf{x}}^2 -1 - \sigma_{\mathbf{x}})$$
+{% endraw %}</p>
+<p>What is important is that the VAE loss function involves generating samples from $\mathbf{z}\sim N(\mathbf{\mu},\mathbf{\sigma})$. Since Sampling is a stochastic process, we cannot backpropagate the gradient while training the model. To make it trainable, a simple trick, called reparametrization trick, is used to make the gradient descent possible despite the random sampling that occurs halfway of the architecture. In this trick, random variable $\mathbf{z}$ is expressed as a deterministic variable $\mathbf{z}=\mathcal{T}_{\phi}(\mathbf{x},\mathbf{\epsilon})$, where $\mathbf{\epsilon}$ is an auxiliary independent random variable, and the transformation function $\mathcal{T}_{\phi}$ parameterized by ϕ converts $\mathbf{\epsilon}$ to $\mathbf{z}$.</p>
 <p>If $\mathbf{z}$ is a random variable following a Gaussian distribution with mean $\mathbf{\mu}$ and with covariance $\mathbf{\sigma}$ then it can be expressed as:</p>
-$$\mathbf{z}=\mathbf{\mu}+\mathbf{\sigma}\odot \mathbf{\epsilon}$$<p>where $\odot$ is the element-wise multiplication.</p>
+<p>{% raw %}
+$$\mathbf{z}=\mathbf{\mu}+\mathbf{\sigma}\odot \mathbf{\epsilon}$$
+{% endraw %}</p>
+<p>where $\odot$ is the element-wise multiplication.</p>
 <p><img src="/ml_tutorial/images/autoen_vae_backprop.png" alt="">
 <em>Illustration of the reparametrisation trick. [<a href="https://towardsdatascience.com/understanding-variational-autoencoders-vaes-f70510919f73">Image Source</a>]</em></p>
 
@@ -808,6 +902,8 @@ $$\mathbf{z}=\mathbf{\mu}+\mathbf{\sigma}\odot \mathbf{\epsilon}$$<p>where $\odo
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -921,6 +1017,10 @@ ________________________________________________________________________________
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -986,6 +1086,10 @@ _________________________________________________________________
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1029,6 +1133,10 @@ _________________________________________________________________
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1050,6 +1158,10 @@ _________________________________________________________________
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1152,6 +1264,10 @@ Epoch 30/30
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1222,6 +1338,8 @@ Epoch 30/30
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you notice the plot above, in the upper right corner and around (-8,-2.7), we see the issue with completeness, which yield outputs that do not make sense. Also, some issues with continuity are visible wherever the samples are blurred.
@@ -1230,6 +1348,8 @@ Epoch 30/30
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1272,6 +1392,8 @@ Epoch 30/30
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Creating-Morph-Images">Creating Morph Images<a class="anchor-link" href="#Creating-Morph-Images"> </a></h3><p>For morphing images, the approach is somewhat different than generating new images of characters. There are four main steps:</p>
@@ -1285,6 +1407,8 @@ Epoch 30/30
 </div>
 </div>
 </div>
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1347,6 +1471,10 @@ Epoch 30/30
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1371,6 +1499,10 @@ Epoch 30/30
 </div>
 
 </div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 
@@ -1413,6 +1545,8 @@ Epoch 30/30
 </div>
 
 </div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The image below is morphing between two characters.</p>
@@ -1430,7 +1564,6 @@ Epoch 30/30
 </div>
 </div>
 </div>
-    {% endraw %}
 </div>
  
 
