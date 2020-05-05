@@ -716,12 +716,25 @@ Test accuracy: 0.81268</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Comparing-Naive-Bayes-to-LSTM-for-Sentiment-Analysis">Comparing Naive Bayes to LSTM for Sentiment Analysis<a class="anchor-link" href="#Comparing-Naive-Bayes-to-LSTM-for-Sentiment-Analysis"> </a></h2>
+<h2 id="Comparing-Naive-Bayes-with-LSTM-for-Sentiment-Analysis">Comparing Naive Bayes with LSTM for Sentiment Analysis<a class="anchor-link" href="#Comparing-Naive-Bayes-with-LSTM-for-Sentiment-Analysis"> </a></h2><p>If we compare Naive Bayes with LSTM, we find out some interesting observations:</p>
+<ol>
+<li><p>Implementing Naive Bayes is very straightforward compared to LSTM.</p>
+</li>
+<li><p>Training NB is extremely fast, a few seconds, whereas the implemented LSTM takes about 30 minutes on GPU. Please note that this LSTM implementation even cuts the max features into 20000.</p>
+</li>
+<li><p>Number of parameters that we can alter for NB is very few unlike LSTM that we need to perform lots of fine tuning.</p>
+</li>
+<li><p>Scaling Naive Bayes implementation to large datasets having millions of documents is quite easy whereas for LSTM we certainly need plenty of resources.</p>
+</li>
+</ol>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p>If you look at the image below, you notice that the state-of-the-art for sentiment analysis belongs to a technique that utilizes Naive Bayes bag of n-grams. See the <a href="https://www.aclweb.org/anthology/P19-2057.pdf">paper</a> for all the details. This method gives the best accuracy higher than many purely deep learning methods such as BERT and LSTM+CNN.</p>
+<p><strong>Don't get me wrong!</strong> I am a big fan of neural networks and deep learning techniques. The point that I am trying to make is that in many cases we may not need very complex methods for our tasks. My approach is always start off with simpler techniques and if they are not satisfactory, then move to more sophisticated ones.</p>
 <p><img src="/ml_tutorial/images/nb_sota.png" alt="">
 <em>State-of-the-art sentiment analysis on the IMDB dataset. [<a href="https://paperswithcode.com/sota/sentiment-analysis-on-imdb">Image Source</a>]</em></p>
 
