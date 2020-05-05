@@ -5,8 +5,8 @@ title: Naive Bayes Classifier
 keywords: fastai
 sidebar: home_sidebar
 
-summary: "This tutorial explains the naive Bayes assumption and how to use it for text classification."
-description: "This tutorial explains the naive Bayes assumption and how to use it for text classification."
+summary: "Summary: Naive Bayes, Text classification, Sentiment analysis, bag-of-words, BOW"
+description: "Summary: Naive Bayes, Text classification, Sentiment analysis, bag-of-words, BOW"
 ---
 <!--
 
@@ -27,6 +27,707 @@ description: "This tutorial explains the naive Bayes assumption and how to use i
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-is-Naive-Bayes-Method?">What is Naive Bayes Method?<a class="anchor-link" href="#What-is-Naive-Bayes-Method?"> </a></h2><p>Naive Bayes technique is a supervised method. It is a probabilistic learning method for classifying documents particularly text documents. It works based on the Naive Bayes assumption. Navie Bayes assumes that features $x_1, x_2, \cdots, x_n$ are <strong>conditionally independent</strong> given the class labels $y$. In other words:</p>
+<p>{% raw %}
+$$P(x_1,x_2,\cdots,x_n|y)=P(x_1|y)P(x_2|y)\cdots P(x_n|y)=\prod_{i=1}^{n}P(x_i|y)$$
+{% endraw %}</p>
+<p>Although often times $x_i$'s are not really conditionally independent in real world, nevertheless, the approach performs surprisingly well in practice, particularly document classification and spam filtering.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Naive-Bayes-(NB)-for-Text-Classification">Naive Bayes (NB) for Text Classification<a class="anchor-link" href="#Naive-Bayes-(NB)-for-Text-Classification"> </a></h2><p>Let $D$ be a corpus of documents where each document $d$ is represented by a bag of words (i.e. the order of words does not matter), and has a label $y_d$. If the total number of labels are two $y=\{0,1\}$, meaning that every document belongs to the class 0 or 1, then the problem is a binary classification. Otherwise it is called a multi-class classification, $y=\{0,1, \cdots, k\}$.
+For instance, for sentiment analysis we have two classes: "positive" and "negative", therefore, $y=\{0,1\}$, 0 representing "negative" class and 1 representing "positive" class, respectively.</p>
+<p>The words of the documents are the features and the total number of features is the size of the vocabulary $|v|$ (i.e. total number of unique words in the corpus). For classifying documents, first we represent each document $d$ as a vector of the words $d=&lt;x_{1}, x_{2},\cdots,x_{v}&gt;$. Then the probability of document $d$ being in class $y=c$ is:</p>
+<p>{% raw %}
+$$P(y=c|x_1,x_2,\cdots,x_v)=\dfrac{P(y=c)P(x_1,x_2,\cdots,x_v|y=c)}{P(x_1,x_2,\cdots,x_v)}$$
+{% endraw %}</p>
+<p>Assuming conditional independence between $x_i$'s:</p>
+<p>{% raw %}
+$$P(y=c|x_1,x_2,\cdots,x_v)=\dfrac{P(y=c)\prod_{i=1}^{|v|}P(x_i|y=c)}{P(x_1,x_2,\cdots,x_v)}$$
+{% endraw %}</p>
+<p>We can drop the denominator as it is a normalization constant. Thus we have:</p>
+<p>{% raw %}
+$$P(y=c|x_1,x_2,\cdots,x_v)\propto P(y=c)\prod_{i=1}^{|v|}P(x_i|y=c)$$
+{% endraw %}</p>
+<p>In text classification, our goal is to find the <em>best</em> class for the document $d$. The best class in NB classification is the most likely or <em>maximum a posteriori (MAP)</em> class $y^{map}$. Therefore:</p>
+<p>{% raw %}
+$$y^{map} =\underset{y}{\arg\max}\quad P(y=y_k)\prod_i^{|v|} P(x_i|y=y_k)$$
+{% endraw %}</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-to-Estimate-Parameters-$p(y)$-and-$p(x_i|y)$">How to Estimate Parameters $p(y)$ and $p(x_i|y)$<a class="anchor-link" href="#How-to-Estimate-Parameters-$p(y)$-and-$p(x_i|y)$"> </a></h2><p>In the context of text classification, to estimate the parameters $P(y)$ and $P(x_i|y)$ we use relative frequency, which assigns the most likely value of each parameter given the training data. For estimating the prior:</p>
+<p>{% raw %}
+$$\hat{P}(y=c)=\dfrac{N_c}{|D|}$$
+{% endraw %}</p>
+<p>where $N_c$ is the total number of documents with label $c$ and $|D|$ is total number of documents in the corpus $D$.</p>
+<p>We estimate the conditional probability $\hat{P}(x_i|y=c)$ as the relative frequency of term $x_i$ in documents belonging to class $c$:</p>
+<p>{% raw %}
+$$\hat{P}(x_i=t|y=c)=\dfrac{N_{ct} + \alpha}{\sum_{t'=1}^v (N_{ct'}+\alpha)}=\dfrac{N_{ct} + \alpha}{\sum_{t'=1}^v N_{ct'}+\alpha|v|}$$
+{% endraw %}</p>
+<p>where $N_{ct}$ is the number of occurrences of $t$ (i.e. count or frequency of $t$) in training documents from class $c$, and $\sum_{t'=1}^v N_{ct'}$ is total count of all the words in documents with label $c$. The parameter $\alpha \geq 0$ is called the <em>smoothing prior</em>. You can think of it as "virtual" or "imaginary" counts, which prevents the probabilities from becomming zero when a feature does not exist in the training data. When $\alpha =1$, it is called <em>Laplace smoothing</em>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Toy-Example">Toy Example<a class="anchor-link" href="#Toy-Example"> </a></h2><p>Let's assume that we have a small dataset shown below: (example is adopted from <a href="https://nlp.stanford.edu/IR-book/html/htmledition/naive-bayes-text-classification-1.html">here</a>)</p>
+<p><img src="/ml_tutorial/images/nb_toy_example.png" alt=""></p>
+<p>According to this dataset, we want to classify the test document. The vocabulary has 6 words: {"Chinese", "Tokyo", "Japan", "Beijing", "Shanghai", "Macao"}. Therefore, each document is a vector of these words. For example, document $d_1 = &lt;2,0,0,1,0,0&gt;$. Now, the first step to classify the test document $d_5$ is to calculate the priors:</p>
+<p>$\hat{P}(y=yes)=\frac{3}{4}$ and $\hat{P}(y=no)=\frac{1}{4}$. Then, we compute the conditional probabilities, assuming $\alpha=1$:</p>
+<p>{% raw %}
+$$\hat{P}(Chinese|y=yes)=\dfrac{5+1}{8+6}=\dfrac{6}{14}=\dfrac{3}{7}$$
+{% endraw %}</p>
+<p>{% raw %}
+$$\hat{P}(Tokyo|y=yes)=\hat{P}(Japan|y=yes)=\dfrac{0+1}{8+6}=\dfrac{1}{14}$$
+{% endraw %}</p>
+<p>{% raw %}
+$$\hat{P}(Chinese|y=no)=\dfrac{1+1}{3+6}=\dfrac{2}{9}$$
+{% endraw %}</p>
+<p>{% raw %}
+$$\hat{P}(Tokyo|y=yes)=\hat{P}(Japan|y=yes)=\dfrac{1+1}{3+6}=\dfrac{2}{9}$$
+{% endraw %}</p>
+<p>We then get,</p>
+<p>{% raw %}
+$$\hat{P}(y=yes|d_5)\propto 3/4 \cdot (3/7)^3 \cdot 1/14 \cdot 1/14 \approx 0.0003$$
+{% endraw %}</p>
+<p>{% raw %}
+$$\hat{P}(y=no|d_5)\propto 1/4 \cdot (2/9)^3 \cdot 2/9 \cdot 2/9 \approx 0.0001$$
+{% endraw %}</p>
+<p>Thus, the classifier assigns the test document to $c=$ China. The reason for this classification decision is that the three occurrences of the positive indicator Chinese in $d_5$ outweigh the occurrences of the two negative indicators Japan and Tokyo.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Implementation">Implementation<a class="anchor-link" href="#Implementation"> </a></h2><p>For sentiment classification, I used the popular IMDB dataset from <a href="https://ai.stanford.edu/~amaas/data/sentiment/">here</a>. This dataset provides a set of 25,000 highly polar movie reviews for training, and 25,000 for testing.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="read_dir" class="doc_header"><code>read_dir</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/naive_bayes.py#L6" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>read_dir</code>(<strong><code>dir_path</code></strong>, <strong><code>label</code></strong>)</p>
+</blockquote>
+<p>Read all the files in the directory <code>dir_path</code> with the labels <code>label</code> and
+return a list of tuples (text, label).</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="load_data" class="doc_header"><code>load_data</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/naive_bayes.py#L18" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>load_data</code>(<strong><code>task</code></strong>)</p>
+</blockquote>
+<p>Load all the positive and negative examples for the training or test sets according to argument <code>task</code>,
+and return the shuffled data.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="train" class="doc_header"><code>train</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/naive_bayes.py#L32" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>train</code>(<strong><code>x_train</code></strong>, <strong><code>y_train</code></strong>, <strong><code>stop_words</code></strong>=<em><code>'english'</code></em>, <strong><code>ngram_range</code></strong>=<em><code>(1, 1)</code></em>, <strong><code>max_features</code></strong>=<em><code>None</code></em>)</p>
+</blockquote>
+<p>Create the BOW (i.e. word-count matrix) for the training set depending on input arguments
+whether or not consider <code>stop_words</code>, <code>ngram_range</code> such as words, bigrams, etc and
+<code>max_features</code>, which is the size of the vocabulary. Return the model and vectorizer objects.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="test" class="doc_header"><code>test</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/naive_bayes.py#L49" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>test</code>(<strong><code>x_test</code></strong>, <strong><code>y_test</code></strong>, <strong><code>model</code></strong>)</p>
+</blockquote>
+<p>Perform the prediction on the test set <code>x_test</code> and measures the accuracy based on actual labels <code>y_test</code>.
+Return the predictions and accuracy.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="run" class="doc_header"><code>run</code><a href="https://github.com/sci2lab/ml_tutorial/tree/master/ml_tutorial/naive_bayes.py#L59" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>run</code>(<strong><code>x_train</code></strong>, <strong><code>y_train</code></strong>, <strong><code>x_test</code></strong>, <strong><code>y_test</code></strong>, <strong><code>stop_words</code></strong>, <strong><code>ngram_range</code></strong>, <strong><code>max_features</code></strong>)</p>
+</blockquote>
+<p>Vectorize the data, create the model, run the train and test and measure the accuracy considering the input arquments.</p>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>First, we read the files and create our training and test sets.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loading training data...&#39;</span><span class="p">)</span>
+<span class="n">train_data</span> <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s1">&#39;train&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;done!&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loading test data...&#39;</span><span class="p">)</span>
+<span class="n">test_data</span>  <span class="o">=</span> <span class="n">load_data</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;done!&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Loading training data...
+100%|██████████| 12500/12500 [00:00&lt;00:00, 18679.50it/s]
+100%|██████████| 12500/12500 [00:00&lt;00:00, 17331.23it/s]
+done!
+Loading test data...
+100%|██████████| 12500/12500 [00:02&lt;00:00, 5996.60it/s]
+100%|██████████| 12500/12500 [00:00&lt;00:00, 13607.38it/s]
+done!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Unpack the (text, label) for training and test data</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">train_data</span><span class="p">)</span>
+<span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span>   <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">test_data</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are many different configurations that we can experiment with. To start it off, we train the model based on input arquments. This model removes the stop words, creates the unigrams and bigrams for all the documents and take into account the entire vocabulary. After training, the model outputs useful information such as the accuracy of the model and total training time.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Training the model with following parameters</span>
+<span class="c1"># Remove stop words</span>
+<span class="n">stop_words</span>   <span class="o">=</span> <span class="s1">&#39;english&#39;</span>
+
+<span class="c1"># Consider uni-grams and bi-grams</span>
+<span class="n">ngram_range</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Take all the features into account</span>
+<span class="n">max_features</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="n">preds</span><span class="p">,</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">stop_words</span><span class="p">,</span> <span class="n">ngram_range</span><span class="p">,</span> <span class="n">max_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Vectorizing training data i.e. Creating the word count matrix... done!
+
+Start training...
+Training done!
+Number of documents = 25000  |  Number of features = 37842
+Training time: 12.09 s
+
+Vectorizing test data... done!
+Test data shape =  (25000, 37842)
+Start testing...
+done!
+accuracy = 0.85
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the this experiment, we only consider the unigrams (i.e. representing documents based on terms). The remaining input parameters are as before. We can see that the accuracy is decreased, which indicate that bigrams help the classification task.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Another configuration</span>
+<span class="n">stop_words</span>   <span class="o">=</span> <span class="s1">&#39;english&#39;</span>
+<span class="n">ngram_range</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">max_features</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">preds</span><span class="p">,</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">stop_words</span><span class="p">,</span> <span class="n">ngram_range</span><span class="p">,</span> <span class="n">max_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Vectorizing training data i.e. Creating the word count matrix... done!
+
+Start training...
+Training done!
+Number of documents = 25000  |  Number of features = 18222
+Training time: 2.72 s
+
+Vectorizing test data... done!
+Test data shape =  (25000, 18222)
+Start testing...
+done!
+accuracy = 0.83
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this configuration, we only consider the 5000 common words in the documents, but take the bigrams into account and perform the classification task. It gives better accuracy comparing with previous experiment.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Another configuration</span>
+<span class="n">stop_words</span>   <span class="o">=</span> <span class="s1">&#39;english&#39;</span>
+<span class="n">ngram_range</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">max_features</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">preds</span><span class="p">,</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">stop_words</span><span class="p">,</span> <span class="n">ngram_range</span><span class="p">,</span> <span class="n">max_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Vectorizing training data i.e. Creating the word count matrix... done!
+
+Start training...
+Training done!
+Number of documents = 25000  |  Number of features = 5000
+Training time: 11.79 s
+
+Vectorizing test data... done!
+Test data shape =  (25000, 5000)
+Start testing...
+done!
+accuracy = 0.84
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this experiment, we keep the stop words but limit the vocabulary size to 5000 and only consider unigrams. The result shows that cutting the size of the vocab lowers the accuracy.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Another configuration</span>
+<span class="n">stop_words</span>   <span class="o">=</span> <span class="kc">None</span>
+<span class="n">ngram_range</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">max_features</span> <span class="o">=</span> <span class="mi">5000</span>
+<span class="n">preds</span><span class="p">,</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">stop_words</span><span class="p">,</span> <span class="n">ngram_range</span><span class="p">,</span> <span class="n">max_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Vectorizing training data i.e. Creating the word count matrix... done!
+
+Start training...
+Training done!
+Number of documents = 25000  |  Number of features = 5000
+Training time: 2.95 s
+
+Vectorizing test data... done!
+Test data shape =  (25000, 5000)
+Start testing...
+done!
+accuracy = 0.83
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the last experiment, we keep the stop words, consider both unigrams and bigrams and take into account the entire vocabulary. It gives us the best accuracy among all the configuration we experimented with. It demonstrates that keeping stop words help in better sentiment analysis, unlike some other classification tasks.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Another configuration</span>
+<span class="n">stop_words</span>   <span class="o">=</span> <span class="kc">None</span>
+<span class="n">ngram_range</span>  <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">max_features</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">preds</span><span class="p">,</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">run</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span> <span class="n">stop_words</span><span class="p">,</span> <span class="n">ngram_range</span><span class="p">,</span> <span class="n">max_features</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Vectorizing training data i.e. Creating the word count matrix... done!
+
+Start training...
+Training done!
+Number of documents = 25000  |  Number of features = 80869
+Training time: 13.53 s
+
+Vectorizing test data... done!
+Test data shape =  (25000, 80869)
+Start testing...
+done!
+accuracy = 0.86
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>There are other configurations that I did not experiment with. But I leave that as an exercise. ;)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Training-an-LSTM-model-on-the-IMDB-sentiment-classification-task">Training an LSTM model on the IMDB sentiment classification task<a class="anchor-link" href="#Training-an-LSTM-model-on-the-IMDB-sentiment-classification-task"> </a></h2><p>The code below is adopted directly from <a href="https://keras.io/examples/imdb_lstm/">Keras website</a>. This code implements an LSTM model on the same IMDB dataset for sentiment analysis task.</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">tensorflow.keras.preprocessing</span> <span class="kn">import</span> <span class="n">sequence</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.models</span> <span class="kn">import</span> <span class="n">Sequential</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span><span class="p">,</span> <span class="n">Embedding</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">LSTM</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.datasets</span> <span class="kn">import</span> <span class="n">imdb</span>
+
+<span class="n">max_features</span> <span class="o">=</span> <span class="mi">20000</span>
+<span class="c1"># cut texts after this number of words (among top max_features most common words)</span>
+<span class="n">maxlen</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">batch_size</span> <span class="o">=</span> <span class="mi">32</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Loading data...&#39;</span><span class="p">)</span>
+<span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">),</span> <span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span> <span class="o">=</span> <span class="n">imdb</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">num_words</span><span class="o">=</span><span class="n">max_features</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_train</span><span class="p">),</span> <span class="s1">&#39;train sequences&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_test</span><span class="p">),</span> <span class="s1">&#39;test sequences&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Pad sequences (samples x time)&#39;</span><span class="p">)</span>
+<span class="n">x_train</span> <span class="o">=</span> <span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">maxlen</span><span class="p">)</span>
+<span class="n">x_test</span> <span class="o">=</span> <span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">maxlen</span><span class="o">=</span><span class="n">maxlen</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_train shape:&#39;</span><span class="p">,</span> <span class="n">x_train</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x_test shape:&#39;</span><span class="p">,</span> <span class="n">x_test</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Build model...&#39;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Sequential</span><span class="p">()</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Embedding</span><span class="p">(</span><span class="n">max_features</span><span class="p">,</span> <span class="mi">128</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">LSTM</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="n">dropout</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">recurrent_dropout</span><span class="o">=</span><span class="mf">0.2</span><span class="p">))</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">Dense</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">))</span>
+
+<span class="c1"># try using different optimizers and different optimizer configs</span>
+<span class="n">model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;binary_crossentropy&#39;</span><span class="p">,</span>
+              <span class="n">optimizer</span><span class="o">=</span><span class="s1">&#39;adam&#39;</span><span class="p">,</span>
+              <span class="n">metrics</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;accuracy&#39;</span><span class="p">])</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Train...&#39;</span><span class="p">)</span>
+<span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span>
+          <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+          <span class="n">epochs</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span>
+          <span class="n">validation_data</span><span class="o">=</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="n">score</span><span class="p">,</span> <span class="n">acc</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">evaluate</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">,</span>
+                            <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test score:&#39;</span><span class="p">,</span> <span class="n">score</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test accuracy:&#39;</span><span class="p">,</span> <span class="n">acc</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It takes a lot of time to run on CPU, therefore I ran it on Google Colab, which took roughly around 30 minutes to train. You can see the result below:</p>
+
+<pre><code>Loading data...
+25000 train sequences
+25000 test sequences
+Pad sequences (samples x time)
+x_train shape: (25000, 80)
+x_test shape: (25000, 80)
+Build model...
+Train...
+Train on 25000 samples, validate on 25000 samples
+Epoch 1/15
+25000/25000 [==============================] - 137s 5ms/sample - loss: 0.4546 - accuracy: 0.7889 - val_loss: 0.3738 - val_accuracy: 0.8394
+Epoch 2/15
+25000/25000 [==============================] - 133s 5ms/sample - loss: 0.2930 - accuracy: 0.8816 - val_loss: 0.3865 - val_accuracy: 0.8281
+Epoch 3/15
+25000/25000 [==============================] - 130s 5ms/sample - loss: 0.2111 - accuracy: 0.9173 - val_loss: 0.4440 - val_accuracy: 0.8348
+Epoch 4/15
+25000/25000 [==============================] - 128s 5ms/sample - loss: 0.1484 - accuracy: 0.9449 - val_loss: 0.4976 - val_accuracy: 0.8283
+Epoch 5/15
+25000/25000 [==============================] - 127s 5ms/sample - loss: 0.1022 - accuracy: 0.9627 - val_loss: 0.6127 - val_accuracy: 0.8238
+Epoch 6/15
+25000/25000 [==============================] - 126s 5ms/sample - loss: 0.0781 - accuracy: 0.9734 - val_loss: 0.6076 - val_accuracy: 0.8173
+Epoch 7/15
+25000/25000 [==============================] - 126s 5ms/sample - loss: 0.0587 - accuracy: 0.9794 - val_loss: 0.7733 - val_accuracy: 0.8188
+Epoch 8/15
+25000/25000 [==============================] - 126s 5ms/sample - loss: 0.0430 - accuracy: 0.9860 - val_loss: 0.9582 - val_accuracy: 0.7603
+Epoch 9/15
+25000/25000 [==============================] - 125s 5ms/sample - loss: 0.0482 - accuracy: 0.9847 - val_loss: 0.7996 - val_accuracy: 0.8190
+Epoch 10/15
+25000/25000 [==============================] - 125s 5ms/sample - loss: 0.0270 - accuracy: 0.9916 - val_loss: 0.8270 - val_accuracy: 0.8106
+Epoch 11/15
+25000/25000 [==============================] - 125s 5ms/sample - loss: 0.0226 - accuracy: 0.9927 - val_loss: 0.8667 - val_accuracy: 0.8120
+Epoch 12/15
+25000/25000 [==============================] - 126s 5ms/sample - loss: 0.0176 - accuracy: 0.9944 - val_loss: 1.0325 - val_accuracy: 0.8141
+Epoch 13/15
+25000/25000 [==============================] - 126s 5ms/sample - loss: 0.0149 - accuracy: 0.9948 - val_loss: 0.9852 - val_accuracy: 0.8104
+Epoch 14/15
+25000/25000 [==============================] - 126s 5ms/sample - loss: 0.0140 - accuracy: 0.9955 - val_loss: 1.0443 - val_accuracy: 0.8127
+Epoch 15/15
+25000/25000 [==============================] - 125s 5ms/sample - loss: 0.0133 - accuracy: 0.9956 - val_loss: 1.1763 - val_accuracy: 0.8127
+25000/25000 [==============================] - 16s 656us/sample - loss: 1.1763 - accuracy: 0.8127
+Test score: 1.1762849241028726
+Test accuracy: 0.81268</code></pre>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Comparing-Naive-Bayes-to-LSTM-for-Sentiment-Analysis">Comparing Naive Bayes to LSTM for Sentiment Analysis<a class="anchor-link" href="#Comparing-Naive-Bayes-to-LSTM-for-Sentiment-Analysis"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/ml_tutorial/images/nb_sota.png" alt="">
+<em>State-of-the-art sentiment analysis on the IMDB dataset. [<a href="https://paperswithcode.com/sota/sentiment-analysis-on-imdb">Image Source</a>]</em></p>
+
+</div>
+</div>
+</div>
 </div>
  
 
