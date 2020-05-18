@@ -4,7 +4,7 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"flip_coin": "01_mle_map.ipynb",
          "read_dir": "02_naive_bayes.ipynb",
-         "load_data": "07_autoencoder.ipynb",
+         "load_data": "10_bert_farsi_sentiment.ipynb",
          "train": "04_logistic_regression.ipynb",
          "test": "02_naive_bayes.ipynb",
          "run": "02_naive_bayes.ipynb",
@@ -36,7 +36,17 @@ index = {"flip_coin": "01_mle_map.ipynb",
          "run_query_loop": "08_tfidf.ipynb",
          "handle_query": "08_tfidf.ipynb",
          "encode": "09_rnn.ipynb",
-         "decode": "09_rnn.ipynb"}
+         "decode": "09_rnn.ipynb",
+         "file_name": "10_bert_farsi_sentiment.ipynb",
+         "df": "10_bert_farsi_sentiment.ipynb",
+         "create_small_dataset": "10_bert_farsi_sentiment.ipynb",
+         "remove_emoji": "10_bert_farsi_sentiment.ipynb",
+         "convert_data_into_input_example": "10_bert_farsi_sentiment.ipynb",
+         "my_solution": "10_bert_farsi_sentiment.ipynb",
+         "example_to_features": "10_bert_farsi_sentiment.ipynb",
+         "plot_history": "10_bert_farsi_sentiment.ipynb",
+         "example_to_features_predict": "10_bert_farsi_sentiment.ipynb",
+         "get_prediction": "10_bert_farsi_sentiment.ipynb"}
 
 modules = ["mle_map.py",
            "naive_bayes.py",
@@ -46,7 +56,8 @@ modules = ["mle_map.py",
            "cnn.py",
            "autoencoder.py",
            "tfidf.py",
-           "rnn.py"]
+           "rnn.py",
+           "bert_farsi.py"]
 
 doc_url = "https://sci2lab.github.io/ml_tutorial/"
 

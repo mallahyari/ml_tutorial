@@ -36,5 +36,9 @@ Topics are constantly updated and new tutorial is added. The current topics are:
 [9- Recurrent Neural Networks (RNN)](rnn)
 
 
+[10- Sentiment Analysis with multilingual Transformers](bert_farsi_sentiment)
+
+
+
 
 

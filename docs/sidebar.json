@@ -9,6 +9,7 @@
     "Convolutional Neural Networks": "/cnn",
     "Autoencoders": "/autoencoder",
     "Text Search using TF-IDF and Elasticsearch": "/tfidf",
-    "Recurrent Neural Networks": "/rnn"
+    "Recurrent Neural Networks": "/rnn",
+    "Sentiment Analysis with Multilingual Transformers": "/bert_farsi_sentiment"
   }
 }

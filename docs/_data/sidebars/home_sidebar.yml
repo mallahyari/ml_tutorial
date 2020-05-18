@@ -36,6 +36,9 @@ entries:
     - output: web,pdf
       title: Recurrent Neural Networks
       url: /rnn
+    - output: web,pdf
+      title: Sentiment Analysis with Multilingual Transformers
+      url: /bert_farsi_sentiment
     output: web
     title: ml_tutorial
   output: web
