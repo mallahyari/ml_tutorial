@@ -157,7 +157,7 @@ def get_prediction(in_sentences):
     labels = ["0", "1"]
     input_examples = [InputExample(guid="", text_a = x, text_b = None, label = '0') for x in in_sentences] # here, "" is just a dummy label
     predict_input_fn = glue_convert_examples_to_features(examples=input_examples, tokenizer=tokenizer, max_length=MAX_SEQ_LENGTH, task='mrpc', label_list=label_list)
-    x_test_input, y_test_input = my_workaround(predict_input_fn)
+    x_test_input, y_test_input = my_solution(predict_input_fn)
     test_ds   = tf.data.Dataset.from_tensor_slices((x_test_input[0], x_test_input[1], x_test_input[2])).map(example_to_features_predict).batch(32)
 
     predictions = model.predict(test_ds)
