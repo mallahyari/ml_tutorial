@@ -39,6 +39,9 @@ entries:
     - output: web,pdf
       title: Sentiment Analysis with Multilingual Transformers
       url: /bert_farsi_sentiment
+    - output: web,pdf
+      title: Muticlass Classification on Imbalanced Dataset
+      url: /multiclass_classification
     output: web
     title: ml_tutorial
   output: web

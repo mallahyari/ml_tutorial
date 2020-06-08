@@ -10,6 +10,7 @@
     "Autoencoders": "/autoencoder",
     "Text Search using TF-IDF and Elasticsearch": "/tfidf",
     "Recurrent Neural Networks": "/rnn",
-    "Sentiment Analysis with Multilingual Transformers": "/bert_farsi_sentiment"
+    "Sentiment Analysis with Multilingual Transformers": "/bert_farsi_sentiment",
+    "Muticlass Classification on Imbalanced Dataset": "/multiclass_classification"
   }
 }

@@ -39,6 +39,10 @@ Topics are constantly updated and new tutorial is added. The current topics are:
 [10- Sentiment Analysis with multilingual Transformers](bert_farsi_sentiment)
 
 
+[11- Multiclass Classification on Imbalanced Dataset](multiclass_classification)
+
+
+
 
 
 

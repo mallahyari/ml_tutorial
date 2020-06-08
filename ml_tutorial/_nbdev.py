@@ -4,7 +4,7 @@ __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
 index = {"flip_coin": "01_mle_map.ipynb",
          "read_dir": "02_naive_bayes.ipynb",
-         "load_data": "10_bert_farsi_sentiment.ipynb",
+         "load_data": "11_multiclass_classification.ipynb",
          "train": "04_logistic_regression.ipynb",
          "test": "02_naive_bayes.ipynb",
          "run": "02_naive_bayes.ipynb",
@@ -46,7 +46,12 @@ index = {"flip_coin": "01_mle_map.ipynb",
          "example_to_features": "10_bert_farsi_sentiment.ipynb",
          "plot_history": "10_bert_farsi_sentiment.ipynb",
          "example_to_features_predict": "10_bert_farsi_sentiment.ipynb",
-         "get_prediction": "10_bert_farsi_sentiment.ipynb"}
+         "get_prediction": "10_bert_farsi_sentiment.ipynb",
+         "clean_text": "11_multiclass_classification.ipynb",
+         "preprocess_corpus": "11_multiclass_classification.ipynb",
+         "encode_labels": "11_multiclass_classification.ipynb",
+         "compute_tfidf": "11_multiclass_classification.ipynb",
+         "train_test_model": "11_multiclass_classification.ipynb"}
 
 modules = ["mle_map.py",
            "naive_bayes.py",
@@ -57,7 +62,8 @@ modules = ["mle_map.py",
            "autoencoder.py",
            "tfidf.py",
            "rnn.py",
-           "bert_farsi.py"]
+           "bert_farsi.py",
+           "multiclass_classification.py"]
 
 doc_url = "https://sci2lab.github.io/ml_tutorial/"
 
