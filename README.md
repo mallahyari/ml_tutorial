@@ -18,7 +18,7 @@ Topics are constantly updated and new tutorial is added. The current topics are:
 [3- Linear Regression](linear_regression)
 
 
-[4- Logistic Regression](logistic_regression)
+[4- Logistic Regression](04_logistic_regression.ipynb)
 
 
 [5- Neural Networks](neural_network)
